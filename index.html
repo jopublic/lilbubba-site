@@ -473,17 +473,36 @@
   .feature-item[onclick] {
     cursor: pointer;
   }
+  .feature-thumb-wrap {
+    position: relative;
+    margin-top: 8px;
+  }
   .feature-thumb {
     width: 100%;
-    margin-top: 8px;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     opacity: 0.8;
     transition: opacity 0.3s;
+    display: block;
+  }
+  .feature-thumb-zoom {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    font-size: 32px;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8);
   }
   .feature-item:hover .feature-thumb {
     opacity: 1;
     border-color: rgba(139, 92, 246, 0.35);
+  }
+  .feature-item:hover .feature-thumb-zoom {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
   .feature-icon {
     width: 34px; height: 34px;
@@ -1073,7 +1092,7 @@
               <div>
                 <h4>Stupidly Fast</h4>
                 <p>Patent-pending technology. 99.88% faster than traditional methods. Scans 500GB in seconds.</p>
-                <img src="img/screenshots/bionic_scan_results.png" class="feature-thumb" alt="K8 Bionic scan results">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_scan_results.png" class="feature-thumb" alt="K8 Bionic scan results"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_similar_photos.png')">
@@ -1081,7 +1100,7 @@
               <div>
                 <h4>Similar Photos</h4>
                 <p>We all take loads of shots hoping one comes out perfect. K8 hunts down your near-duplicates so you don't have to.</p>
-                <img src="img/screenshots/bionic_similar_photos.png" class="feature-thumb" alt="K8 Similar Photos detection">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_similar_photos.png" class="feature-thumb" alt="K8 Similar Photos detection"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_quarantine.png')">
@@ -1089,7 +1108,7 @@
               <div>
                 <h4>Quarantine System</h4>
                 <p>Nothing permanently deleted. 30-day quarantine with full restore. Protected folders.</p>
-                <img src="img/screenshots/bionic_quarantine.png" class="feature-thumb" alt="K8 Quarantine Vault">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_quarantine.png" class="feature-thumb" alt="K8 Quarantine Vault"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item">
@@ -1104,7 +1123,7 @@
               <div>
                 <h4>Source of Truth</h4>
                 <p>Set a master folder. Find duplicates everywhere else. Originals always safe.</p>
-                <img src="img/screenshots/bionic_source_of_truth.png" class="feature-thumb" alt="K8 Source of Truth">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_source_of_truth.png" class="feature-thumb" alt="K8 Source of Truth"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_find_this_file.png')">
@@ -1112,7 +1131,7 @@
               <div>
                 <h4>Find This File</h4>
                 <p>Pick any file. K8 searches your entire system for exact copies and same-size matches.</p>
-                <img src="img/screenshots/bionic_find_this_file.png" class="feature-thumb" alt="K8 Find This File">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_find_this_file.png" class="feature-thumb" alt="K8 Find This File"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
           </div>
@@ -1144,7 +1163,7 @@
               <div>
                 <h4>Seek &amp; Destroy</h4>
                 <p>node_modules, __pycache__, .git bloat, build artifacts, caches - found and flagged.</p>
-                <img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft scan results">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft scan results"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_overview.png')">
@@ -1152,7 +1171,7 @@
               <div>
                 <h4>Crap Scores</h4>
                 <p>Every item scored by safety. 100% = nuke it. 50% = check first. You decide.</p>
-                <img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft crap scores">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft crap scores"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_detail.png')">
@@ -1160,7 +1179,7 @@
               <div>
                 <h4>Project-Aware</h4>
                 <p>Knows active projects from abandoned cruft. Won't break your workflow.</p>
-                <img src="img/screenshots/cruft_detail.png" class="feature-thumb" alt="K8 Cruft project detection">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/cruft_detail.png" class="feature-thumb" alt="K8 Cruft project detection"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_overview.png')">
@@ -1168,7 +1187,7 @@
               <div>
                 <h4>Regenerable Badges</h4>
                 <p>"npm install will bring this back." Delete with confidence.</p>
-                <img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft regenerable badges">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft regenerable badges"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_overview.png')">
@@ -1176,7 +1195,7 @@
               <div>
                 <h4>9 Categories</h4>
                 <p>Build artifacts, caches, package managers, logs, Python environments, version control - all sorted and scored.</p>
-                <img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft 9 categories">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft 9 categories"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item">
@@ -1215,7 +1234,7 @@
               <div>
                 <h4>Smart Video Matching</h4>
                 <p>Same video, different encode? Found. Different resolution? Found. Different container? Found.</p>
-                <img src="img/screenshots/media_detail.png" class="feature-thumb" alt="K8 Media video matching">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/media_detail.png" class="feature-thumb" alt="K8 Media video matching"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item" onclick="openLightbox('img/screenshots/media_overview.png')">
@@ -1223,7 +1242,7 @@
               <div>
                 <h4>RAW + JPEG Matching</h4>
                 <p>Pairs RAW files with their JPEG exports automatically. Keep one, archive both.</p>
-                <img src="img/screenshots/media_overview.png" class="feature-thumb" alt="K8 Media RAW+JPEG matching">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/media_overview.png" class="feature-thumb" alt="K8 Media RAW+JPEG matching"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item">
@@ -1245,7 +1264,7 @@
               <div>
                 <h4>Quarantine System</h4>
                 <p>Nothing permanently deleted. 30-day quarantine with full restore. Protected folders.</p>
-                <img src="img/screenshots/bionic_quarantine.png" class="feature-thumb" alt="K8 Quarantine Vault">
+                <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_quarantine.png" class="feature-thumb" alt="K8 Quarantine Vault"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
             <div class="feature-item">
