@@ -470,6 +470,21 @@
     border-color: rgba(139, 92, 246, 0.25);
     background: rgba(139, 92, 246, 0.04);
   }
+  .feature-item[onclick] {
+    cursor: pointer;
+  }
+  .feature-thumb {
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  .feature-item:hover .feature-thumb {
+    opacity: 1;
+    border-color: rgba(139, 92, 246, 0.35);
+  }
   .feature-icon {
     width: 34px; height: 34px;
     border-radius: 8px;
@@ -1053,25 +1068,28 @@
             The duplicate file and photo finder that actually works. Patent-pending technology finds every duplicate on your system in seconds, not hours. Reclaim gigabytes of wasted space. Your files never leave your machine.
           </p>
           <div class="features-grid">
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_scan_results.png')">
               <div class="feature-icon">&#9889;</div>
               <div>
                 <h4>Stupidly Fast</h4>
                 <p>Patent-pending technology. 99.88% faster than traditional methods. Scans 500GB in seconds.</p>
+                <img src="img/screenshots/bionic_scan_results.png" class="feature-thumb" alt="K8 Bionic scan results">
               </div>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_similar_photos.png')">
               <div class="feature-icon">&#128247;</div>
               <div>
                 <h4>Similar Photos</h4>
                 <p>We all take loads of shots hoping one comes out perfect. K8 hunts down your near-duplicates so you don't have to.</p>
+                <img src="img/screenshots/bionic_similar_photos.png" class="feature-thumb" alt="K8 Similar Photos detection">
               </div>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_quarantine.png')">
               <div class="feature-icon">&#128737;</div>
               <div>
                 <h4>Quarantine System</h4>
                 <p>Nothing permanently deleted. 30-day quarantine with full restore. Protected folders.</p>
+                <img src="img/screenshots/bionic_quarantine.png" class="feature-thumb" alt="K8 Quarantine Vault">
               </div>
             </div>
             <div class="feature-item">
@@ -1081,18 +1099,20 @@
                 <p>Detects OneDrive cloud-only files automatically. No freezing. No forced downloads.</p>
               </div>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_source_of_truth.png')">
               <div class="feature-icon">&#128270;</div>
               <div>
                 <h4>Source of Truth</h4>
                 <p>Set a master folder. Find duplicates everywhere else. Originals always safe.</p>
+                <img src="img/screenshots/bionic_source_of_truth.png" class="feature-thumb" alt="K8 Source of Truth">
               </div>
             </div>
-            <div class="feature-item">
-              <div class="feature-icon">&#128274;</div>
+            <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_find_this_file.png')">
+              <div class="feature-icon">&#128269;</div>
               <div>
-                <h4>100% Local</h4>
-                <p>No cloud. No accounts. No telemetry. Everything stays on your machine.</p>
+                <h4>Find This File</h4>
+                <p>Pick any file. K8 searches your entire system for exact copies and same-size matches.</p>
+                <img src="img/screenshots/bionic_find_this_file.png" class="feature-thumb" alt="K8 Find This File">
               </div>
             </div>
           </div>
@@ -1119,46 +1139,51 @@
             Developer junk detection that knows what's safe to nuke. 9 categories of cruft with crap scores, project-aware detection, and smart exclusions that won't touch your tools.
           </p>
           <div class="features-grid">
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_overview.png')">
               <div class="feature-icon">&#128163;</div>
               <div>
                 <h4>Seek &amp; Destroy</h4>
                 <p>node_modules, __pycache__, .git bloat, build artifacts, caches - found and flagged.</p>
+                <img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft scan results">
               </div>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_overview.png')">
               <div class="feature-icon">&#127919;</div>
               <div>
                 <h4>Crap Scores</h4>
                 <p>Every item scored by safety. 100% = nuke it. 50% = check first. You decide.</p>
+                <img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft crap scores">
               </div>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_detail.png')">
               <div class="feature-icon">&#128736;</div>
               <div>
                 <h4>Project-Aware</h4>
                 <p>Knows active projects from abandoned cruft. Won't break your workflow.</p>
+                <img src="img/screenshots/cruft_detail.png" class="feature-thumb" alt="K8 Cruft project detection">
               </div>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_overview.png')">
               <div class="feature-icon">&#9851;</div>
               <div>
                 <h4>Regenerable Badges</h4>
                 <p>"npm install will bring this back." Delete with confidence.</p>
+                <img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft regenerable badges">
+              </div>
+            </div>
+            <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_overview.png')">
+              <div class="feature-icon">&#128202;</div>
+              <div>
+                <h4>9 Categories</h4>
+                <p>Build artifacts, caches, package managers, logs, Python environments, version control - all sorted and scored.</p>
+                <img src="img/screenshots/cruft_overview.png" class="feature-thumb" alt="K8 Cruft 9 categories">
               </div>
             </div>
             <div class="feature-item">
               <div class="feature-icon">&#128737;</div>
               <div>
                 <h4>Smart Protection</h4>
-                <p>Your system files, development tools, and package managers are automatically excluded. Zero false positives.</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">&#128274;</div>
-              <div>
-                <h4>100% Local</h4>
-                <p>Your code stays yours. No cloud. No telemetry. Private by design.</p>
+                <p>3-layer exclusion system. Your system files, dev tools, and package managers are automatically safe. Zero false positives.</p>
               </div>
             </div>
           </div>
@@ -1185,18 +1210,20 @@
             Built for creators drowning in footage. Finds duplicate videos other tools miss, pairs your RAW files with JPEG exports, respects your editor projects, and handles terabytes without breaking a sweat.
           </p>
           <div class="features-grid">
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/media_detail.png')">
               <div class="feature-icon">&#127909;</div>
               <div>
                 <h4>Smart Video Matching</h4>
                 <p>Same video, different encode? Found. Different resolution? Found. Different container? Found.</p>
+                <img src="img/screenshots/media_detail.png" class="feature-thumb" alt="K8 Media video matching">
               </div>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/media_overview.png')">
               <div class="feature-icon">&#128247;</div>
               <div>
                 <h4>RAW + JPEG Matching</h4>
                 <p>Pairs RAW files with their JPEG exports automatically. Keep one, archive both.</p>
+                <img src="img/screenshots/media_overview.png" class="feature-thumb" alt="K8 Media RAW+JPEG matching">
               </div>
             </div>
             <div class="feature-item">
@@ -1213,11 +1240,12 @@
                 <p>Massive media libraries. Intelligent scanning rules out most files in milliseconds. Slash your storage costs.</p>
               </div>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_quarantine.png')">
               <div class="feature-icon">&#128737;</div>
               <div>
                 <h4>Quarantine System</h4>
                 <p>Nothing permanently deleted. 30-day quarantine with full restore. Protected folders.</p>
+                <img src="img/screenshots/bionic_quarantine.png" class="feature-thumb" alt="K8 Quarantine Vault">
               </div>
             </div>
             <div class="feature-item">
@@ -1517,7 +1545,30 @@ function toggleFaq(el) {
   document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
   if (!wasOpen) item.classList.add('open');
 }
+
+function openLightbox(src) {
+  var lb = document.getElementById('k8-lightbox');
+  var img = document.getElementById('k8-lightbox-img');
+  img.src = src;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('k8-lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
 </script>
+
+<!-- Lightbox -->
+<div id="k8-lightbox" onclick="closeLightbox()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); z-index:10000; justify-content:center; align-items:center; cursor:zoom-out; backdrop-filter:blur(8px);">
+  <img id="k8-lightbox-img" src="" alt="K8 Screenshot" style="max-width:92%; max-height:90%; border-radius:12px; box-shadow:0 0 60px rgba(139,92,246,0.3);">
+  <div style="position:absolute; top:20px; right:28px; color:#fff; font-size:32px; cursor:pointer; opacity:0.7;" onclick="closeLightbox()">&times;</div>
+</div>
 
 </body>
 </html>
