@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LilBuba.ai - AI That Respects You</title>
-<link rel="icon" type="image/png" href="img/lilbuba_favicon_32.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap');
 
@@ -402,13 +401,11 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    .big-brand { font-size: 3rem; }
-    .chooser-title { font-size: 1.5rem; }
+    .chooser-title { font-size: 2rem; }
     .buba-choices { gap: 40px; }
     .buba-preview { width: 220px; height: 124px; }
     .buba-name { font-size: 1.3rem; }
     .video-stage video { max-width: 95vw; max-height: 70vh; }
-    header { padding: 14px 20px; }
   }
 </style>
 </head>
@@ -430,7 +427,7 @@
 
 <!-- HEADER -->
 <header>
-  <a href="/" class="header-brand">
+  <a href="#" class="header-brand" onclick="goBack(); return false;">
     <img src="img/lilbuba_icon.png" alt="LilBuba">
     <span>LilBuba.ai</span>
   </a>
@@ -492,9 +489,11 @@
 
 <script>
   function chooseBuba(gender) {
+    // Fade out chooser
     const chooser = document.getElementById('chooser');
     chooser.classList.add('hidden');
 
+    // Show video stage after fade
     setTimeout(() => {
       const stage = document.getElementById('videoStage');
       stage.classList.add('active');
@@ -512,9 +511,14 @@
   }
 
   function goBack() {
+    // Stop videos
     document.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime = 0; v.style.display = 'none'; });
+
+    // Hide stage and back button
     document.getElementById('videoStage').classList.remove('active');
     document.getElementById('backBtn').classList.remove('visible');
+
+    // Show chooser
     const chooser = document.getElementById('chooser');
     chooser.classList.remove('hidden');
   }
