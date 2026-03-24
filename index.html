@@ -986,6 +986,20 @@
     color: var(--text-secondary);
   }
   .footer-copy .patent { color: var(--purple); }
+  .footer-contact {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .footer-contact a {
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .footer-contact a:hover {
+    text-decoration: underline;
+  }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
@@ -1026,9 +1040,12 @@
     <span>LilBuba.ai</span>
   </a>
   <nav class="header-nav">
-    <a href="#products">Products</a>
-    <a href="#cleverness">How It Works</a>
-    <a href="#support">Support</a>
+    <a href="index.html#products">Products</a>
+    <a href="index.html#cleverness">How It Works</a>
+    <a href="faq.html">FAQ</a>
+    <a href="terms.html">T&Cs</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="mailto:support@lilbuba.ai">Contact</a>
   </nav>
 </header>
 
@@ -1337,206 +1354,6 @@
     </div>
   </section>
 
-  <!-- FAQ / SUPPORT -->
-  <section class="faq-section" id="support">
-    <p class="section-label">Support</p>
-    <p class="section-title">Frequently Asked Questions</p>
-
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          What is K8?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          K8 is a family of desktop file management tools that help you reclaim disk space safely. There are three products: <strong>K8 Bionic</strong> (duplicate file and photo finder), <strong>K8 Cruft</strong> (developer junk cleaner), and <strong>K8 Media</strong> (media deduplication, coming soon). All run 100% locally on your computer. Nothing leaves your machine. Ever.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          How does K8 find duplicates so fast?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          K8 uses patent-pending detection technology that's 99.88% faster than traditional methods. That's why K8 handles terabytes while other tools choke on gigabytes.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          Will K8 permanently delete my files?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          No. All removals go through a 30-day quarantine system first. Files sit there fully intact and restorable with one click. Even after 30 days, K8 asks for confirmation before permanent deletion. We've all heard the horror stories about tools that nuked someone's wedding photos. That will never happen with K8.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          Does K8 send my data anywhere?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          No. Absolutely not. K8 runs entirely on your local machine. It does not connect to the internet during scanning. Zero telemetry. Zero analytics. Zero tracking. We don't know how often you run it, how many files you scan, or whether you prefer dark mode. Your privacy is not our product.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          Do I need to create an account?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          No. K8 has no accounts, no login, no registration. You download it, enter your licence key, and you're done. We don't want your email address, your usage data, or your firstborn. Just clean up your files in peace.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          How does K8 handle OneDrive cloud files?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          K8 detects cloud-only files (the cloud icon in Explorer) and skips them automatically. No accidental mass downloads, no freezing, no bandwidth surprises. Files that are fully synced locally are scanned normally.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          What is your refund policy?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          K8 is thoroughly tested and we don't anticipate any problems. Should you encounter a genuine technical issue, please contact us at <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a>. We do not refund for change of mind or after successful K8 use.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          Are updates free?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          Yes. All updates to your purchased K8 product are free, forever. Bug fixes, performance improvements, and new features within your product are all included in your one-time purchase price. No subscriptions, no annual renewals.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          Will K8 Cruft break my projects?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          K8 Cruft is project-aware. It detects whether cruft sits inside an active project and adjusts its recommendations accordingly. It will never auto-delete anything. You review every item, you decide what goes, and everything removed goes to quarantine with 30-day restore.
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          Can I install K8 on more than one computer?
-          <span class="faq-arrow">+</span>
-        </div>
-        <div class="faq-answer"><div class="faq-answer-inner">
-          Your licence covers one active installation. If you replace your computer, you can deactivate the old one and activate on the new machine using the same key. If the old machine is gone, contact us and we'll reset your activation.
-        </div></div>
-      </div>
-    </div>
-
-    <p class="faq-contact">
-      Still stuck? Email us at <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a> &mdash; real humans, not bots.
-    </p>
-  </section>
-
-  <!-- ==================== PRIVACY POLICY ==================== -->
-  <section class="legal-section" id="privacy">
-    <div class="section-label">Legal</div>
-    <h2 class="section-title">Privacy Policy</h2>
-    <div class="legal-content">
-
-      <h3>The short version</h3>
-      <p>K8 runs entirely on your computer. We don't collect your data. We don't want your data. Your files are yours.</p>
-
-      <h3>What K8 does</h3>
-      <p>K8 scans files on your local machine to find duplicates and unnecessary files. All scanning, analysis, and file operations happen locally. K8 does not connect to the internet during scanning. No file data, metadata, filenames, folder structures, or scan results are transmitted anywhere. Ever.</p>
-
-      <h3>What we collect</h3>
-      <p>K8 itself collects nothing. Zero telemetry. Zero analytics. Zero tracking. We don't know how many files you scan, how often you use K8, or what's on your computer.</p>
-      <p>The only data involved in your K8 purchase is:</p>
-      <ul>
-        <li><strong>Payment information</strong> &mdash; handled entirely by our payment processor, <a href="https://www.paddle.com/legal/privacy" target="_blank">Paddle</a>. We never see or store your card details. Paddle acts as Merchant of Record and processes payments in accordance with their own privacy policy.</li>
-        <li><strong>Licence key</strong> &mdash; your key is stored locally on your machine in a settings file. It is not transmitted anywhere after activation.</li>
-        <li><strong>Email address</strong> &mdash; only if you voluntarily contact us at support@lilbuba.ai or sign up for launch notifications. We use it solely to respond to your enquiry or send product updates you requested. You can unsubscribe at any time.</li>
-      </ul>
-
-      <h3>Cookies</h3>
-      <p>This website does not use cookies. K8 does not use cookies. There is nothing to accept, reject, or manage.</p>
-
-      <h3>Third parties</h3>
-      <p>We do not sell, share, or transfer any personal data to third parties. The only third party involved is Paddle (payment processing), who operate under their own GDPR-compliant privacy policy.</p>
-
-      <h3>Your rights (UK GDPR)</h3>
-      <p>Since we don't collect personal data through K8, there's very little to exercise rights over. However, if you've contacted us by email and wish to have your correspondence deleted, email <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a> and we'll sort it.</p>
-
-      <h3>Children</h3>
-      <p>K8 is not directed at children under 13. We do not knowingly collect data from children because we don't knowingly collect data from anyone.</p>
-
-      <h3>Changes to this policy</h3>
-      <p>If we ever change this policy, we'll update it here with a new date. Given that our policy is essentially "we don't collect your data", we don't anticipate major revisions.</p>
-
-      <p class="legal-updated">Last updated: March 2026</p>
-    </div>
-  </section>
-
-  <!-- ==================== TERMS & CONDITIONS ==================== -->
-  <section class="legal-section" id="terms">
-    <h2 class="section-title">Terms &amp; Conditions</h2>
-    <div class="legal-content">
-
-      <h3>Overview</h3>
-      <p>These terms govern your use of K8 software products ("K8") provided by LilBuba.ai. By purchasing and installing K8, you agree to these terms.</p>
-
-      <h3>Licence</h3>
-      <p>Your purchase grants you a personal, non-transferable licence to install and use K8 on one computer at a time. You may transfer your licence to a replacement computer by deactivating the old installation first. If your old machine is no longer accessible, contact us to reset your activation.</p>
-      <p>You may not:</p>
-      <ul>
-        <li>Redistribute, resell, or sublicence K8</li>
-        <li>Reverse engineer, decompile, or disassemble the software</li>
-        <li>Use K8 to build a competing product</li>
-        <li>Share your licence key with others</li>
-      </ul>
-
-      <h3>What K8 does</h3>
-      <p>K8 identifies duplicate and unnecessary files on your computer and allows you to remove them. All file operations are initiated by you. K8 will not delete anything without your explicit instruction. All deletions go through a 30-day quarantine system where files can be restored.</p>
-
-      <h3>Your responsibility</h3>
-      <p>You are responsible for reviewing K8's recommendations before acting on them. While K8 is designed to be safe and includes multiple safeguards (protected folders, quarantine, confirmation prompts), you should always maintain backups of important data. This is good practice regardless of what software you use.</p>
-
-      <h3>Updates</h3>
-      <p>All updates to your purchased K8 product are included free of charge, forever. This covers bug fixes, performance improvements, and new features within the product you purchased. Separate K8 products (Bionic, Cruft, Media) each require their own licence.</p>
-
-      <h3 id="refunds">Refund policy</h3>
-      <p>K8 is thoroughly tested and we don't anticipate any problems. Should you encounter a genuine technical issue, please contact us at <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a>. We do not refund for change of mind or after successful K8 use.</p>
-
-      <h3>Payment</h3>
-      <p>Payments are processed by <a href="https://www.paddle.com" target="_blank">Paddle</a>, who acts as Merchant of Record. All pricing includes applicable taxes as calculated by Paddle for your region. Paddle handles all payment processing, invoicing, and tax compliance.</p>
-
-      <h3>Intellectual property</h3>
-      <p>K8 and its detection algorithms are the intellectual property of LilBuba.ai. The K8 detection method is patent pending (UK IPO, 2026). All trademarks, logos, and brand assets belong to LilBuba.ai.</p>
-
-      <h3>Limitation of liability</h3>
-      <p>K8 is provided "as is". While we've built extensive safeguards into the software (quarantine system, protected folders, confirmation prompts), LilBuba.ai is not liable for data loss resulting from user-initiated file operations. Our total liability is limited to the purchase price of your K8 licence.</p>
-
-      <h3>Governing law</h3>
-      <p>These terms are governed by the laws of England and Wales.</p>
-
-      <h3>Contact</h3>
-      <p>For any questions about these terms, email <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a>.</p>
-
-      <p class="legal-updated">Last updated: March 2026</p>
-    </div>
-  </section>
 
 </main>
 
@@ -1548,11 +1365,11 @@
       <span>LilBuba.ai</span>
     </div>
     <p class="footer-tagline">Smart local tools that respect you.</p>
+    <p class="footer-contact">Questions? Email us directly: <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a> — real humans, real answers.</p>
     <div class="footer-links">
-      <a href="#privacy">Privacy Policy</a>
-      <a href="#terms">Terms &amp; Conditions</a>
-      <a href="#refunds">Refund Policy</a>
-      <a href="#support">Support</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="faq.html">Support</a>
       <a href="mailto:support@lilbuba.ai">Contact</a>
     </div>
     <p class="footer-copy">
@@ -1569,12 +1386,6 @@ function showProduct(product, btn) {
   document.getElementById('product-' + product).classList.add('active');
 }
 
-function toggleFaq(el) {
-  var item = el.parentElement;
-  var wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
-  if (!wasOpen) item.classList.add('open');
-}
 
 function openLightbox(src) {
   var lb = document.getElementById('k8-lightbox');
