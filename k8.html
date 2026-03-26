@@ -171,6 +171,43 @@
   }
   .header-nav a:hover { color: var(--text-primary); }
 
+  /* ===== BUBA COMPANION - top-left reassuring presence ===== */
+  .buba-companion {
+    position: fixed;
+    top: 80px;
+    left: 35px;
+    z-index: 99;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.4s ease;
+    animation: bubaFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.3));
+  }
+  .buba-companion:hover {
+    opacity: 1;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6)) drop-shadow(0 0 40px rgba(0, 212, 255, 0.3));
+  }
+  .buba-companion video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle, black 45%, transparent 70%);
+    mask-image: radial-gradient(circle, black 45%, transparent 70%);
+  }
+  @keyframes bubaFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ===== ASSET PROTECTION ===== */
+  img, video { -webkit-user-drag: none; user-select: none; }
+
   /* ===== MAIN CONTENT ===== */
   main {
     position: relative;
@@ -1007,7 +1044,7 @@
   }
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
 <!-- AMBIENT LIGHT POOLS - 5 orbs, prominent turquoise on left -->
 <div class="ambient">
@@ -1019,16 +1056,26 @@
   <div class="ambient-orb orb6"></div>
 </div>
 
+<!-- BUBA COMPANION - reassuring presence, top-left -->
+<div class="buba-companion" id="bubaCompanion" onclick="window.location.href='homepage-buba-chooser.html'" title="Back to LilBuba home">
+  <video id="bubaVid" autoplay loop muted playsinline>
+    <source id="bubaVidSrc" src="img/lilbuba_masculine_v3_trimmed.mp4" type="video/mp4">
+  </video>
+</div>
+
 <!-- HEADER - LilBuba as subtle parent brand -->
 <header>
-  <a href="#" class="header-brand">
+  <a href="homepage-buba-chooser.html" class="header-brand">
     <img src="img/lilbuba_icon.png" alt="LilBuba">
     <span>LilBuba.ai</span>
   </a>
   <nav class="header-nav">
     <a href="#products">Products</a>
     <a href="#cleverness">How It Works</a>
-    <a href="#support">Support</a>
+    <a href="faq.html">FAQ</a>
+    <a href="terms.html">T&amp;Cs</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="mailto:support@lilbuba.ai">Contact</a>
   </nav>
 </header>
 
@@ -1309,12 +1356,12 @@
   <!-- NOTIFY / EMAIL SIGNUP -->
   <section class="notify-section" id="notify">
     <div class="notify-card">
-      <h2>K8 launches soon.</h2>
-      <p class="notify-sub">Be the first to know when K8 is ready to download. No spam, just launch news.</p>
-      <a href="mailto:support@lilbuba.ai?subject=Notify%20me%20when%20K8%20launches&body=Hi%2C%20please%20add%20me%20to%20the%20K8%20launch%20notification%20list.%20Thanks!" class="btn-notify">
-        Notify Me <span>&rarr;</span>
+      <h2>Join the mailing list</h2>
+      <p class="notify-sub">If you'd like, we'll only email you new product updates. Nothing else, ever.</p>
+      <a href="mailto:support@lilbuba.ai?subject=Join%20mailing%20list&body=Hi%2C%20please%20add%20me%20to%20the%20LilBuba%20mailing%20list%20for%20product%20updates.%20Thanks!" class="btn-notify">
+        Join Mailing List <span>&rarr;</span>
       </a>
-      <p class="notify-fine">We'll only email you when there's something worth saying. Unsubscribe anytime.</p>
+      <p class="notify-fine">Product updates only. No spam, no sharing, unsubscribe anytime.</p>
     </div>
   </section>
 
@@ -1449,94 +1496,7 @@
     </p>
   </section>
 
-  <!-- ==================== PRIVACY POLICY ==================== -->
-  <section class="legal-section" id="privacy">
-    <div class="section-label">Legal</div>
-    <h2 class="section-title">Privacy Policy</h2>
-    <div class="legal-content">
-
-      <h3>The short version</h3>
-      <p>K8 runs entirely on your computer. We don't collect your data. We don't want your data. Your files are yours.</p>
-
-      <h3>What K8 does</h3>
-      <p>K8 scans files on your local machine to find duplicates and unnecessary files. All scanning, analysis, and file operations happen locally. K8 does not connect to the internet during scanning. No file data, metadata, filenames, folder structures, or scan results are transmitted anywhere. Ever.</p>
-
-      <h3>What we collect</h3>
-      <p>K8 itself collects nothing. Zero telemetry. Zero analytics. Zero tracking. We don't know how many files you scan, how often you use K8, or what's on your computer.</p>
-      <p>The only data involved in your K8 purchase is:</p>
-      <ul>
-        <li><strong>Payment information</strong> &mdash; handled entirely by our payment processor, <a href="https://www.paddle.com/legal/privacy" target="_blank">Paddle</a>. We never see or store your card details. Paddle acts as Merchant of Record and processes payments in accordance with their own privacy policy.</li>
-        <li><strong>Licence key</strong> &mdash; your key is stored locally on your machine in a settings file. It is not transmitted anywhere after activation.</li>
-        <li><strong>Email address</strong> &mdash; only if you voluntarily contact us at support@lilbuba.ai or sign up for launch notifications. We use it solely to respond to your enquiry or send product updates you requested. You can unsubscribe at any time.</li>
-      </ul>
-
-      <h3>Cookies</h3>
-      <p>This website does not use cookies. K8 does not use cookies. There is nothing to accept, reject, or manage.</p>
-
-      <h3>Third parties</h3>
-      <p>We do not sell, share, or transfer any personal data to third parties. The only third party involved is Paddle (payment processing), who operate under their own GDPR-compliant privacy policy.</p>
-
-      <h3>Your rights (UK GDPR)</h3>
-      <p>Since we don't collect personal data through K8, there's very little to exercise rights over. However, if you've contacted us by email and wish to have your correspondence deleted, email <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a> and we'll sort it.</p>
-
-      <h3>Children</h3>
-      <p>K8 is not directed at children under 13. We do not knowingly collect data from children because we don't knowingly collect data from anyone.</p>
-
-      <h3>Changes to this policy</h3>
-      <p>If we ever change this policy, we'll update it here with a new date. Given that our policy is essentially "we don't collect your data", we don't anticipate major revisions.</p>
-
-      <p class="legal-updated">Last updated: March 2026</p>
-    </div>
-  </section>
-
-  <!-- ==================== TERMS & CONDITIONS ==================== -->
-  <section class="legal-section" id="terms">
-    <h2 class="section-title">Terms &amp; Conditions</h2>
-    <div class="legal-content">
-
-      <h3>Overview</h3>
-      <p>These terms govern your use of K8 software products ("K8") provided by LilBuba.ai. By purchasing and installing K8, you agree to these terms.</p>
-
-      <h3>Licence</h3>
-      <p>Your purchase grants you a personal, non-transferable licence to install and use K8 on one computer at a time. You may transfer your licence to a replacement computer by deactivating the old installation first. If your old machine is no longer accessible, contact us to reset your activation.</p>
-      <p>You may not:</p>
-      <ul>
-        <li>Redistribute, resell, or sublicence K8</li>
-        <li>Reverse engineer, decompile, or disassemble the software</li>
-        <li>Use K8 to build a competing product</li>
-        <li>Share your licence key with others</li>
-      </ul>
-
-      <h3>What K8 does</h3>
-      <p>K8 identifies duplicate and unnecessary files on your computer and allows you to remove them. All file operations are initiated by you. K8 will not delete anything without your explicit instruction. All deletions go through a 30-day quarantine system where files can be restored.</p>
-
-      <h3>Your responsibility</h3>
-      <p>You are responsible for reviewing K8's recommendations before acting on them. While K8 is designed to be safe and includes multiple safeguards (protected folders, quarantine, confirmation prompts), you should always maintain backups of important data. This is good practice regardless of what software you use.</p>
-
-      <h3>Updates</h3>
-      <p>All updates to your purchased K8 product are included free of charge, forever. This covers bug fixes, performance improvements, and new features within the product you purchased. Separate K8 products (Bionic, Cruft, Media) each require their own licence.</p>
-
-      <h3>Refund policy</h3>
-      <p>K8 is thoroughly tested and we don't anticipate any problems. Should you encounter a genuine technical issue, please contact us at <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a>. We do not refund for change of mind or after successful K8 use.</p>
-
-      <h3>Payment</h3>
-      <p>Payments are processed by <a href="https://www.paddle.com" target="_blank">Paddle</a>, who acts as Merchant of Record. All pricing includes applicable taxes as calculated by Paddle for your region. Paddle handles all payment processing, invoicing, and tax compliance.</p>
-
-      <h3>Intellectual property</h3>
-      <p>K8 and its detection algorithms are the intellectual property of LilBuba.ai. The K8 detection method is patent pending (UK IPO, 2026). All trademarks, logos, and brand assets belong to LilBuba.ai.</p>
-
-      <h3>Limitation of liability</h3>
-      <p>K8 is provided "as is". While we've built extensive safeguards into the software (quarantine system, protected folders, confirmation prompts), LilBuba.ai is not liable for data loss resulting from user-initiated file operations. Our total liability is limited to the purchase price of your K8 licence.</p>
-
-      <h3>Governing law</h3>
-      <p>These terms are governed by the laws of England and Wales.</p>
-
-      <h3>Contact</h3>
-      <p>For any questions about these terms, email <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a>.</p>
-
-      <p class="legal-updated">Last updated: March 2026</p>
-    </div>
-  </section>
+  <!-- Privacy & T&Cs now on their own pages: privacy.html, terms.html -->
 
 </main>
 
@@ -1549,9 +1509,9 @@
     </div>
     <p class="footer-tagline">Smart local tools that respect you.</p>
     <div class="footer-links">
-      <a href="#privacy">Privacy Policy</a>
-      <a href="#terms">Terms &amp; Conditions</a>
-      <a href="#support">Support</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="faq.html">FAQ</a>
       <a href="mailto:support@lilbuba.ai">Contact</a>
     </div>
     <p class="footer-copy">
@@ -1599,5 +1559,26 @@ document.addEventListener('keydown', function(e) {
   <div style="position:absolute; top:20px; right:28px; color:#fff; font-size:32px; cursor:pointer; opacity:0.7;" onclick="closeLightbox()">&times;</div>
 </div>
 
+<script>
+// Load the user's chosen Buba (from URL param or localStorage)
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var buba = params.get('buba') || localStorage.getItem('bubaChoice') || 'masc';
+  if (params.get('buba')) localStorage.setItem('bubaChoice', buba);
+  var vidSrc = buba === 'fem'
+    ? 'img/lilbuba_feminine_v3_trimmed.mp4'
+    : 'img/lilbuba_masculine_v3_trimmed.mp4';
+  var srcEl = document.getElementById('bubaVidSrc');
+  var vidEl = document.getElementById('bubaVid');
+  var companion = document.getElementById('bubaCompanion');
+  if (srcEl && vidEl) {
+    srcEl.src = vidSrc;
+    vidEl.load();
+    vidEl.play().catch(function(){});
+  }
+  // Ensure companion is always visible
+  if (companion) companion.style.display = 'block';
+})();
+</script>
 </body>
 </html>

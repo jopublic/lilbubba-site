@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LilBuba.ai - AI That Respects You</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --purple: #8B5CF6;
+    --purple-glow-strong: rgba(139, 92, 246, 0.6);
+    --cyan: #00D4FF;
+    --bg: #000000;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: #f0f0f5;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== AMBIENT LIGHT POOLS ===== */
+  .ambient {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .ambient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+  }
+  .ambient-orb.orb1 {
+    top: -10%; left: 15%;
+    width: 1000px; height: 1000px;
+    background: radial-gradient(circle, var(--purple-glow-strong) 0%, rgba(139, 92, 246, 0.15) 40%, transparent 70%);
+    animation: orbit1 18s ease-in-out infinite;
+  }
+  .ambient-orb.orb2 {
+    bottom: -10%; right: 10%;
+    width: 900px; height: 900px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.45) 0%, rgba(0, 212, 255, 0.1) 40%, transparent 70%);
+    animation: orbit2 22s ease-in-out infinite;
+  }
+  .ambient-orb.orb3 {
+    top: 30%; left: -10%;
+    width: 900px; height: 900px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.06) 45%, transparent 70%);
+    animation: orbit3 26s ease-in-out infinite;
+  }
+  .ambient-orb.orb4 {
+    top: 60%; right: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, rgba(139, 92, 246, 0.06) 45%, transparent 70%);
+    animation: orbit4 20s ease-in-out infinite;
+  }
+  .ambient-orb.orb5 {
+    top: 10%; left: -5%;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.22) 0%, transparent 60%);
+    animation: orbit5 24s ease-in-out infinite;
+  }
+  .ambient-orb.orb6 {
+    top: 45%; left: 5%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 70%);
+    animation: orbit6 21s ease-in-out infinite;
+  }
+  .ambient-orb.orb7 {
+    top: 20%; right: 15%;
+    width: 750px; height: 750px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, rgba(139, 92, 246, 0.1) 40%, transparent 65%);
+    animation: bubble1 25s ease-in-out infinite;
+  }
+  .ambient-orb.orb8 {
+    top: 70%; left: 20%;
+    width: 650px; height: 650px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.4) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 65%);
+    animation: bubble2 15s ease-in-out infinite;
+  }
+  .ambient-orb.orb9 {
+    top: 5%; right: 35%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.45) 0%, rgba(139, 92, 246, 0.1) 40%, transparent 65%);
+    animation: bubble3 17s ease-in-out infinite;
+  }
+  .ambient-orb.orb10 {
+    bottom: 5%; left: 45%;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.35) 0%, transparent 55%);
+    animation: bubble4 28s ease-in-out infinite;
+  }
+
+  @keyframes orbit1 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+    33% { transform: translate(80px, 120px) scale(1.15); opacity: 1; }
+    66% { transform: translate(-50px, 70px) scale(0.95); opacity: 0.9; }
+  }
+  @keyframes orbit2 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+    33% { transform: translate(-80px, -90px) scale(1.2); opacity: 1; }
+    66% { transform: translate(60px, -50px) scale(0.9); opacity: 0.8; }
+  }
+  @keyframes orbit3 {
+    0%, 100% { transform: translate(0, 0); opacity: 0.7; }
+    50% { transform: translate(100px, -70px); opacity: 1; }
+  }
+  @keyframes orbit4 {
+    0%, 100% { transform: translate(0, 0); opacity: 0.6; }
+    50% { transform: translate(-70px, 90px); opacity: 0.9; }
+  }
+  @keyframes orbit5 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    40% { transform: translate(60px, 80px) scale(1.1); opacity: 0.95; }
+    70% { transform: translate(-30px, 50px) scale(0.95); opacity: 0.7; }
+  }
+  @keyframes orbit6 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+    35% { transform: translate(40px, -50px) scale(1.15); opacity: 1; }
+    65% { transform: translate(-20px, 30px) scale(0.9); opacity: 0.8; }
+  }
+  @keyframes bubble1 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    25% { transform: translate(-100px, 70px) scale(1.2); opacity: 0.9; }
+    50% { transform: translate(-50px, 140px) scale(0.85); opacity: 0.5; }
+    75% { transform: translate(70px, 80px) scale(1.1); opacity: 0.8; }
+  }
+  @keyframes bubble2 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+    30% { transform: translate(80px, -50px) scale(1.2); opacity: 1; }
+    60% { transform: translate(40px, -100px) scale(0.85); opacity: 0.6; }
+  }
+  @keyframes bubble3 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    50% { transform: translate(80px, 100px) scale(1.15); opacity: 1; }
+  }
+  @keyframes bubble4 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    20% { transform: translate(-70px, -50px) scale(1.1); opacity: 0.8; }
+    40% { transform: translate(-130px, 30px) scale(0.9); opacity: 0.6; }
+    60% { transform: translate(-40px, 80px) scale(1.15); opacity: 0.9; }
+    80% { transform: translate(60px, 40px) scale(0.95); opacity: 0.55; }
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .header-brand img {
+    width: 44px; height: 44px;
+    border-radius: 11px;
+    box-shadow: 0 0 14px rgba(139, 92, 246, 0.35);
+  }
+  .header-brand span {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+  }
+
+  /* ===== CHOOSER SCREEN ===== */
+  .chooser {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    transition: opacity 0.6s ease;
+  }
+
+  .chooser.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .big-brand {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 4px;
+    letter-spacing: -1px;
+    text-shadow: 0 0 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(0, 212, 255, 0.15);
+  }
+  .big-brand .tm, .video-tm {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    vertical-align: super;
+    color: rgba(255,255,255,0.4);
+    text-shadow: none;
+  }
+
+  .rolling-bar {
+    height: 1.4em;
+    overflow: hidden;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .rolling-words {
+    display: flex;
+    flex-direction: column;
+    animation: rollWords 10s infinite;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .rolling-words span {
+    height: 1.4em;
+    line-height: 1.4em;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  @keyframes rollWords {
+    0%, 14%   { transform: translateY(0); }
+    16.6%, 30.6% { transform: translateY(-1.4em); }
+    33.2%, 47.2% { transform: translateY(-2.8em); }
+    49.8%, 63.8% { transform: translateY(-4.2em); }
+    66.4%, 80.4% { transform: translateY(-5.6em); }
+    83%, 97%     { transform: translateY(-7em); }
+    100%         { transform: translateY(0); }
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .chooser-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    letter-spacing: 2px;
+  }
+
+  .buba-choices {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .buba-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+  .buba-choice:hover { transform: scale(1.08) translateY(-10px); }
+  .buba-choice:hover .buba-preview {
+    filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.7)) drop-shadow(0 0 80px rgba(0, 212, 255, 0.4));
+  }
+
+  .buba-preview {
+    width: 320px; height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.4)) drop-shadow(0 0 50px rgba(0, 212, 255, 0.2));
+    transition: filter 0.4s ease;
+    margin-bottom: 20px;
+  }
+  .buba-name {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: #fff; margin-bottom: 6px;
+  }
+  .buba-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    text-align: center; max-width: 200px;
+  }
+
+  .buba-choice:nth-child(1) .buba-preview { animation: idleFloat1 5s ease-in-out infinite; }
+  .buba-choice:nth-child(2) .buba-preview { animation: idleFloat2 6s ease-in-out infinite; }
+  @keyframes idleFloat1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes idleFloat2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+  /* ===== VIDEO STAGE ===== */
+  .video-stage {
+    position: relative;
+    z-index: 5;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    transition: all 0.8s ease;
+  }
+  .video-stage.active { display: flex; }
+
+  .video-stage video {
+    max-width: 80vw; max-height: 65vh;
+    object-fit: contain;
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at center, black 40%, transparent 72%);
+    mask-image: radial-gradient(ellipse 70% 70% at center, black 40%, transparent 72%);
+    transition: all 0.8s ease;
+  }
+
+  /* TM overlay on video stage - top right, out of the way */
+  .video-brand-overlay {
+    position: absolute;
+    top: 90px;
+    right: 30px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px;
+    pointer-events: none;
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    opacity: 0;
+    animation: fadeInSlow 2s ease 1s forwards;
+  }
+  @keyframes fadeInSlow { to { opacity: 1; } }
+
+  /* ===== K8 TILE BUTTON - big square product tile, right side ===== */
+  .k8-enter-wrap {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: none;
+  }
+  .k8-enter-wrap.visible {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: fadeUpIn 0.8s ease forwards;
+  }
+  .k8-enter-btn {
+    width: 140px;
+    height: 140px;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: 22px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .k8-enter-btn:hover {
+    border-color: rgba(139, 92, 246, 0.8);
+    transform: scale(1.08);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.4), 0 0 80px rgba(0, 212, 255, 0.2);
+  }
+  .k8-enter-btn img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.4));
+  }
+  .k8-enter-label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+  }
+  @keyframes fadeUpIn {
+    from { opacity: 0; transform: translateY(-50%) translateX(30px); }
+    to { opacity: 1; transform: translateY(-50%) translateX(0); }
+  }
+
+  /* ===== BACK BUTTON ===== */
+  .back-btn {
+    position: fixed;
+    top: 25px; right: 25px;
+    z-index: 100;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    display: none;
+  }
+  .back-btn:hover {
+    background: rgba(139, 92, 246, 0.3);
+    border-color: rgba(139, 92, 246, 0.5);
+    color: #fff;
+  }
+  .back-btn.visible { display: block; }
+
+  /* ===== "OR CLICK BUBA" hint ===== */
+  .click-buba-hint {
+    display: none;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+    margin-top: 10px;
+    font-style: italic;
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+  }
+  .click-buba-hint.visible {
+    display: block;
+    animation: fadeUpIn 0.8s ease 0.3s forwards;
+  }
+
+  /* Make video clickable when in stage */
+  .video-stage.active video { cursor: pointer; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 30px 20px;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  footer a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+  }
+  footer a:hover { color: var(--cyan); }
+
+  /* ===== TRANSITION OUT ===== */
+  .page-exit {
+    animation: pageExit 0.8s ease forwards;
+  }
+  @keyframes pageExit {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.95) translateX(50px); }
+  }
+
+  /* ===== BASIC ASSET PROTECTION ===== */
+  img, video { -webkit-user-drag: none; user-select: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .big-brand { font-size: 3rem; }
+    .chooser-title { font-size: 1.5rem; }
+    .buba-choices { gap: 40px; }
+    .buba-preview { width: 220px; height: 124px; }
+    .buba-name { font-size: 1.3rem; }
+    .video-stage video { max-width: 95vw; max-height: 60vh; }
+    .k8-enter-btn { font-size: 0.95rem; padding: 14px 30px; }
+  }
+</style>
+</head>
+<body oncontextmenu="return false;">
+
+<!-- AMBIENT LIGHT POOLS -->
+<div class="ambient">
+  <div class="ambient-orb orb1"></div>
+  <div class="ambient-orb orb2"></div>
+  <div class="ambient-orb orb3"></div>
+  <div class="ambient-orb orb4"></div>
+  <div class="ambient-orb orb5"></div>
+  <div class="ambient-orb orb6"></div>
+  <div class="ambient-orb orb7"></div>
+  <div class="ambient-orb orb8"></div>
+  <div class="ambient-orb orb9"></div>
+  <div class="ambient-orb orb10"></div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="header-brand" onclick="goBack(); return false;">
+    <img src="img/lilbuba_icon.png" alt="LilBuba">
+    <span>LilBuba.ai</span>
+  </a>
+</header>
+
+<!-- BACK BUTTON -->
+<button class="back-btn" id="backBtn" onclick="goBack()">&#8592; Choose again</button>
+
+<!-- CHOOSER SCREEN -->
+<div class="chooser" id="chooser">
+  <div class="big-brand">LilBuba.ai<span class="tm">&trade;</span></div>
+  <div class="rolling-bar">
+    <div class="rolling-words">
+      <span>SAFE</span>
+      <span>SMART</span>
+      <span>FAST</span>
+      <span>LOCAL</span>
+      <span>PRIVATE</span>
+      <span>YOURS</span>
+    </div>
+  </div>
+  <p class="tagline">We took the intelligence out of AI so you don't have to</p>
+  <h2 class="chooser-title">Choose Your Buba</h2>
+
+  <div class="buba-choices">
+    <div class="buba-choice" onclick="chooseBuba('masc')">
+      <img class="buba-preview" src="img/buba_masculine_static.png" alt="Original Buba">
+      <div class="buba-name">Original Buba</div>
+      <div class="buba-desc">The OG</div>
+    </div>
+
+    <div class="buba-choice" onclick="chooseBuba('fem')">
+      <img class="buba-preview" src="img/buba_feminine_static.png" alt="Buba Pi">
+      <div class="buba-name">Buba Pi</div>
+      <div class="buba-desc">Sweet as pie, sharp as 3.14</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO STAGE -->
+<div class="video-stage" id="videoStage">
+  <video id="vid-masc" loop>
+    <source src="img/lilbuba_masculine_v3_trimmed.mp4" type="video/mp4">
+  </video>
+  <video id="vid-fem" loop>
+    <source src="img/lilbuba_feminine_v3_trimmed.mp4" type="video/mp4">
+  </video>
+  <div class="video-brand-overlay">LilBuba.ai<span class="video-tm">&trade;</span></div>
+</div>
+
+<!-- K8 TILE BUTTON - right side -->
+<div class="k8-enter-wrap" id="k8Wrap">
+  <button class="k8-enter-btn" onclick="goToK8()">
+    <img src="img/k8_hero_logo.png" alt="K8">
+  </button>
+  <div class="k8-enter-label">Explore K8</div>
+  <div class="click-buba-hint" id="clickHint">or click your Buba</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 LilBuba.ai&trade; &mdash; Jo Browning</p>
+  <p>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms &amp; Conditions</a>
+    <a href="mailto:support@lilbuba.ai">Contact</a>
+  </p>
+</footer>
+
+<script>
+  let chosenGender = null;
+
+  function chooseBuba(gender) {
+    chosenGender = gender;
+    // Store choice for K8 page
+    localStorage.setItem('bubaChoice', gender);
+
+    const chooser = document.getElementById('chooser');
+    chooser.classList.add('hidden');
+
+    setTimeout(() => {
+      const stage = document.getElementById('videoStage');
+      stage.classList.add('active');
+
+      const vid = document.getElementById('vid-' + gender);
+      const other = document.getElementById('vid-' + (gender === 'masc' ? 'fem' : 'masc'));
+      other.style.display = 'none';
+      other.pause();
+      vid.style.display = 'block';
+      vid.currentTime = 0;
+      vid.play().catch(() => {});
+
+      // Make video clickable to go to K8
+      vid.onclick = function() { goToK8(); };
+
+      document.getElementById('backBtn').classList.add('visible');
+
+      // Show K8 tile button after 2 seconds
+      setTimeout(() => {
+        document.getElementById('k8Wrap').classList.add('visible');
+      }, 2000);
+    }, 600);
+  }
+
+  function goToK8() {
+    // Animate everything out
+    document.body.classList.add('page-exit');
+
+    // Navigate to K8 after animation
+    setTimeout(() => {
+      window.location.href = 'k8.html?buba=' + (chosenGender || 'masc');
+    }, 700);
+  }
+
+  function goBack() {
+    document.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime = 0; v.style.display = 'none'; v.onclick = null; });
+    document.getElementById('videoStage').classList.remove('active');
+    document.getElementById('backBtn').classList.remove('visible');
+    document.getElementById('k8Wrap').classList.remove('visible');
+
+    const chooser = document.getElementById('chooser');
+    chooser.classList.remove('hidden');
+    chosenGender = null;
+  }
+</script>
+
+</body>
+</html>
