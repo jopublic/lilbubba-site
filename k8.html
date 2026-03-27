@@ -14,6 +14,20 @@
 <meta property="og:image" content="https://lilbuba.ai/img/lilbubba_logo.png">
 <meta property="og:site_name" content="LilBuba.ai">
 
+<!-- Paddle.js -->
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>
+  Paddle.Initialize({
+    token: 'live_32141f7ba947368975f22b2dc25'
+  });
+
+  function buyProduct(priceId) {
+    Paddle.Checkout.open({
+      items: [{ priceId: priceId, quantity: 1 }]
+    });
+  }
+</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fredoka:wght@500;600;700&display=swap');
 
@@ -1193,7 +1207,7 @@
             </div>
           </div>
           <div class="cta-row">
-            <a href="#notify" class="btn-buy" style="background: linear-gradient(135deg, var(--purple-deep), var(--purple-dark)); opacity: 0.85;">Launching Soon <span class="arrow">&darr;</span></a>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkfbv93p3079jbf7pt21c76')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
             <div class="price-tag">
               <span class="currency">&pound;</span>24.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
@@ -1264,7 +1278,7 @@
             </div>
           </div>
           <div class="cta-row">
-            <a href="#notify" class="btn-buy" style="background: linear-gradient(135deg, var(--purple-deep), var(--purple-dark)); opacity: 0.85;">Launching Soon <span class="arrow">&darr;</span></a>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkfq9ge9q3mc8jbxfvvdvm4')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
             <div class="price-tag">
               <span class="currency">&pound;</span>24.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
@@ -1333,7 +1347,7 @@
             </div>
           </div>
           <div class="cta-row">
-            <a href="#notify" class="btn-buy" style="background: linear-gradient(135deg, var(--purple-deep), var(--purple-dark)); opacity: 0.85;">Launching Soon <span class="arrow">&darr;</span></a>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkg4ex5x3saje0erbnmca3t')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
             <div class="price-tag">
               <span class="currency">&pound;</span>39.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
@@ -1342,11 +1356,15 @@
         </div>
 
       </div>
-      <!-- LOYALTY DISCOUNT - in pricing area -->
+      <!-- BUNDLE & SAVE -->
       <div class="loyalty-card-wrap">
         <div class="loyalty-card">
           <h3>Bundle &amp; Save</h3>
           <p>Media + Bionic <span class="hl">&pound;54.95</span> (save &pound;10) &middot; All three <span class="hl">&pound;64.95</span> (save &pound;25)</p>
+          <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkgqd61b354cvpctb77pvmg')" class="btn-buy" style="font-size: 14px; padding: 10px 20px;">Media + Bionic &pound;54.95</a>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmpep1pb6r1enr8tvr1r4m02')" class="btn-buy" style="font-size: 14px; padding: 10px 20px;">All Three &pound;64.95</a>
+          </div>
         </div>
       </div>
 
