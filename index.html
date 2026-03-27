@@ -14,6 +14,23 @@
 <meta property="og:image" content="https://lilbuba.ai/img/lilbubba_logo.png">
 <meta property="og:site_name" content="LilBuba.ai">
 
+<!-- Paddle.js -->
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>
+  Paddle.Initialize({
+    token: 'live_32141f7ba947368975f22b2dc25'
+  });
+
+  function buyProduct(priceId) {
+    Paddle.Checkout.open({
+      items: [{ priceId: priceId, quantity: 1 }],
+      settings: {
+        successUrl: 'https://lilbuba.ai/download.html'
+      }
+    });
+  }
+</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fredoka:wght@500;600;700&display=swap');
 
@@ -170,6 +187,43 @@
     transition: color 0.3s;
   }
   .header-nav a:hover { color: var(--text-primary); }
+
+  /* ===== BUBA COMPANION - top-left reassuring presence ===== */
+  .buba-companion {
+    position: fixed;
+    top: 80px;
+    left: 35px;
+    z-index: 99;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.4s ease;
+    animation: bubaFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.3));
+  }
+  .buba-companion:hover {
+    opacity: 1;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6)) drop-shadow(0 0 40px rgba(0, 212, 255, 0.3));
+  }
+  .buba-companion video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle, black 45%, transparent 70%);
+    mask-image: radial-gradient(circle, black 45%, transparent 70%);
+  }
+  @keyframes bubaFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ===== ASSET PROTECTION ===== */
+  img, video { -webkit-user-drag: none; user-select: none; }
 
   /* ===== MAIN CONTENT ===== */
   main {
@@ -986,20 +1040,6 @@
     color: var(--text-secondary);
   }
   .footer-copy .patent { color: var(--purple); }
-  .footer-contact {
-    text-align: center;
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-  }
-  .footer-contact a {
-    color: var(--cyan);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .footer-contact a:hover {
-    text-decoration: underline;
-  }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
@@ -1021,7 +1061,7 @@
   }
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
 <!-- AMBIENT LIGHT POOLS - 5 orbs, prominent turquoise on left -->
 <div class="ambient">
@@ -1033,17 +1073,25 @@
   <div class="ambient-orb orb6"></div>
 </div>
 
+<!-- BUBA COMPANION - reassuring presence, top-left -->
+<div class="buba-companion" id="bubaCompanion" onclick="window.location.href='homepage-buba-chooser.html'" title="Back to LilBuba home">
+  <video id="bubaVid" autoplay loop muted playsinline>
+    <source id="bubaVidSrc" src="img/lilbuba_masculine_v3_trimmed.mp4" type="video/mp4">
+  </video>
+</div>
+
 <!-- HEADER - LilBuba as subtle parent brand -->
 <header>
-  <a href="#" class="header-brand">
+  <a href="homepage-buba-chooser.html" class="header-brand">
     <img src="img/lilbuba_icon.png" alt="LilBuba">
     <span>LilBuba.ai</span>
   </a>
   <nav class="header-nav">
-    <a href="index.html#products">Products</a>
-    <a href="index.html#cleverness">How It Works</a>
+    <a href="#products">Products</a>
+    <a href="#cleverness">How It Works</a>
     <a href="faq.html">FAQ</a>
-    <a href="terms.html">T&Cs</a>
+    <a href="blog.html">Blog</a>
+    <a href="terms.html">T&amp;Cs</a>
     <a href="privacy.html">Privacy</a>
     <a href="mailto:support@lilbuba.ai">Contact</a>
   </nav>
@@ -1163,7 +1211,7 @@
             </div>
           </div>
           <div class="cta-row">
-            <a href="#notify" class="btn-buy" style="background: linear-gradient(135deg, var(--purple-deep), var(--purple-dark)); opacity: 0.85;">Launching Soon <span class="arrow">&darr;</span></a>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkfbv93p3079jbf7pt21c76')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
             <div class="price-tag">
               <span class="currency">&pound;</span>24.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
@@ -1234,7 +1282,7 @@
             </div>
           </div>
           <div class="cta-row">
-            <a href="#notify" class="btn-buy" style="background: linear-gradient(135deg, var(--purple-deep), var(--purple-dark)); opacity: 0.85;">Launching Soon <span class="arrow">&darr;</span></a>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkfq9ge9q3mc8jbxfvvdvm4')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
             <div class="price-tag">
               <span class="currency">&pound;</span>24.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
@@ -1303,7 +1351,7 @@
             </div>
           </div>
           <div class="cta-row">
-            <a href="#notify" class="btn-buy" style="background: linear-gradient(135deg, var(--purple-deep), var(--purple-dark)); opacity: 0.85;">Launching Soon <span class="arrow">&darr;</span></a>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkg4ex5x3saje0erbnmca3t')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
             <div class="price-tag">
               <span class="currency">&pound;</span>39.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
@@ -1312,11 +1360,15 @@
         </div>
 
       </div>
-      <!-- LOYALTY DISCOUNT - in pricing area -->
+      <!-- BUNDLE & SAVE -->
       <div class="loyalty-card-wrap">
         <div class="loyalty-card">
           <h3>Bundle &amp; Save</h3>
           <p>Media + Bionic <span class="hl">&pound;54.95</span> (save &pound;10) &middot; All three <span class="hl">&pound;64.95</span> (save &pound;25)</p>
+          <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkgqd61b354cvpctb77pvmg')" class="btn-buy" style="font-size: 14px; padding: 10px 20px;">Media + Bionic &pound;54.95</a>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmpep1pb6r1enr8tvr1r4m02')" class="btn-buy" style="font-size: 14px; padding: 10px 20px;">All Three &pound;64.95</a>
+          </div>
         </div>
       </div>
 
@@ -1326,12 +1378,12 @@
   <!-- NOTIFY / EMAIL SIGNUP -->
   <section class="notify-section" id="notify">
     <div class="notify-card">
-      <h2>K8 launches soon.</h2>
-      <p class="notify-sub">Be the first to know when K8 is ready to download. No spam, just launch news.</p>
-      <a href="mailto:support@lilbuba.ai?subject=Notify%20me%20when%20K8%20launches&body=Hi%2C%20please%20add%20me%20to%20the%20K8%20launch%20notification%20list.%20Thanks!" class="btn-notify">
-        Notify Me <span>&rarr;</span>
+      <h2>Join the mailing list</h2>
+      <p class="notify-sub">If you'd like, we'll only email you new product updates. Nothing else, ever.</p>
+      <a href="mailto:support@lilbuba.ai?subject=Join%20mailing%20list&body=Hi%2C%20please%20add%20me%20to%20the%20LilBuba%20mailing%20list%20for%20product%20updates.%20Thanks!" class="btn-notify">
+        Join Mailing List <span>&rarr;</span>
       </a>
-      <p class="notify-fine">We'll only email you when there's something worth saying. Unsubscribe anytime.</p>
+      <p class="notify-fine">Product updates only. No spam, no sharing, unsubscribe anytime.</p>
     </div>
   </section>
 
@@ -1354,6 +1406,119 @@
     </div>
   </section>
 
+  <!-- FAQ / SUPPORT -->
+  <section class="faq-section" id="support">
+    <p class="section-label">Support</p>
+    <p class="section-title">Frequently Asked Questions</p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What is K8?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          K8 is a family of desktop file management tools that help you reclaim disk space safely. There are three products: <strong>K8 Bionic</strong> (duplicate file and photo finder), <strong>K8 Cruft</strong> (developer junk cleaner), and <strong>K8 Media</strong> (media deduplication, coming soon). All run 100% locally on your computer. Nothing leaves your machine. Ever.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How does K8 find duplicates so fast?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          K8 uses patent-pending detection technology that's 99.88% faster than traditional methods. That's why K8 handles terabytes while other tools choke on gigabytes.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Will K8 permanently delete my files?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          No. All removals go through a 30-day quarantine system first. Files sit there fully intact and restorable with one click. Even after 30 days, K8 asks for confirmation before permanent deletion. We've all heard the horror stories about tools that nuked someone's wedding photos. That will never happen with K8.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Does K8 send my data anywhere?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          No. Absolutely not. K8 runs entirely on your local machine. It does not connect to the internet during scanning. Zero telemetry. Zero analytics. Zero tracking. We don't know how often you run it, how many files you scan, or whether you prefer dark mode. Your privacy is not our product.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Do I need to create an account?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          No. K8 has no accounts, no login, no registration. You download it, enter your licence key, and you're done. We don't want your email address, your usage data, or your firstborn. Just clean up your files in peace.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How does K8 handle OneDrive cloud files?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          K8 detects cloud-only files (the cloud icon in Explorer) and skips them automatically. No accidental mass downloads, no freezing, no bandwidth surprises. Files that are fully synced locally are scanned normally.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What is your refund policy?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          K8 is thoroughly tested and we don't anticipate any problems. Should you encounter a genuine technical issue, please contact us at <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a>. We do not refund for change of mind or after successful K8 use.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Are updates free?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Yes. All updates to your purchased K8 product are free, forever. Bug fixes, performance improvements, and new features within your product are all included in your one-time purchase price. No subscriptions, no annual renewals.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Will K8 Cruft break my projects?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          K8 Cruft is project-aware. It detects whether cruft sits inside an active project and adjusts its recommendations accordingly. It will never auto-delete anything. You review every item, you decide what goes, and everything removed goes to quarantine with 30-day restore.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Can I install K8 on more than one computer?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Your licence covers one active installation. If you replace your computer, you can deactivate the old one and activate on the new machine using the same key. If the old machine is gone, contact us and we'll reset your activation.
+        </div></div>
+      </div>
+    </div>
+
+    <p class="faq-contact">
+      Still stuck? Email us at <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a> &mdash; real humans, not bots.
+    </p>
+  </section>
+
+  <!-- Privacy & T&Cs now on their own pages: privacy.html, terms.html -->
 
 </main>
 
@@ -1365,11 +1530,10 @@
       <span>LilBuba.ai</span>
     </div>
     <p class="footer-tagline">Smart local tools that respect you.</p>
-    <p class="footer-contact">Questions? Email us directly: <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a> — real humans, real answers.</p>
     <div class="footer-links">
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms &amp; Conditions</a>
-      <a href="faq.html">Support</a>
+      <a href="faq.html">FAQ</a>
       <a href="mailto:support@lilbuba.ai">Contact</a>
     </div>
     <p class="footer-copy">
@@ -1386,6 +1550,12 @@ function showProduct(product, btn) {
   document.getElementById('product-' + product).classList.add('active');
 }
 
+function toggleFaq(el) {
+  var item = el.parentElement;
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+  if (!wasOpen) item.classList.add('open');
+}
 
 function openLightbox(src) {
   var lb = document.getElementById('k8-lightbox');
@@ -1411,5 +1581,26 @@ document.addEventListener('keydown', function(e) {
   <div style="position:absolute; top:20px; right:28px; color:#fff; font-size:32px; cursor:pointer; opacity:0.7;" onclick="closeLightbox()">&times;</div>
 </div>
 
+<script>
+// Load the user's chosen Buba (from URL param or localStorage)
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var buba = params.get('buba') || localStorage.getItem('bubaChoice') || 'masc';
+  if (params.get('buba')) localStorage.setItem('bubaChoice', buba);
+  var vidSrc = buba === 'fem'
+    ? 'img/lilbuba_feminine_v3_trimmed.mp4'
+    : 'img/lilbuba_masculine_v3_trimmed.mp4';
+  var srcEl = document.getElementById('bubaVidSrc');
+  var vidEl = document.getElementById('bubaVid');
+  var companion = document.getElementById('bubaCompanion');
+  if (srcEl && vidEl) {
+    srcEl.src = vidSrc;
+    vidEl.load();
+    vidEl.play().catch(function(){});
+  }
+  // Ensure companion is always visible
+  if (companion) companion.style.display = 'block';
+})();
+</script>
 </body>
 </html>
