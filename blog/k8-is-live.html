@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K8 Is Live: How One Person Built a Software Company From Scratch | LilBuba.ai Blog</title>
+<meta name="description" content="K8 went from idea to live product in three months. Built by one person, at 4am, with AI assistants, tea, and sheer bloody-mindedness. Here's the story.">
+<meta property="og:title" content="K8 Is Live: How One Person Built a Software Company From Scratch">
+<meta property="og:description" content="Three months from idea to live product. Built by one person at 4am with AI and tea. Here's the story.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lilbuba.ai/blog/k8-is-live.html">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fredoka:wght@500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #000; color: #f0f0f5; min-height: 100vh; line-height: 1.8; }
+  .nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .nav a { color: #b0b0c8; text-decoration: none; margin-left: 24px; font-size: 14px; }
+  .nav a:hover { color: #8B5CF6; }
+  .nav .logo { font-family: 'Fredoka', sans-serif; font-size: 1.3em; background: linear-gradient(135deg, #8B5CF6, #00D4FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; margin-left: 0; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; }
+  .breadcrumb { color: #8888a0; font-size: 0.85em; margin-bottom: 32px; }
+  .breadcrumb a { color: #8B5CF6; text-decoration: none; }
+  h1 { font-family: 'Fredoka', sans-serif; font-size: 2.2em; margin-bottom: 12px; color: #f0f0f5; }
+  .meta { color: #8888a0; font-size: 0.9em; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .article h2 { font-size: 1.4em; margin-top: 40px; margin-bottom: 16px; color: #f0f0f5; }
+  .article p { color: #b0b0c8; margin-bottom: 16px; font-size: 1.02em; }
+  .article strong { color: #f0f0f5; }
+  .article em { color: #8888a0; }
+  .article ul { color: #b0b0c8; margin-left: 24px; margin-bottom: 16px; }
+  .article li { margin-bottom: 8px; }
+  .article a { color: #8B5CF6; text-decoration: none; }
+  .article a:hover { text-decoration: underline; }
+  .article hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 40px 0; }
+  .article blockquote { border-left: 3px solid #8B5CF6; padding-left: 20px; margin: 24px 0; font-style: italic; color: #8888a0; }
+  .cta-box { background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 16px; padding: 32px; margin: 40px 0; text-align: center; }
+  .cta-box h3 { color: #f0f0f5; margin-bottom: 12px; }
+  .cta-box p { color: #b0b0c8; margin-bottom: 20px; }
+  .cta-box .btn { display: inline-block; padding: 12px 32px; background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; }
+  .cta-box .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3); text-decoration: none; }
+  footer { text-align: center; padding: 40px; color: #8888a0; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.07); }
+  footer a { color: #8B5CF6; text-decoration: none; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="../k8.html" class="logo">LilBuba.ai</a>
+  <div>
+    <a href="../k8.html">Products</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../terms.html">T&Cs</a>
+    <a href="../privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb"><a href="../blog.html">Blog</a> &rsaquo; K8 Is Live</div>
+
+  <h1>K8 Is Live: How One Person Built a Software Company From Scratch</h1>
+  <div class="meta">By Jo Browning &middot; 27 March 2026 &middot; 5 min read</div>
+
+  <div class="article">
+    <p>Today, K8 officially went live. You can go to <a href="../k8.html">lilbuba.ai</a>, click "Buy Now," pay for a licence, download the installer, and start finding duplicate files on your machine. The whole thing takes about two minutes.</p>
+
+    <p>Getting to those two minutes took three months.</p>
+
+    <h2>The Problem That Started It All</h2>
+
+    <p>I'm a musician, filmmaker, and DJ. Which means I have an absolutely ridiculous number of files. Photos in five different folders. Videos in three different formats. Music tracks exported, re-exported, backed up, synced across devices, and scattered across drives I'd forgotten existed.</p>
+
+    <p>When I ran out of space on my laptop for the fourth time in a month, I finally snapped. I downloaded every duplicate finder I could find. They all did the same thing: hash every file on the drive, compare every hash, and take <strong>hours</strong> to finish. On my 500GB drive, one tool estimated 6 hours. I fell asleep waiting.</p>
+
+    <p>There had to be a better way.</p>
+
+    <h2>The 4am Breakthrough</h2>
+
+    <p>I do my best thinking at stupid o'clock. Always have. There's something about 4am when the world's quiet, the tea's strong, and nobody's asking you for anything.</p>
+
+    <p>The insight was simple: <strong>you don't need to hash every file.</strong> Most files on your computer are obviously unique - different sizes, different types, different dates. You can eliminate 99% of candidates before you even start comparing content. The hashing is only needed for the final 1%.</p>
+
+    <p>That one idea turned a 6-hour scan into a 6-second scan.</p>
+
+    <h2>Building With AI (The Honest Version)</h2>
+
+    <p>I'm going to say something that might surprise you: I built K8 with AI assistants. Not as a gimmick. Not as a marketing angle. Because I'm one person with a big idea and no development team.</p>
+
+    <p>Here's what AI actually did: it wrote code when I told it what to build. It debugged things I couldn't see. It designed the installer. It helped me file a patent. It built the website you're reading right now.</p>
+
+    <p>Here's what AI didn't do: come up with the idea, understand the problem, make the design decisions, test it on real messy data, or care whether it actually worked well for real people. That was all me, at 4am, with a cup of tea and a very patient dog.</p>
+
+    <blockquote>"We took the intelligence out of AI so you don't have to."</blockquote>
+
+    <p>That's the LilBuba.ai tagline, and it's not just marketing. K8 runs 100% on your machine. No cloud uploads. No accounts. No subscriptions phoning home. The clever part is baked into the software - it does its job, then shuts up. Your files never leave your computer.</p>
+
+    <h2>What K8 Actually Does</h2>
+
+    <p>There are three tools in the K8 family:</p>
+
+    <ul>
+      <li><strong>K8 Bionic</strong> - finds duplicate files and similar photos. The one that started it all.</li>
+      <li><strong>K8 Cruft</strong> - finds developer junk. node_modules, __pycache__, build artifacts, caches. Scores everything by safety so you know what's genuinely safe to delete. There's literally nothing else on the market that does this properly.</li>
+      <li><strong>K8 Media</strong> - for creators drowning in footage. Finds same-video-different-encode matches, pairs RAW files with JPEG exports, and respects your editor project folders.</li>
+    </ul>
+
+    <p>Everything goes through a 30-day quarantine before permanent deletion. Nothing is truly gone until you're absolutely sure.</p>
+
+    <h2>Why I'm Telling You This</h2>
+
+    <p>Because I think there's a gap in the market for software that's honest. Software that doesn't collect your data. Software that doesn't need a subscription for something that should be a one-time purchase. Software that respects the fact that your files are <em>yours</em>.</p>
+
+    <p>K8 is a one-time purchase. &pound;24.95 for Bionic, &pound;24.95 for Cruft, &pound;39.95 for Media. No monthly fees. No cloud dependency. No data collection. Free updates forever.</p>
+
+    <p>I'm not a venture-funded startup. I'm one person in Worthing who got fed up with slow duplicate finders and decided to build a better one. If that resonates with you, I'd love for you to give K8 a try.</p>
+
+    <div class="cta-box">
+      <h3>K8 is open for business</h3>
+      <p>Safe. Smart. Stupidly Fast. One-time purchase, lifetime licence.</p>
+      <a href="../k8.html" class="btn">See K8 &rarr;</a>
+    </div>
+
+    <hr>
+
+    <p><em>K8 is available at <a href="../k8.html">lilbuba.ai</a>. Built in Worthing, UK. Patent pending. No cloud, no bullshit.</em></p>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 LilBuba.ai &middot; Jo Browning &middot; <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a></p>
+  <p style="margin-top: 8px;">Patent pending &middot; Built in Worthing, UK</p>
+</footer>
+</body>
+</html>
