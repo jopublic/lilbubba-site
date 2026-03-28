@@ -70,12 +70,31 @@
     font-size: 0.85em;
   }
   .support a { color: #8B5CF6; }
+  .mobile-alert {
+    display: none;
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+    font-size: 0.9em;
+    color: #b0b0c8;
+  }
+  .mobile-alert strong { color: #8B5CF6; }
+  @media (max-width: 768px) {
+    .mobile-alert { display: block; }
+    .download-btn { background: rgba(255,255,255,0.08); pointer-events: none; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>Thank You!</h1>
   <p class="subtitle">Your purchase is complete. Download K8 below.</p>
+
+  <div class="mobile-alert">
+    <strong>&#128187; Heads up!</strong> K8 is a Windows desktop app. This .exe file won't run on a phone or tablet. Please visit this page on your Windows PC to download.
+  </div>
 
   <a href="https://github.com/jopublic/lilbubba-site/releases/download/v1.7.0/K8_Setup_1.7.0.exe" class="download-btn">
     Download K8 Setup (38MB)

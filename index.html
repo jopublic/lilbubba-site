@@ -3,60 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LilBuba.ai — AI-Powered File Tools for Windows | No Cloud, No Subscription</title>
-<meta name="description" content="LilBuba.ai builds AI-powered desktop tools that run 100% locally. Find duplicate files, clean developer junk, and deduplicate media. No cloud. No data collection. One-time purchase, yours forever.">
-<link rel="canonical" href="https://lilbuba.ai/">
+<title>K8 Duplicate File Finder for Windows — Find &amp; Remove Duplicates | LilBuba.ai</title>
+<meta name="description" content="K8 finds duplicate files on Windows in seconds — not hours. AI-powered deduplication for photos, documents, and media. 100% local, no cloud. Safe. Smart. Stupidly Fast. From £24.95 one-time.">
+<link rel="canonical" href="https://lilbuba.ai/k8.html">
 
 <!-- Open Graph -->
-<meta property="og:title" content="LilBuba.ai — AI-Powered File Tools for Windows">
-<meta property="og:description" content="Desktop tools that run 100% on your machine. Find duplicates, clean junk, manage media. No cloud. No data collection. One-time purchase.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://lilbuba.ai/">
+<meta property="og:title" content="K8 Duplicate File Finder for Windows | LilBuba.ai">
+<meta property="og:description" content="Find and remove duplicate files in seconds. AI-powered, 100% local, no cloud. From £24.95 one-time purchase.">
+<meta property="og:type" content="product">
+<meta property="og:url" content="https://lilbuba.ai/k8.html">
 <meta property="og:image" content="https://lilbuba.ai/img/lilbubba_logo.png">
 <meta property="og:site_name" content="LilBuba.ai">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LilBuba.ai — AI-Powered File Tools for Windows">
-<meta name="twitter:description" content="Desktop tools that run 100% on your machine. No cloud. No data collection. One-time purchase.">
+<meta name="twitter:title" content="K8 Duplicate File Finder for Windows | LilBuba.ai">
+<meta name="twitter:description" content="Find and remove duplicate files in seconds. AI-powered, 100% local, no cloud. From £24.95.">
 <meta name="twitter:image" content="https://lilbuba.ai/img/lilbubba_logo.png">
 
 <!-- Structured Data -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "LilBuba.ai",
-  "url": "https://lilbuba.ai",
-  "logo": "https://lilbuba.ai/img/lilbubba_logo.png",
-  "description": "AI-powered file management tools. 100% local. No cloud. No subscription.",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "email": "support@lilbuba.ai",
-    "contactType": "customer support"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "K8 Bionic",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Windows 10, Windows 11",
-  "offers": {
-    "@type": "Offer",
-    "price": "24.95",
-    "priceCurrency": "GBP",
-    "availability": "https://schema.org/InStock"
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "K8 Bionic",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Windows 10, Windows 11",
+    "offers": {
+      "@type": "Offer",
+      "price": "24.95",
+      "priceCurrency": "GBP",
+      "availability": "https://schema.org/InStock"
+    },
+    "description": "AI-powered duplicate file finder for Windows. Scans terabytes in seconds. 30-day quarantine protects your files. 100% local.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "LilBuba.ai",
+      "url": "https://lilbuba.ai"
+    }
   },
-  "description": "AI-powered duplicate file finder for Windows. Scans terabytes in seconds. 100% local, no cloud, no data collection.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "LilBuba.ai",
-    "url": "https://lilbuba.ai"
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "K8 Cruft",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows 10, Windows 11",
+    "offers": {
+      "@type": "Offer",
+      "price": "24.95",
+      "priceCurrency": "GBP",
+      "availability": "https://schema.org/InStock"
+    },
+    "description": "Developer junk cleaner for Windows. Finds node_modules, build artifacts, cache files, and dev cruft eating your disk space.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "LilBuba.ai",
+      "url": "https://lilbuba.ai"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "K8 Media",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows 10, Windows 11",
+    "offers": {
+      "@type": "Offer",
+      "price": "39.95",
+      "priceCurrency": "GBP",
+      "availability": "https://schema.org/PreOrder"
+    },
+    "description": "Media deduplication tool for creators. Find duplicate photos, videos, and audio files across your entire library.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "LilBuba.ai",
+      "url": "https://lilbuba.ai"
+    }
   }
-}
+]
 </script>
 
 <!-- Paddle.js -->
@@ -703,6 +728,45 @@
     text-transform: uppercase;
   }
 
+  .guarantee-badge {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--cyan);
+    letter-spacing: 0.5px;
+  }
+  .guarantee-badge::before {
+    content: '\2714 ';
+  }
+  .windows-only {
+    display: block;
+    margin-top: 4px;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+  .mobile-warning {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(139, 92, 246, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 16px 20px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  .mobile-warning a { color: var(--cyan); text-decoration: underline; }
+  @media (max-width: 768px) {
+    .mobile-warning { display: block; }
+  }
+
   .btn-coming {
     display: inline-flex;
     padding: 16px 32px;
@@ -1333,6 +1397,8 @@ function closeMenu() {
             <div class="price-tag">
               <span class="currency">&pound;</span>24.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
+              <span class="guarantee-badge">30-day money-back guarantee</span>
+              <span class="windows-only">Windows 10/11 only</span>
             </div>
           </div>
         </div>
@@ -1404,6 +1470,8 @@ function closeMenu() {
             <div class="price-tag">
               <span class="currency">&pound;</span>24.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
+              <span class="guarantee-badge">30-day money-back guarantee</span>
+              <span class="windows-only">Windows 10/11 only</span>
             </div>
           </div>
         </div>
@@ -1473,6 +1541,8 @@ function closeMenu() {
             <div class="price-tag">
               <span class="currency">&pound;</span>39.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
+              <span class="guarantee-badge">30-day money-back guarantee</span>
+              <span class="windows-only">Windows 10/11 only</span>
             </div>
           </div>
         </div>
@@ -1720,5 +1790,11 @@ document.addEventListener('keydown', function(e) {
   if (companion) companion.style.display = 'block';
 })();
 </script>
+
+<!-- Mobile Warning Banner -->
+<div class="mobile-warning">
+  &#128187; K8 is a Windows desktop app (Windows 10/11). Please visit <a href="https://lilbuba.ai">lilbuba.ai</a> on your PC to download.
+</div>
+
 </body>
 </html>
