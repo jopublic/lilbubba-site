@@ -37,12 +37,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lilbuba.ai/download.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://lilbuba.ai/privacy.html</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
