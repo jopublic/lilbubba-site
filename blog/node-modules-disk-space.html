@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>node_modules Is Eating Your Hard Drive: A Developer's Guide to Reclaiming Space | LilBuba.ai Blog</title>
+<meta name="description" content="node_modules, .next, __pycache__, target/ — your SSD is full of regenerable dev junk. Here's how to find it, clean it, and keep it from coming back.">
+<meta property="og:title" content="node_modules Is Eating Your Hard Drive: A Developer's Guide to Reclaiming Space">
+<meta property="og:description" content="Your SSD is full of regenerable dev junk. Here's how to find it, clean it, and keep it from coming back.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lilbuba.ai/blog/node-modules-disk-space.html">
+<link rel="canonical" href="https://lilbuba.ai/blog/node-modules-disk-space.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="node_modules Is Eating Your Hard Drive">
+<meta name="twitter:description" content="Your SSD is full of regenerable dev junk. Here's how to find it, clean it, and keep it from coming back.">
+<meta name="twitter:image" content="https://lilbuba.ai/img/lilbubba_logo.png">
+
+<!-- Article Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "node_modules Is Eating Your Hard Drive: A Developer's Guide to Reclaiming Space",
+  "datePublished": "2026-04-04",
+  "dateModified": "2026-04-04",
+  "author": {
+    "@type": "Organization",
+    "name": "LilBuba.ai",
+    "url": "https://lilbuba.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LilBuba.ai",
+    "url": "https://lilbuba.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lilbuba.ai/img/lilbubba_logo.png"
+    }
+  },
+  "description": "node_modules, .next, __pycache__, target/ — your SSD is full of regenerable dev junk. Here's how to find it, clean it, and keep it from coming back.",
+  "mainEntityOfPage": "https://lilbuba.ai/blog/node-modules-disk-space.html"
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fredoka:wght@500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #000; color: #f0f0f5; min-height: 100vh; line-height: 1.8; }
+  .nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .nav a { color: #b0b0c8; text-decoration: none; margin-left: 24px; font-size: 14px; }
+  .nav a:hover { color: #8B5CF6; }
+  .nav .logo { font-family: 'Fredoka', sans-serif; font-size: 1.3em; background: linear-gradient(135deg, #8B5CF6, #00D4FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; margin-left: 0; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; }
+  .breadcrumb { color: #8888a0; font-size: 0.85em; margin-bottom: 32px; }
+  .breadcrumb a { color: #8B5CF6; text-decoration: none; }
+  h1 { font-family: 'Fredoka', sans-serif; font-size: 2.2em; margin-bottom: 12px; color: #f0f0f5; }
+  .meta { color: #8888a0; font-size: 0.9em; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .article h2 { font-size: 1.4em; margin-top: 40px; margin-bottom: 16px; color: #f0f0f5; }
+  .article h3 { font-size: 1.15em; margin-top: 32px; margin-bottom: 12px; color: #b0b0c8; }
+  .article p { color: #b0b0c8; margin-bottom: 16px; font-size: 1.02em; }
+  .article strong { color: #f0f0f5; }
+  .article ul, .article ol { color: #b0b0c8; margin-left: 24px; margin-bottom: 16px; }
+  .article li { margin-bottom: 8px; }
+  .article code { background: rgba(139, 92, 246, 0.15); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: #8B5CF6; }
+  .article pre { background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 8px; padding: 16px; margin-bottom: 16px; overflow-x: auto; }
+  .article pre code { background: none; padding: 0; font-size: 0.85em; }
+  .article a { color: #8B5CF6; text-decoration: none; }
+  .article a:hover { text-decoration: underline; }
+  .article hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 40px 0; }
+  .article table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .article th, .article td { text-align: left; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); color: #b0b0c8; font-size: 0.95em; }
+  .article th { color: #f0f0f5; font-weight: 600; }
+  .cta-box { background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 16px; padding: 32px; margin: 40px 0; text-align: center; }
+  .cta-box h3 { color: #f0f0f5; margin-bottom: 12px; margin-top: 0; }
+  .cta-box p { color: #b0b0c8; margin-bottom: 20px; }
+  .cta-box .btn { display: inline-block; padding: 12px 32px; background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; }
+  .cta-box .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3); text-decoration: none; }
+  footer { text-align: center; padding: 40px; color: #8888a0; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.07); }
+  footer a { color: #8B5CF6; text-decoration: none; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="../k8.html" class="logo">LilBuba.ai</a>
+  <div>
+    <a href="../k8.html">Products</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../terms.html">T&Cs</a>
+    <a href="../privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb"><a href="../blog.html">Blog</a> &rsaquo; node_modules Disk Space</div>
+
+  <h1>node_modules Is Eating Your Hard Drive: A Developer's Guide to Reclaiming Space</h1>
+  <div class="meta">By LilBuba.ai &middot; 4 April 2026 &middot; 7 min read</div>
+
+  <div class="article">
+    <p>You know the meme. The one where node_modules is heavier than a black hole. Funny, until you're staring at a "Low Disk Space" warning on a Tuesday afternoon and wondering where 47GB of your 256GB SSD went.</p>
+
+    <p>Let's talk about the elephant in the directory.</p>
+
+    <h2>The Quiet Accumulation</h2>
+
+    <p>Here's the thing nobody warns you about when you start building things. Every project you create, clone, or "just want to try out for five minutes" leaves behind a trail of generated files. And those files are <strong>big</strong>.</p>
+
+    <p>A fresh Create React App? That's 200-300MB of node_modules before you've written a single line of code. Next.js with a few dependencies? Easily 400MB+. And that's one project.</p>
+
+    <p>Most developers have ten, twenty, sometimes fifty projects scattered across their machine. Tutorial repos you followed six months ago. Side projects that lasted exactly one weekend. That thing you cloned to check one function and never opened again.</p>
+
+    <p>Do the maths. Ten abandoned React projects sitting in your <code>~/projects</code> folder? That's 2-3GB of node_modules alone. Doing absolutely nothing. Just... sitting there. Eating your SSD.</p>
+
+    <p>And node_modules isn't even the worst of it.</p>
+
+    <h2>The Usual Suspects</h2>
+
+    <p>node_modules gets all the attention (it deserves it), but it's got company. Here's the lineup of space-hogging dev junk that's almost certainly living on your machine right now:</p>
+
+    <p><strong>node_modules/</strong> &mdash; The big one. 200-300MB per project is typical. Complex projects with heavy dependencies can hit 500MB+. Fully regenerable with <code>npm install</code>.</p>
+
+    <p><strong>.next/</strong> &mdash; Next.js build cache. Can grow to 200-500MB on active projects. Contains compiled pages, webpack cache, and trace files.</p>
+
+    <p><strong>build/ and dist/</strong> &mdash; Your compiled output. Varies wildly in size, but the build caches underneath them can be substantial. Every time you run a production build, more gets cached.</p>
+
+    <p><strong>__pycache__/</strong> &mdash; Python's compiled bytecode. Individually tiny, but they breed. Scattered across every directory in every Python project. Dozens of little folders, each with <code>.pyc</code> files.</p>
+
+    <p><strong>.venv/ and venv/</strong> &mdash; Python virtual environments. Each one is 50-200MB depending on your dependencies. And they're completely regenerable from <code>requirements.txt</code>.</p>
+
+    <p><strong>.gradle/ and .m2/</strong> &mdash; Java and Android developers, you know this pain. The Gradle cache alone can be multiple gigabytes. Maven's <code>.m2</code> repository is essentially a local mirror of half of Maven Central.</p>
+
+    <p><strong>target/</strong> &mdash; Rust's target directory is legendary. A single Rust project can have a target folder north of 1GB. Two or three Rust projects and you're looking at serious disk space.</p>
+
+    <p><strong>.cargo/registry/</strong> &mdash; Shared Rust package cache. Grows silently over time.</p>
+
+    <p><strong>vendor/</strong> &mdash; PHP's Composer equivalent of node_modules. Same problem, slightly less memed.</p>
+
+    <p><strong>.terraform/</strong> &mdash; Each Terraform workspace downloads provider binaries. These add up fast across multiple infrastructure projects.</p>
+
+    <p>If you work across multiple languages &mdash; and most of us do &mdash; you're carrying around <strong>gigabytes</strong> of regenerable junk without realising it.</p>
+
+    <h2>How Much Space Are You Actually Wasting?</h2>
+
+    <p>Let's be conservative. Say you're a JavaScript developer with a reasonable number of projects:</p>
+
+    <table>
+      <tr><th>What</th><th>Count</th><th>Size each</th><th>Total</th></tr>
+      <tr><td>Active projects (node_modules)</td><td>5</td><td>300MB</td><td>1.5GB</td></tr>
+      <tr><td>Abandoned projects (node_modules)</td><td>10</td><td>250MB</td><td>2.5GB</td></tr>
+      <tr><td>.next build caches</td><td>3</td><td>300MB</td><td>900MB</td></tr>
+      <tr><td>Misc build/dist folders</td><td>8</td><td>100MB</td><td>800MB</td></tr>
+    </table>
+
+    <p>That's <strong>5.7GB</strong> from one language. If you also dabble in Python, Rust, or Java, double it.</p>
+
+    <p>When we first scanned a real developer's machine during testing &mdash; someone who'd been coding professionally for about four years on the same Windows install &mdash; we found <strong>12GB of regenerable dev files</strong>. Stuff that could be deleted and recreated with a single command in each project directory.</p>
+
+    <p>On a 256GB SSD where Windows and applications already eat 80-100GB, that's nearly 10% of your usable space. Gone. To files you never look at and can rebuild in seconds.</p>
+
+    <h2>The Manual Approach (AKA Pain)</h2>
+
+    <p>You could do this yourself. Open a terminal, navigate to each project, delete the generated folders manually.</p>
+
+    <pre><code>rm -rf node_modules
+rm -rf .next
+rm -rf build
+rm -rf dist</code></pre>
+
+    <p>Simple enough for one project. Now do it for thirty. While making sure you don't nuke node_modules in a project you're actively working on and need to demo to a client tomorrow morning.</p>
+
+    <p>The manual approach has three problems:</p>
+
+    <ol>
+      <li><strong>You have to remember where everything is.</strong> Projects in <code>~/projects</code>, <code>~/code</code>, <code>~/repos</code>, <code>~/Desktop/random-tutorial</code>, that one you cloned into Downloads...</li>
+      <li><strong>You might break something active.</strong> Deleting node_modules from a project you're currently developing means running <code>npm install</code> again (and hoping your lockfile is intact and your private registry is accessible). Not ideal at 4pm on a Friday.</li>
+      <li><strong>You'll do it once and never again.</strong> It's tedious. You'll clean up, feel virtuous for a week, and then never do it again. Six months later, same problem.</li>
+    </ol>
+
+    <h2>The Free Tool Route (Genuinely Good Options)</h2>
+
+    <p>Credit where it's due. There are free tools that tackle parts of this problem:</p>
+
+    <p><strong>npx npkill</strong> &mdash; Brilliant little tool. Scans for node_modules directories, shows you the size of each one, and lets you delete them with a keypress. It's interactive, it's fast, and it's free. If node_modules is your only problem, this is a solid choice. Run it every month or so and you'll stay on top of things.</p>
+
+    <p><strong>npx depcheck</strong> &mdash; Doesn't delete anything, but tells you which dependencies in your package.json aren't actually being used. Useful for trimming bloated dependency lists before they become bloated node_modules.</p>
+
+    <p><strong>ncdu</strong> (Linux/WSL) &mdash; Not dev-specific, but a great interactive disk usage viewer. Lets you visually see what's eating space and delete from the interface.</p>
+
+    <p><strong>WinDirStat</strong> or <strong>TreeSize</strong> &mdash; Windows equivalents. Show you where your disk space went. You'll still need to delete things manually, but at least you can see the damage.</p>
+
+    <p>These are all legitimate tools. Use them. Especially npkill &mdash; it's excellent at what it does.</p>
+
+    <p>Where they fall short is coverage. npkill only handles node_modules. It won't touch your .next caches, Python venvs, Rust targets, or Gradle builds. You'd need a different tool (or manual cleanup) for each language ecosystem. And none of them know whether a project is something you're actively working on or something you abandoned fourteen months ago.</p>
+
+    <h2>K8 Cruft: The "All of the Above" Approach</h2>
+
+    <p>This is where we come in. <a href="../k8.html">K8 Cruft</a> was built because we kept hitting this exact problem across multiple languages and wanted one tool that handled all of it.</p>
+
+    <p><strong>9 categories of dev junk.</strong> Not just node_modules. K8 Cruft scans for package caches, build output, virtual environments, IDE metadata, log accumulations, temp files, orphaned configs, and more. One scan, everything surfaced.</p>
+
+    <p><strong>Project-aware scanning.</strong> This is the bit that matters. K8 Cruft doesn't just find big folders and offer to delete them. It understands project structure. It knows the difference between a project you committed to yesterday and one that hasn't been touched since 2024. It assigns "crap scores" based on how stale, how large, and how regenerable each item is. High crap score = safe to remove. Low crap score = probably leave it alone.</p>
+
+    <p><strong>Quarantine, not deletion.</strong> Nothing gets permanently deleted. When you remove something through K8 Cruft, it goes to quarantine for 30 days. Changed your mind? Restore it. Realised you needed that .venv after all? One click, it's back. After 30 days with no complaints, <em>then</em> it's gone for good.</p>
+
+    <p><strong>100% local.</strong> Your project files never leave your machine. No cloud upload, no telemetry, no phoning home. It runs locally, it scans locally, it deletes locally.</p>
+
+    <p>It's a one-time purchase at &pound;24.95. No subscription. No "free tier with annoying upsells." You buy it, it works on your machine, that's the arrangement.</p>
+
+    <h2>Prevention Habits (Free, Effective, Worth Doing)</h2>
+
+    <p>Whether you use K8 Cruft, npkill, or just your own discipline, these habits will keep dev junk from spiralling:</p>
+
+    <p><strong>Delete node_modules when you shelve a project.</strong> If you're done with a project for now, nuke the node_modules. You've got a lockfile. It'll come back with <code>npm install</code> when you need it. There's zero reason to keep 300MB of cached packages for a project you haven't opened in three months.</p>
+
+    <p><strong>Use .gitignore as a cleanup checklist.</strong> Everything in your .gitignore is, by definition, regenerable. That's literally why it's in .gitignore &mdash; because it can be rebuilt from source. When you're cleaning up, start there.</p>
+
+    <p><strong>Set a calendar reminder.</strong> Once a month, spend ten minutes on dev cleanup. Run npkill. Check for stale venvs. Delete build caches from finished projects. It's less painful in small doses than doing a massive purge once a year.</p>
+
+    <p><strong>Consider a projects archive.</strong> Keep active work in <code>~/projects</code> and move finished/abandoned things to <code>~/archive</code>. Makes it much easier to identify what's safe to clean. If it's in archive and has a lockfile, its node_modules can go.</p>
+
+    <p><strong>Watch your global caches too.</strong> <code>~/.npm</code>, <code>~/.cargo</code>, <code>~/.gradle/caches</code>, <code>pip cache dir</code> &mdash; these grow silently over time. They're shared across projects, so they don't show up in any single project's footprint. But they accumulate. <code>npm cache clean --force</code> and <code>pip cache purge</code> are your friends.</p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>Your SSD is not as full as Windows says it is. A meaningful chunk of that "used space" is regenerable developer junk that's been accumulating quietly since you set up your machine.</p>
+
+    <p>You don't need to live with it. Whether you use free tools, paid tools, or just a terminal and some discipline, reclaiming that space is straightforward. The important thing is to actually do it &mdash; and to make it a habit rather than a once-a-year panic when your drive hits 95%.</p>
+
+    <p>Your disk called. It wants its space back.</p>
+
+    <hr>
+
+    <div class="cta-box">
+      <h3>9 categories of dev junk. One scan. Nothing deleted without your say-so.</h3>
+      <p>K8 Cruft finds the node_modules, build caches, stale venvs, and forgotten build output that's eating your disk. Project-aware scanning, 30-day quarantine, 100% local.</p>
+      <a href="../k8.html" class="btn">See how K8 Cruft works &rarr;</a>
+    </div>
+
+    <hr>
+
+    <p><em>K8 Cruft is available at <a href="../k8.html">lilbuba.ai</a>. One-time purchase, &pound;24.95. No subscription. No cloud. Your code stays on your machine, where it belongs.</em></p>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 LilBuba.ai &middot; Jo Browning &middot; <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a></p>
+  <p style="margin-top: 8px;">Patent pending &middot; Built in Worthing, UK</p>
+</footer>
+</body>
+</html>
