@@ -332,8 +332,8 @@
     height: 100%;
     object-fit: cover;
     pointer-events: none;
-    -webkit-mask-image: radial-gradient(circle, black 45%, transparent 70%);
-    mask-image: radial-gradient(circle, black 45%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle, black 70%, transparent 95%);
+    mask-image: radial-gradient(circle, black 70%, transparent 95%);
   }
   @keyframes bubaFloat {
     0%, 100% { transform: translateY(0); }
@@ -463,7 +463,40 @@
   var vidSrc = buba === 'fem' ? 'img/lilbuba_feminine_v3_trimmed.mp4' : 'img/lilbuba_masculine_v3_trimmed.mp4';
   var srcEl = document.getElementById('bubaVidSrc');
   var vidEl = document.getElementById('bubaVid');
-  if (srcEl && vidEl) { srcEl.src = vidSrc; vidEl.load(); vidEl.play().catch(function(){}); }
+  if (!srcEl || !vidEl) return;
+  srcEl.src = vidSrc;
+  vidEl.load();
+  vidEl.muted = true;
+  vidEl.loop = true;
+  vidEl.play().catch(function(){});
+  if (sessionStorage.getItem('bubaGreeted')) return;
+  function playGreeting() {
+    document.removeEventListener('click', playGreeting);
+    document.removeEventListener('touchstart', playGreeting);
+    document.removeEventListener('keydown', playGreeting);
+    sessionStorage.setItem('bubaGreeted', '1');
+    vidEl.pause();
+    vidEl.loop = false;
+    vidEl.muted = false;
+    vidEl.currentTime = 0;
+    var p = vidEl.play();
+    if (p) p.then(function() {
+      vidEl.addEventListener('ended', function onEnd() {
+        vidEl.removeEventListener('ended', onEnd);
+        vidEl.muted = true;
+        vidEl.loop = true;
+        vidEl.currentTime = 0;
+        vidEl.play().catch(function(){});
+      });
+    }).catch(function() {
+      vidEl.muted = true;
+      vidEl.loop = true;
+      vidEl.play().catch(function(){});
+    });
+  }
+  document.addEventListener('click', playGreeting, { once: true });
+  document.addEventListener('touchstart', playGreeting, { once: true });
+  document.addEventListener('keydown', playGreeting, { once: true });
 })();
 </script>
 </body>
