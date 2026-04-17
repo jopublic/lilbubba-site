@@ -279,13 +279,21 @@
     transform: scale(1.15);
     filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6)) drop-shadow(0 0 40px rgba(0, 212, 255, 0.3));
   }
+  .buba-audio-toggle {
+    position: fixed; top: 232px; left: 80px; z-index: 100;
+    background: rgba(139, 92, 246, 0.25); border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 50%; width: 26px; height: 26px; font-size: 12px;
+    line-height: 26px; text-align: center; cursor: pointer;
+    opacity: 0; animation: bubaEntrance 0.5s ease-out 2.5s forwards; transition: background 0.3s;
+  }
+  .buba-audio-toggle:hover { background: rgba(139, 92, 246, 0.5); }
   .buba-companion video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     pointer-events: none;
-    -webkit-mask-image: radial-gradient(circle, black 40%, transparent 63%);
-    mask-image: radial-gradient(circle, black 40%, transparent 63%);
+    -webkit-mask-image: radial-gradient(circle, black 42%, transparent 66%);
+    mask-image: radial-gradient(circle, black 42%, transparent 66%);
   }
   @keyframes bubaEntrance {
     0% { opacity: 0; transform: translateY(30px) scale(0.85); }
@@ -1229,6 +1237,7 @@
     .cleverness-card h2 { font-size: 1.4em; }
     .big-quote { font-size: 1em; }
     .buba-companion { display: none; }
+    .buba-audio-toggle { display: none; }
     footer { padding: 24px 16px; }
     .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
   }
@@ -1253,6 +1262,7 @@
     <source id="bubaVidSrc" src="img/lilbuba_masculine_v3_trimmed.mp4" type="video/mp4">
   </video>
 </div>
+<button class="buba-audio-toggle" id="bubaAudioToggle" title="Toggle Buba audio">🔇</button>
 
 <!-- HEADER - LilBuba as subtle parent brand -->
 <header>
@@ -1795,34 +1805,36 @@ document.addEventListener('keydown', function(e) {
   vidEl.muted = true;
   vidEl.loop = true;
   vidEl.play().catch(function(){});
-  if (sessionStorage.getItem('bubaGreeted')) return;
-  function playGreeting() {
-    document.removeEventListener('click', playGreeting);
-    document.removeEventListener('touchstart', playGreeting);
-    document.removeEventListener('keydown', playGreeting);
-    sessionStorage.setItem('bubaGreeted', '1');
-    vidEl.pause();
-    vidEl.loop = false;
-    vidEl.muted = false;
-    vidEl.currentTime = 0;
+  function playBubaAudio() {
+    vidEl.pause(); vidEl.loop = false; vidEl.muted = false; vidEl.currentTime = 0;
     var p = vidEl.play();
     if (p) p.then(function() {
       vidEl.addEventListener('ended', function onEnd() {
         vidEl.removeEventListener('ended', onEnd);
-        vidEl.muted = true;
-        vidEl.loop = true;
-        vidEl.currentTime = 0;
+        vidEl.muted = true; vidEl.loop = true; vidEl.currentTime = 0;
+        var tb = document.getElementById('bubaAudioToggle');
+        if (tb) tb.textContent = '\uD83D\uDD07';
         vidEl.play().catch(function(){});
       });
-    }).catch(function() {
-      vidEl.muted = true;
-      vidEl.loop = true;
-      vidEl.play().catch(function(){});
+    }).catch(function() { vidEl.muted = true; vidEl.loop = true; vidEl.play().catch(function(){}); });
+  }
+  if (!sessionStorage.getItem('bubaGreeted')) {
+    function autoGreet() {
+      document.removeEventListener('click', autoGreet); document.removeEventListener('touchstart', autoGreet); document.removeEventListener('keydown', autoGreet);
+      sessionStorage.setItem('bubaGreeted', '1');
+      var tb = document.getElementById('bubaAudioToggle'); if (tb) tb.textContent = '\uD83D\uDD0A';
+      playBubaAudio();
+    }
+    document.addEventListener('click', autoGreet, { once: true }); document.addEventListener('touchstart', autoGreet, { once: true }); document.addEventListener('keydown', autoGreet, { once: true });
+  }
+  var toggleBtn = document.getElementById('bubaAudioToggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (vidEl.muted) { toggleBtn.textContent = '\uD83D\uDD0A'; playBubaAudio(); }
+      else { vidEl.muted = true; vidEl.loop = true; toggleBtn.textContent = '\uD83D\uDD07'; }
     });
   }
-  document.addEventListener('click', playGreeting, { once: true });
-  document.addEventListener('touchstart', playGreeting, { once: true });
-  document.addEventListener('keydown', playGreeting, { once: true });
 })();
 </script>
 
