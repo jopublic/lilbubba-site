@@ -39,6 +39,59 @@
     font-size: 1.1em;
     margin-bottom: 32px;
   }
+  .key-box {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .key-label {
+    color: #8B5CF6;
+    font-weight: 700;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .key-display {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
+    padding: 12px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    user-select: all;
+  }
+  .key-loading { color: #8888a0; font-size: 1em; }
+  .key-error { color: #ff6b6b; }
+  .copy-btn {
+    display: inline-block;
+    padding: 10px 28px;
+    background: linear-gradient(135deg, #8B5CF6, #00D4FF);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .copy-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+  }
+  .copy-btn.copied { background: #22c55e; }
+  .key-note {
+    color: #8888a0;
+    font-size: 0.8em;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
   .download-btn {
     display: inline-block;
     padding: 16px 40px;
@@ -91,12 +144,15 @@
 <body>
 <div class="container">
   <h1>Thank You!</h1>
-  <p class="subtitle">Your purchase is complete. Download K8 and check your email for your licence key.</p>
+  <p class="subtitle">Your purchase is complete. Here's your licence key.</p>
 
-  <div style="background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: left;">
-    <p style="color: #8B5CF6; font-weight: 700; font-size: 1.1em; margin-bottom: 8px;">Your Licence Key</p>
-    <p style="color: #b0b0c8; font-size: 0.95em; line-height: 1.6;">Your unique licence key has been sent to your purchase email address. Check your inbox (and spam/junk folder). You'll need it when you first open K8.</p>
-    <p style="color: #8888a0; font-size: 0.85em; margin-top: 12px;">Haven't received it within 30 minutes? Email <a href="mailto:support@lilbuba.ai" style="color: #8B5CF6;">support@lilbuba.ai</a> with your order number and we'll sort it straight away.</p>
+  <div class="key-box" id="keyBox">
+    <div class="key-label">Your Licence Key</div>
+    <div class="key-display" id="keyDisplay">
+      <span class="key-loading">Generating your key...</span>
+    </div>
+    <button class="copy-btn" id="copyBtn" style="display:none;" onclick="copyKey()">Copy Key</button>
+    <div class="key-note">Save this key! You'll need it when you first open K8.<br>Screenshot this page or copy the key now.</div>
   </div>
 
   <div class="mobile-alert">
@@ -120,5 +176,46 @@
     <p>&copy; 2026 LilBuba.ai - All rights reserved</p>
   </div>
 </div>
+
+<script>
+var WORKER_URL = 'https://k8-keyss.jopubliccomedy.workers.dev';
+
+function copyKey() {
+  var keyText = document.getElementById('keyDisplay').textContent.trim();
+  navigator.clipboard.writeText(keyText).then(function() {
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Copy Key';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var txn = params.get('_ptxn') || params.get('txn');
+
+  if (!txn) {
+    document.getElementById('keyDisplay').innerHTML = '<span class="key-error">No transaction found.<br>If you just purchased, please email <a href="mailto:support@lilbuba.ai" style="color:#8B5CF6;">support@lilbuba.ai</a> with your order number.</span>';
+    return;
+  }
+
+  fetch(WORKER_URL + '/fulfil?txn=' + encodeURIComponent(txn))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.key) {
+        document.getElementById('keyDisplay').textContent = data.key;
+        document.getElementById('copyBtn').style.display = 'inline-block';
+      } else {
+        document.getElementById('keyDisplay').innerHTML = '<span class="key-error">Error generating key. Please email <a href="mailto:support@lilbuba.ai" style="color:#8B5CF6;">support@lilbuba.ai</a> with your order number.</span>';
+      }
+    })
+    .catch(function() {
+      document.getElementById('keyDisplay').innerHTML = '<span class="key-error">Could not connect to key server. Please email <a href="mailto:support@lilbuba.ai" style="color:#8B5CF6;">support@lilbuba.ai</a> with your order number.</span>';
+    });
+})();
+</script>
 </body>
 </html>
