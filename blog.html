@@ -17,11 +17,19 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fredoka:wght@500;600;700&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', sans-serif; background: #000; color: #f0f0f5; min-height: 100vh; line-height: 1.7; }
-  .nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .ambient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .ambient-orb { position: absolute; border-radius: 50%; filter: blur(100px); }
+  .ambient-orb.orb1 { top: -10%; left: 15%; width: 1000px; height: 1000px; background: radial-gradient(circle, rgba(139,92,246,0.6) 0%, rgba(139,92,246,0.15) 40%, transparent 70%); animation: orbit1 18s ease-in-out infinite; }
+  .ambient-orb.orb2 { bottom: -10%; right: 10%; width: 900px; height: 900px; background: radial-gradient(circle, rgba(0,212,255,0.45) 0%, rgba(0,212,255,0.1) 40%, transparent 70%); animation: orbit2 22s ease-in-out infinite; }
+  .ambient-orb.orb3 { top: 30%; left: -10%; width: 900px; height: 900px; background: radial-gradient(circle, rgba(0,212,255,0.25) 0%, transparent 70%); animation: orbit3 26s ease-in-out infinite; }
+  @keyframes orbit1 { 0%, 100% { transform: translate(0,0) scale(1); opacity: 0.8; } 33% { transform: translate(80px,120px) scale(1.15); opacity: 1; } 66% { transform: translate(-50px,70px) scale(0.95); opacity: 0.9; } }
+  @keyframes orbit2 { 0%, 100% { transform: translate(0,0) scale(1); opacity: 0.7; } 33% { transform: translate(-80px,-90px) scale(1.2); opacity: 1; } 66% { transform: translate(60px,-50px) scale(0.9); opacity: 0.8; } }
+  @keyframes orbit3 { 0%, 100% { transform: translate(0,0); opacity: 0.7; } 50% { transform: translate(100px,-70px); opacity: 1; } }
+  .nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.07); position: relative; z-index: 10; }
   .nav a { color: #b0b0c8; text-decoration: none; margin-left: 24px; font-size: 14px; }
   .nav a:hover { color: #8B5CF6; }
   .nav .logo { font-family: 'Fredoka', sans-serif; font-size: 1.3em; background: linear-gradient(135deg, #8B5CF6, #00D4FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; margin-left: 0; }
-  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
   h1 { font-family: 'Fredoka', sans-serif; font-size: 2.4em; margin-bottom: 8px; background: linear-gradient(135deg, #8B5CF6, #00D4FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .blog-list { margin-top: 48px; }
   .blog-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 32px; margin-bottom: 24px; transition: border-color 0.3s; }
@@ -33,7 +41,7 @@
   .blog-card .excerpt { color: #b0b0c8; font-size: 0.95em; margin-bottom: 16px; }
   .blog-card .read-more { color: #8B5CF6; text-decoration: none; font-weight: 500; font-size: 0.9em; }
   .blog-card .read-more:hover { text-decoration: underline; }
-  footer { text-align: center; padding: 40px; color: #8888a0; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.07); }
+  footer { text-align: center; padding: 40px; color: #8888a0; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.07); position: relative; z-index: 1; }
   footer a { color: #8B5CF6; text-decoration: none; }
 
   /* ===== BUBA COMPANION ===== */
@@ -83,14 +91,21 @@
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"71710d31ec78473da29f26c0eb2aaec0"}'></script>
 </head>
 <body>
+<div class="ambient">
+  <div class="ambient-orb orb1"></div>
+  <div class="ambient-orb orb2"></div>
+  <div class="ambient-orb orb3"></div>
+</div>
 <nav class="nav">
   <a href="k8.html" class="logo">LilBuba.ai</a>
   <div>
     <a href="k8.html">Products</a>
     <a href="faq.html">FAQ</a>
     <a href="blog.html">Blog</a>
-    <a href="terms.html">T&Cs</a>
+    <a href="terms.html">T&amp;Cs</a>
     <a href="privacy.html">Privacy</a>
+    <a href="refund.html">Refunds</a>
+    <a href="mailto:support@lilbuba.ai">Contact</a>
   </div>
 </nav>
 
