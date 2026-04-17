@@ -317,9 +317,9 @@
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
-    opacity: 0.7;
+    opacity: 0;
     transition: all 0.4s ease;
-    animation: bubaFloat 4s ease-in-out infinite;
+    animation: bubaEntrance 1.5s ease-out forwards, bubaFloat 4s ease-in-out 1.5s infinite;
     filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.3));
   }
   .buba-companion:hover {
@@ -332,8 +332,12 @@
     height: 100%;
     object-fit: cover;
     pointer-events: none;
-    -webkit-mask-image: radial-gradient(circle, black 70%, transparent 95%);
-    mask-image: radial-gradient(circle, black 70%, transparent 95%);
+    -webkit-mask-image: radial-gradient(circle, black 40%, transparent 63%);
+    mask-image: radial-gradient(circle, black 40%, transparent 63%);
+  }
+  @keyframes bubaEntrance {
+    0% { opacity: 0; transform: translateY(30px) scale(0.85); }
+    100% { opacity: 0.7; transform: translateY(0) scale(1); }
   }
   @keyframes bubaFloat {
     0%, 100% { transform: translateY(0); }
