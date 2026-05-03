@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Had 500GB of Duplicates. Nothing Worked. So I Built K8. | LilBuba.ai Blog</title>
+<meta name="description" content="A founder story. Why I built K8 — the duplicate file finder for people whose drives are a mess of phone backups, OneDrive copies, and 'just in case' folders.">
+<meta property="og:title" content="I Had 500GB of Duplicates. Nothing Worked. So I Built K8.">
+<meta property="og:description" content="A founder story. Why I built K8 — the duplicate file finder for people whose drives are a real-world mess.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lilbuba.ai/blog/why-i-built-k8.html">
+<link rel="canonical" href="https://lilbuba.ai/blog/why-i-built-k8.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="I Had 500GB of Duplicates. Nothing Worked. So I Built K8.">
+<meta name="twitter:description" content="A founder story. Why I built K8 — the duplicate file finder for people whose drives are a real-world mess.">
+<meta name="twitter:image" content="https://lilbuba.ai/img/lilbuba_logo.png">
+
+<!-- Article Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "I Had 500GB of Duplicates. Nothing Worked. So I Built K8.",
+  "datePublished": "2026-05-03",
+  "dateModified": "2026-05-03",
+  "author": {
+    "@type": "Person",
+    "name": "Jo Browning",
+    "url": "https://lilbuba.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LilBuba.ai",
+    "url": "https://lilbuba.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lilbuba.ai/img/lilbuba_logo.png"
+    }
+  },
+  "description": "A founder story. Why I built K8 — the duplicate file finder for people whose drives are a mess of phone backups, OneDrive copies, and 'just in case' folders.",
+  "mainEntityOfPage": "https://lilbuba.ai/blog/why-i-built-k8.html"
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fredoka:wght@500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #000; color: #f0f0f5; min-height: 100vh; line-height: 1.8; }
+  .nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .nav a { color: #b0b0c8; text-decoration: none; margin-left: 24px; font-size: 14px; }
+  .nav a:hover { color: #8B5CF6; }
+  .nav .logo { font-family: 'Fredoka', sans-serif; font-size: 1.3em; background: linear-gradient(135deg, #8B5CF6, #00D4FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; margin-left: 0; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; }
+  .breadcrumb { color: #8888a0; font-size: 0.85em; margin-bottom: 32px; }
+  .breadcrumb a { color: #8B5CF6; text-decoration: none; }
+  h1 { font-family: 'Fredoka', sans-serif; font-size: 2.2em; margin-bottom: 12px; color: #f0f0f5; }
+  .meta { color: #8888a0; font-size: 0.9em; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .article h2 { font-size: 1.4em; margin-top: 40px; margin-bottom: 16px; color: #f0f0f5; }
+  .article h3 { font-size: 1.15em; margin-top: 32px; margin-bottom: 12px; color: #b0b0c8; }
+  .article p { color: #b0b0c8; margin-bottom: 16px; font-size: 1.02em; }
+  .article strong { color: #f0f0f5; }
+  .article ul, .article ol { color: #b0b0c8; margin-left: 24px; margin-bottom: 16px; }
+  .article li { margin-bottom: 8px; }
+  .article code { background: rgba(139, 92, 246, 0.15); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: #8B5CF6; }
+  .article a { color: #8B5CF6; text-decoration: none; }
+  .article a:hover { text-decoration: underline; }
+  .article hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 40px 0; }
+  .cta-box { background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 16px; padding: 32px; margin: 40px 0; text-align: center; }
+  .cta-box h3 { color: #f0f0f5; margin-bottom: 12px; margin-top: 0; }
+  .cta-box p { color: #b0b0c8; margin-bottom: 20px; }
+  .cta-box .btn { display: inline-block; padding: 12px 32px; background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; }
+  .cta-box .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3); text-decoration: none; }
+  footer { text-align: center; padding: 40px; color: #8888a0; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.07); }
+  footer a { color: #8B5CF6; text-decoration: none; }
+</style>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"71710d31ec78473da29f26c0eb2aaec0"}'></script>
+</head>
+<body>
+<nav class="nav">
+  <a href="../k8.html" class="logo">LilBuba.ai</a>
+  <div>
+    <a href="../k8.html">Products</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../terms.html">T&amp;Cs</a>
+    <a href="../privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb"><a href="../blog.html">Blog</a> &rsaquo; Why I Built K8</div>
+
+  <h1>I Had 500GB of Duplicates. Nothing Worked. So I Built K8.</h1>
+  <div class="meta">By Jo Browning &middot; 3 May 2026 &middot; 5 min read</div>
+
+  <div class="article">
+    <p>I'm going to be honest with you. I didn't set out to build a product. I set out to fix my own mess.</p>
+
+    <h2>The Problem</h2>
+
+    <p>500GB. That's how much space was being wasted on my 2.79TB external drive. Five hundred gigabytes of files that existed in two, three, sometimes five different places. Photos synced from my phone to OneDrive, then backed up to an external drive "just in case," then copied again when I got a new laptop. Music files scattered across old project folders. Video clips duplicated every time I reorganised.</p>
+
+    <p>I tried the tools that already existed. Some were painfully slow &mdash; we're talking hours to scan a single drive. Some wanted to upload my files to the cloud for "analysis." Some found duplicates but couldn't tell me which copy to keep. And some just crashed when they hit my OneDrive folder because 40% of my files were cloud-only placeholders that don't actually exist on the drive.</p>
+
+    <p>None of them worked for the way real people actually use computers in 2026.</p>
+
+    <h2>The Breakthrough</h2>
+
+    <p>The fix came at about 4am on a Tuesday, which is when all the best ideas happen. I came up with a novel way to spot duplicates without the heavy lifting that slows other tools down. Scan times dropped from hours to minutes. A 500GB drive in under 60 seconds.</p>
+
+    <h2>What Makes K8 Different</h2>
+
+    <p><strong>Source of Truth mode.</strong> Pick your master folder &mdash; the one with the originals. K8 finds duplicates everywhere else without touching your originals. You don't have to decide which copy to keep for every single match. You just say "this folder is the truth" and K8 handles the rest.</p>
+
+    <p><strong>OneDrive-aware.</strong> If a file is a cloud-only placeholder (that little cloud icon in Explorer), K8 skips it instead of trying to download it and freezing your entire system. No other duplicate finder does this. I know because my drive is 40% cloud-only files and every other tool choked on them.</p>
+
+    <p><strong>30-day quarantine.</strong> Nothing is permanently deleted. When you remove a duplicate through K8, it goes to quarantine. Changed your mind? Restore it. Realised you actually needed that copy? One click, it's back. After 30 days with no complaints, then it's gone for good.</p>
+
+    <p><strong>100% local.</strong> Your files never leave your machine. No cloud upload, no telemetry, no accounts, no internet connection required during scanning. It runs on your laptop, it scans your drives, and it keeps its mouth shut about what it finds.</p>
+
+    <h2>Three Products, One Philosophy</h2>
+
+    <p>K8 started as a duplicate finder, but the same engine powers three tools:</p>
+
+    <p><strong>K8 Bionic</strong> finds duplicate files. Photos, documents, music, downloads &mdash; whatever's eating your disk space.</p>
+
+    <p><strong>K8 Cruft</strong> is for developers. It finds the node_modules, build caches, Python virtual environments, and other regenerable junk that accumulates on a developer's machine. Most developers are carrying around 5-15GB of stuff they could rebuild with a single command.</p>
+
+    <p><strong>K8 Media</strong> is for creators. Photographers, videographers, musicians &mdash; anyone drowning in near-identical files from multiple shoots, exports, and edits.</p>
+
+    <p>All three share the same principle: safe, smart, stupidly fast. And all three are one-time purchases. No subscriptions. No annual renewals. You buy it, it works, that's the deal.</p>
+
+    <h2>Why I'm Telling You This</h2>
+
+    <p>Because I think there's a gap between "free tools that do half the job" and "enterprise software that costs more than my laptop." K8 sits in that gap. It's &pound;24.95 for Bionic or Cruft, &pound;39.95 for Media. You can buy all three for &pound;64.95.</p>
+
+    <p>It's built by one person, in Worthing, with a dog who thinks the keyboard is a pillow. It's not backed by venture capital or a team of fifty engineers. It's backed by the fact that I had the same problem you have, and I couldn't find anything that actually solved it.</p>
+
+    <p>If your hard drive is full and you don't know why, K8 might be worth a look.</p>
+
+    <hr>
+
+    <div class="cta-box">
+      <h3>Safe. Smart. Stupidly Fast.</h3>
+      <p>K8 finds the duplicates other tools miss. 100% local, 30-day quarantine, nothing deleted without your say-so.</p>
+      <a href="../k8.html" class="btn">See how K8 works &rarr;</a>
+    </div>
+
+    <hr>
+
+    <p><em>K8 is available at <a href="../k8.html">lilbuba.ai</a>. One-time purchase. No subscription. No cloud. Your files stay on your machine, where they belong.</em></p>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 LilBuba.ai &middot; Jo Browning &middot; <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a></p>
+  <p style="margin-top: 8px;">Patent pending &middot; Built in Worthing, UK</p>
+</footer>
+</body>
+</html>
