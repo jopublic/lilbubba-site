@@ -159,12 +159,12 @@
     <strong>&#128187; Heads up!</strong> K8 is a Windows desktop app. This .exe file won't run on a phone or tablet. Please visit this page on your Windows PC to download.
   </div>
 
-  <a href="https://github.com/jopublic/lilbubba-site/releases/download/v1.7.0/K8_Setup_1.7.0.exe" class="download-btn">
-    Download K8 Setup (38MB)
+  <a href="https://github.com/jopublic/lilbubba-site/releases/download/v1.8.0/K8_Setup_1.8.0.exe" class="download-btn">
+    Download K8 Setup (50MB)
   </a>
 
   <div class="info">
-    <p><strong>File:</strong> K8_Setup_1.7.0.exe (38MB)</p>
+    <p><strong>File:</strong> K8_Setup_1.8.0.exe (50MB)</p>
     <p><strong>Platform:</strong> Windows 10/11</p>
     <p><strong>Licence:</strong> Lifetime - one-time purchase, no subscription</p>
     <p><strong>Privacy:</strong> K8 runs 100% on your machine. No cloud. No telemetry.</p>
@@ -194,11 +194,16 @@ function copyKey() {
 }
 
 (function() {
-  var params = new URLSearchParams(window.location.search);
+  // Defensive: some checkout providers naively append "?_ptxn=" instead of
+  // "&_ptxn=" when the success URL already has a query string. Normalise any
+  // second "?" into "&" before parsing so we get both params reliably.
+  var qs = window.location.search.replace(/\?(_ptxn|txn)=/g, '&$1=');
+  if (qs.startsWith('&')) { qs = '?' + qs.substring(1); }
+  var params = new URLSearchParams(qs);
   var txn = params.get('_ptxn') || params.get('txn');
-  // product flag passed by Paddle success URL: ?product=B|C|M|D|A
-  // (configure once per product in the Paddle dashboard)
-  // If absent, worker falls back to legacy ALL-access key for back-compat.
+  // Product flag set per buy button in index.html, passed through Paddle
+  // successUrl as ?product=B|C|M|D|A. If absent, worker falls back to a
+  // legacy ALL-access key (grandfather path) so old links keep working.
   var product = (params.get('product') || '').toUpperCase();
   var validProducts = ['B', 'C', 'M', 'D', 'A'];
 
