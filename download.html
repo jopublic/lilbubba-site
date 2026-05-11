@@ -196,13 +196,23 @@ function copyKey() {
 (function() {
   var params = new URLSearchParams(window.location.search);
   var txn = params.get('_ptxn') || params.get('txn');
+  // product flag passed by Paddle success URL: ?product=B|C|M|D|A
+  // (configure once per product in the Paddle dashboard)
+  // If absent, worker falls back to legacy ALL-access key for back-compat.
+  var product = (params.get('product') || '').toUpperCase();
+  var validProducts = ['B', 'C', 'M', 'D', 'A'];
 
   if (!txn) {
     document.getElementById('keyDisplay').innerHTML = '<span class="key-error">No transaction found.<br>If you just purchased, please email <a href="mailto:support@lilbuba.ai" style="color:#8B5CF6;">support@lilbuba.ai</a> with your order number.</span>';
     return;
   }
 
-  fetch(WORKER_URL + '/fulfil?txn=' + encodeURIComponent(txn))
+  var fulfilUrl = WORKER_URL + '/fulfil?txn=' + encodeURIComponent(txn);
+  if (validProducts.indexOf(product) !== -1) {
+    fulfilUrl += '&product=' + product;
+  }
+
+  fetch(fulfilUrl)
     .then(function(r) { return r.json(); })
     .then(function(data) {
       if (data.key) {

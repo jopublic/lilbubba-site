@@ -91,11 +91,27 @@
     token: 'live_32141f7ba947368975f22b2dc25'
   });
 
+  // Map each Paddle priceId to its K8 product flag.
+  // Worker uses the flag to mint the right product-gated key.
+  // Must match VALID_FLAGS in k8_key_worker.js.
+  var K8_PRICE_TO_PRODUCT = {
+    'pri_01kmkfbv93p3079jbf7pt21c76': 'B', // K8 Bionic        £24.95
+    'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': 'C', // K8 Cruft         £24.95
+    'pri_01kmkg4ex5x3saje0erbnmca3t': 'M', // K8 Media         £39.95
+    'pri_01kmkgqd61b354cvpctb77pvmg': 'D', // Media + Bionic   £54.95 (duo)
+    'pri_01kmpep1pb6r1enr8tvr1r4m02': 'A'  // All Three        £64.95
+  };
+
   function buyProduct(priceId) {
+    var product = K8_PRICE_TO_PRODUCT[priceId];
+    var successUrl = 'https://lilbuba.ai/download.html';
+    if (product) {
+      successUrl += '?product=' + product;
+    }
     Paddle.Checkout.open({
       items: [{ priceId: priceId, quantity: 1 }],
       settings: {
-        successUrl: 'https://lilbuba.ai/download.html'
+        successUrl: successUrl
       }
     });
   }
