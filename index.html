@@ -1782,6 +1782,25 @@ function showProduct(product, btn) {
   document.getElementById('product-' + product).classList.add('active');
 }
 
+// Deep-link support: arrive at /#bionic, /#cruft, or /#media and the right
+// product tab opens automatically. Used by the K8 app's locked-tab upgrade
+// modal so "Buy K8 Cruft" lands the customer on the Cruft tab, not a 404.
+function activateProductFromHash() {
+  var hash = (window.location.hash || '').replace('#', '').toLowerCase();
+  if (['bionic', 'cruft', 'media'].indexOf(hash) === -1) return;
+  var btns = document.querySelectorAll('.product-btn');
+  for (var i = 0; i < btns.length; i++) {
+    var onclick = btns[i].getAttribute('onclick') || '';
+    if (onclick.indexOf("'" + hash + "'") !== -1) {
+      showProduct(hash, btns[i]);
+      btns[i].scrollIntoView({behavior: 'smooth', block: 'center'});
+      break;
+    }
+  }
+}
+window.addEventListener('DOMContentLoaded', activateProductFromHash);
+window.addEventListener('hashchange', activateProductFromHash);
+
 function toggleFaq(el) {
   var item = el.parentElement;
   var wasOpen = item.classList.contains('open');
