@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /fulfil
 
 Sitemap: https://lilbuba.ai/sitemap.xml
