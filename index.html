@@ -1268,6 +1268,56 @@
     footer { padding: 24px 16px; }
     .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
   }
+
+  /* ===== HONEST STATS BAND ===== */
+  .stats-band {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 1000px;
+    margin: 8px auto 44px;
+    padding: 0 20px;
+  }
+  .stat-card {
+    flex: 1 1 200px;
+    max-width: 230px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 26px 18px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--purple-glow);
+  }
+  .stat-number {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 2.7rem;
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .stat-number .stat-unit { font-size: 0.5em; font-weight: 600; }
+  .stat-number .stat-approx { font-size: 0.5em; font-weight: 600; opacity: 0.6; vertical-align: super; margin-right: 1px; }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+  @media (max-width: 768px) {
+    .stats-band { gap: 12px; margin: 4px auto 32px; }
+    .stat-card { flex: 1 1 140px; max-width: 46%; padding: 18px 12px; }
+    .stat-number { font-size: 2rem; }
+    .stat-label { font-size: 0.78rem; }
+  }
 </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"71710d31ec78473da29f26c0eb2aaec0"}'></script>
 </head>
@@ -1332,6 +1382,26 @@ function closeMenu() {
     <p class="safe-smart-hero">Safe &bull; Smart &bull; Stupidly Fast</p>
     <div class="deduplik8-main"><span class="dedupli">Dedupli</span><img src="img/k8_hero_logo.png" alt="K8" class="k8-inline"><span class="your-life">Your Life</span></div>
     <p class="intelligence-line">"We took the intelligence out of AI so you don't have to."</p>
+  </section>
+
+  <!-- HONEST STATS BAND -->
+  <section class="stats-band" aria-label="K8 in numbers">
+    <div class="stat-card">
+      <div class="stat-number"><span class="stat-approx">~</span>500<span class="stat-unit">GB</span></div>
+      <div class="stat-label">of duplicates on my own drive &mdash; the mess that started K8</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">99.88<span class="stat-unit">%</span></div>
+      <div class="stat-label">faster than the old way of finding them</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">100<span class="stat-unit">%</span></div>
+      <div class="stat-label">local &amp; private &mdash; nothing ever leaves your PC</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">30<span class="stat-unit">&nbsp;days</span></div>
+      <div class="stat-label">to restore from quarantine and get your money back</div>
+    </div>
   </section>
 
 
