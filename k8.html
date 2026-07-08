@@ -332,6 +332,38 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
   }
+  /* Buba speech bubble — introduces each K8 product */
+  .buba-speech {
+    position: fixed;
+    top: 92px;
+    left: 198px;
+    z-index: 99;
+    max-width: 240px;
+    background: rgba(26, 18, 48, 0.94);
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    border-radius: 16px 16px 16px 4px;
+    padding: 12px 15px;
+    color: #f0f0f5;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 10px 34px rgba(139, 92, 246, 0.28);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    pointer-events: none;
+  }
+  .buba-speech.show { opacity: 1; transform: translateX(0); }
+  .buba-speech::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 22px;
+    border: 9px solid transparent;
+    border-right-color: rgba(139, 92, 246, 0.5);
+    border-left: 0;
+  }
+  .buba-speech b { color: #c4b5fd; font-weight: 700; }
 
   /* ===== ASSET PROTECTION ===== */
   img, video { -webkit-user-drag: none; user-select: none; }
@@ -1267,6 +1299,7 @@
     .big-quote { font-size: 1em; }
     .buba-companion { display: none; }
     .buba-audio-toggle { display: none; }
+    .buba-speech { display: none; }
     footer { padding: 24px 16px; }
     .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
   }
@@ -1351,11 +1384,12 @@
   </video>
 </div>
 <button class="buba-audio-toggle" id="bubaAudioToggle" title="Toggle Buba audio">🔇</button>
+<div class="buba-speech" id="bubaSpeech" role="status" aria-live="polite"></div>
 
 <!-- HEADER - LilBuba as subtle parent brand -->
 <header>
   <a href="/" class="header-brand">
-    <img src="img/buba_cool_icon.png" alt="LilBuba">
+    <img src="img/buba_cool_icon.png" alt="LilBuba" data-buba-icon>
     <span>LilBuba.ai</span>
   </a>
   <div class="hamburger" onclick="toggleMenu()">
@@ -1842,7 +1876,7 @@ function closeMenu() {
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="img/buba_cool_icon.png" alt="LilBuba">
+      <img src="img/buba_cool_icon.png" alt="LilBuba" data-buba-icon>
       <span>LilBuba.ai</span>
     </div>
     <p class="footer-tagline">Smart local tools that respect you.</p>
@@ -1866,6 +1900,7 @@ function showProduct(product, btn) {
   btn.classList.add('active');
   document.querySelectorAll('.product-content').forEach(p => p.classList.remove('active'));
   document.getElementById('product-' + product).classList.add('active');
+  if (window.bubaSay) window.bubaSay(product);   // Buba introduces the chosen product
 }
 
 // Deep-link support: arrive at /#bionic, /#cruft, or /#media and the right
@@ -1886,6 +1921,35 @@ function activateProductFromHash() {
 }
 window.addEventListener('DOMContentLoaded', activateProductFromHash);
 window.addEventListener('hashchange', activateProductFromHash);
+
+// ===== BUBA DIALOGUE: the companion introduces each K8 product =====
+(function () {
+  var LINES = {
+    bionic: 'This is <b>K8 Bionic</b> &mdash; file and photo deduper.',
+    cruft:  'This is <b>K8 Cruft</b> &mdash; the developer junk cleaner.',
+    media:  'This is <b>K8 Media</b> &mdash; dedupe your photos, music &amp; video.'
+  };
+  var bubble = document.getElementById('bubaSpeech');
+  var swapTimer = null;
+  window.bubaSay = function (product) {
+    if (!bubble || !LINES[product]) return;
+    bubble.classList.remove('show');            // fade out, swap text, fade back in
+    clearTimeout(swapTimer);
+    swapTimer = setTimeout(function () {
+      bubble.innerHTML = LINES[product];
+      bubble.classList.add('show');
+    }, 160);
+  };
+  // Opening line, once Buba has floated in — say whichever product tab is active
+  window.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+      var active = document.querySelector('.product-btn.active');
+      var oc = active ? (active.getAttribute('onclick') || '') : '';
+      var m = oc.match(/showProduct\('(\w+)'/);
+      window.bubaSay(m ? m[1] : 'bionic');
+    }, 1800);
+  });
+})();
 
 function toggleFaq(el) {
   var item = el.parentElement;
@@ -1949,6 +2013,22 @@ document.addEventListener('keydown', function(e) {
     });
   }, { threshold: 0.4 });
   obs.observe(band);
+})();
+</script>
+
+<script>
+// ===== FLAVOUR ENGINE (shared) =====
+// Wear the Buba the visitor chose on the homepage: swap header + footer icons.
+(function () {
+  var ICONS = {
+    cute:   'img/buba_cute_icon.png',
+    cool:   'img/buba_cool_icon.png',
+    clever: 'img/buba_clever_icon.png'
+  };
+  var f = localStorage.getItem('buba_flavour');
+  if (!ICONS[f]) return;                 // no choice yet -> keep Cool (the logo)
+  var icons = document.querySelectorAll('[data-buba-icon]');
+  for (var i = 0; i < icons.length; i++) icons[i].src = ICONS[f];
 })();
 </script>
 
