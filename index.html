@@ -129,8 +129,20 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     text-align: center; padding: 110px 24px 60px;
   }
-  .hero-buba { position: relative; width: min(420px, 78vw); }
-  .hero-buba video, .hero-buba img.hero-fallback { width: 100%; height: auto; display: block; }
+  /* Square stage. The entrance webms are wide 16:9 with Buba floating in a big
+     transparent margin; we crop to that square so the animated Buba is as BIG as
+     the static ones. Each flavour frames Buba differently in-source, so each gets
+     its own zoom/position (tuned by eye) to land at a matching big size. */
+  .hero-buba {
+    position: relative;
+    width: min(430px, 82vw);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-buba video { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .hero-buba.f-cool video { object-position: center 44%; transform: scale(1.34); transform-origin: center 44%; }
+  .hero-buba.f-cute video { object-position: center 50%; transform: scale(1.02); transform-origin: center 50%; }
   .hero-sound {
     position: absolute; bottom: 6px; right: 6px;
     background: rgba(139,92,246,0.22); border: 1px solid var(--purple-soft);
@@ -224,8 +236,8 @@
   @keyframes bubaTalk { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.03, 0.93) translateY(2px); } }
   @keyframes bubaSettle { 0% { transform: scale(1.06); } 100% { transform: scale(1); } }
 
-  /* Hero per-flavour still */
-  .hero-still { width: 100%; height: auto; display: block; }
+  /* Hero per-flavour still (Clever, and any non-webm fallback) */
+  .hero-still { width: 100%; height: 100%; object-fit: contain; display: block; }
   .hero-still.bob { animation: heroBob 4s ease-in-out infinite; }
   .hero-still.hopped { animation: heroHop 0.6s ease; }
   @keyframes heroBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -312,7 +324,7 @@
 
 <header>
   <a href="/" class="header-brand">
-    <img src="img/buba_cool_icon.png" alt="Lil Buba" data-buba-icon>
+    <img src="img/buba_cool_icon.png" alt="Lil Buba">
     <span>LilBuba.ai</span>
   </a>
   <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -330,11 +342,9 @@
 
   <!-- HERO -->
   <div class="hero" id="meet-buba">
-    <div class="hero-buba">
+    <div class="hero-buba f-cool">
       <video id="heroVid" muted playsinline poster="img/buba_cool.png">
-        <source src="img/buba_entrance.webm" type="video/webm">
-        <source src="img/lilbuba_feminine_v3_trimmed.mp4" type="video/mp4">
-        <img src="img/buba_cool.png" alt="Lil Buba" class="hero-fallback">
+        <source id="heroVidSrc" src="img/buba_entrance.webm" type="video/webm">
       </video>
       <img id="heroStill" class="hero-still" src="img/buba_cool.png" alt="Lil Buba" style="display:none;">
       <button class="hero-sound" id="heroSound" title="Hear Buba say hello">🔊 Hear Buba</button>
@@ -399,6 +409,7 @@
       </div>
       <div class="family-card">
         <span class="badge beta">◐ In testing</span>
+        <!-- This is the Buba APP product card, not the brand mark, so its icon follows the chosen flavour (header/footer logos stay Cool). -->
         <img src="img/buba_cool_icon.png" alt="Buba app" class="card-icon" data-buba-icon>
         <h3>Buba — the app</h3>
         <p>
@@ -441,7 +452,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="img/buba_cool_icon.png" alt="LilBuba" data-buba-icon>
+      <img src="img/buba_cool_icon.png" alt="LilBuba">
       <span>LilBuba.ai</span>
     </div>
     <p class="footer-tagline">Kind AI helpers and smart local tools that respect you.</p>
@@ -462,35 +473,46 @@ function closeMenu() { document.getElementById('mobileNav').classList.remove('op
 
 // ===== FLAVOUR ENGINE =====
 // One chosen flavour (cute|cool|clever) lives in localStorage.buba_flavour and
-// drives every Buba face on the site (header/footer/family icons + hero), and one day the app.
+// drives the Buba faces that are a *preference* surface — the app-product icon and
+// the hero. (The header/footer logos stay Cool: that's the brand mark.) One day: the app.
 var BUBA_FLAVOURS = {
-  cute:   { icon: 'img/buba_cute_icon.png',   still: 'img/buba_cute.png'   },
-  cool:   { icon: 'img/buba_cool_icon.png',   still: 'img/buba_cool.png'   },
-  clever: { icon: 'img/buba_clever_icon.png', still: 'img/buba_clever.png' }
+  cute:   { icon: 'img/buba_cute_icon.png',   still: 'img/buba_cute.png',   video: 'img/buba_cute_entrance.webm' },
+  cool:   { icon: 'img/buba_cool_icon.png',   still: 'img/buba_cool.png',   video: 'img/buba_entrance.webm'      },
+  clever: { icon: 'img/buba_clever_icon.png', still: 'img/buba_clever.png', video: null                          }
 };
 var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var bubaVoice = new Audio('img/buba_hello.mp3');   // the "I'm Lil Buba" voice (silent video, separate mp3)
+// Can this browser play the transparent VP9 webms? If not, every flavour falls back to its static.
+var heroCanPlayWebm = (function () { var t = document.createElement('video'); return !!(t.canPlayType && t.canPlayType('video/webm').replace(/no/, '')); })();
 
-// Swap every Buba icon on the page + set the hero for the chosen flavour
+// Swap the flavour icons + set the hero for the chosen flavour
 function applyFlavour(flavour) {
   var f = BUBA_FLAVOURS[flavour] ? flavour : 'cool';
   var icon = BUBA_FLAVOURS[f].icon;
-  var icons = document.querySelectorAll('[data-buba-icon]');
+  var icons = document.querySelectorAll('[data-buba-icon]');   // the app-product icon(s) — logos are pinned Cool
   for (var i = 0; i < icons.length; i++) icons[i].src = icon;
 
+  var wrap = document.querySelector('.hero-buba');
   var vid = document.getElementById('heroVid');
+  var src = document.getElementById('heroVidSrc');
   var still = document.getElementById('heroStill');
-  if (vid && still) {
-    if (f === 'cool') {
-      still.style.display = 'none'; still.classList.remove('bob', 'hopped');
-      vid.style.display = ''; try { vid.currentTime = 0; } catch (e) {} var p = vid.play(); if (p && p.catch) p.catch(function () {});
-    } else {
-      try { vid.pause(); } catch (e) {}
-      vid.style.display = 'none';
-      still.src = BUBA_FLAVOURS[f].still;
-      still.style.display = '';
-      still.classList.toggle('bob', !reduceMotion);
-    }
+  if (wrap) { wrap.classList.remove('f-cute', 'f-cool', 'f-clever'); wrap.classList.add('f-' + f); }
+  if (!vid || !still) return;
+
+  if (BUBA_FLAVOURS[f].video && heroCanPlayWebm) {
+    // Play this flavour's entrance webm (Cool, Cute), big, in the square stage
+    still.style.display = 'none'; still.classList.remove('bob', 'hopped');
+    if (src && src.getAttribute('src') !== BUBA_FLAVOURS[f].video) { src.setAttribute('src', BUBA_FLAVOURS[f].video); vid.load(); }
+    vid.setAttribute('poster', BUBA_FLAVOURS[f].still);
+    vid.style.display = '';
+    try { vid.currentTime = 0; } catch (e) {} var p = vid.play(); if (p && p.catch) p.catch(function () {});
+  } else {
+    // Clever (no clip yet), or any browser that can't play the webm: static + gentle bob
+    try { vid.pause(); } catch (e) {}
+    vid.style.display = 'none';
+    still.src = BUBA_FLAVOURS[f].still;
+    still.style.display = '';
+    still.classList.toggle('bob', !reduceMotion);
   }
 }
 
