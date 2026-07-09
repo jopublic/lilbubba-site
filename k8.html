@@ -316,7 +316,7 @@
     transition: background 0.3s;
   }
   .buba-audio-toggle:hover { background: rgba(139, 92, 246, 0.5); }
-  .buba-companion video {
+  .buba-companion video, .buba-companion img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1376,20 +1376,19 @@
   <div class="ambient-orb orb6"></div>
 </div>
 
-<!-- BUBA COMPANION - reassuring presence, top-left -->
+<!-- BUBA COMPANION - reassuring presence, top-left. Wears the flavour the visitor chose on the homepage. -->
 <div class="buba-companion" id="bubaCompanion" title="LilBuba">
-  <video id="bubaVid" autoplay loop muted playsinline>
-    <source src="img/buba_entrance.webm" type="video/webm">
-    <source src="img/lilbuba_feminine_v3_trimmed.mp4" type="video/mp4">
+  <video id="bubaVid" loop muted playsinline>
+    <source id="bubaVidSrc" src="img/buba_entrance.webm" type="video/webm">
   </video>
+  <img id="bubaStill" src="img/buba_cool.png" alt="LilBuba" style="display:none;">
 </div>
-<button class="buba-audio-toggle" id="bubaAudioToggle" title="Toggle Buba audio">🔇</button>
 <div class="buba-speech" id="bubaSpeech" role="status" aria-live="polite"></div>
 
 <!-- HEADER - LilBuba as subtle parent brand -->
 <header>
   <a href="/" class="header-brand">
-    <img src="img/buba_cool_icon.png" alt="LilBuba" data-buba-icon>
+    <img src="img/buba_cool_icon.png" alt="LilBuba">
     <span>LilBuba.ai</span>
   </a>
   <div class="hamburger" onclick="toggleMenu()">
@@ -1876,7 +1875,7 @@ function closeMenu() {
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="img/buba_cool_icon.png" alt="LilBuba" data-buba-icon>
+      <img src="img/buba_cool_icon.png" alt="LilBuba">
       <span>LilBuba.ai</span>
     </div>
     <p class="footer-tagline">Smart local tools that respect you.</p>
@@ -1922,32 +1921,46 @@ function activateProductFromHash() {
 window.addEventListener('DOMContentLoaded', activateProductFromHash);
 window.addEventListener('hashchange', activateProductFromHash);
 
-// ===== BUBA DIALOGUE: the companion introduces each K8 product =====
+// ===== BUBA DIALOGUE: the companion introduces K8 and each product =====
 (function () {
   var LINES = {
-    bionic: 'This is <b>K8 Bionic</b> &mdash; file and photo deduper.',
+    bionic: 'This is <b>K8 Bionic</b> &mdash; file and photo deduper. Let me show you around.',
     cruft:  'This is <b>K8 Cruft</b> &mdash; the developer junk cleaner.',
     media:  'This is <b>K8 Media</b> &mdash; dedupe your photos, music &amp; video.'
   };
+  var FAMILY = 'Meet the <b>K8 family</b> &mdash; Bionic, Cruft and Media. Click each one for a special tour.';
   var bubble = document.getElementById('bubaSpeech');
-  var swapTimer = null;
-  window.bubaSay = function (product) {
-    if (!bubble || !LINES[product]) return;
+  var swapTimer = null, openerTimers = [], userPicked = false;
+
+  function showBubble(html) {
+    if (!bubble) return;
     bubble.classList.remove('show');            // fade out, swap text, fade back in
     clearTimeout(swapTimer);
-    swapTimer = setTimeout(function () {
-      bubble.innerHTML = LINES[product];
-      bubble.classList.add('show');
-    }, 160);
+    swapTimer = setTimeout(function () { bubble.innerHTML = html; bubble.classList.add('show'); }, 160);
+  }
+  // product = 'bionic' | 'cruft' | 'media'. Future: a per-product "K8 Buba" character could be
+  // swapped in here (art pending) without changing any caller.
+  window.bubaSay = function (product) {
+    if (!LINES[product]) return;
+    userPicked = true;                          // a real product click ends the opening sequence
+    for (var i = 0; i < openerTimers.length; i++) clearTimeout(openerTimers[i]);
+    showBubble(LINES[product]);
   };
-  // Opening line, once Buba has floated in — say whichever product tab is active
+
+  // Opening sequence once Buba has floated in: greet with the active product line + a tour
+  // invitation. Any earlier product click cancels it (userPicked).
   window.addEventListener('DOMContentLoaded', function () {
-    setTimeout(function () {
+    openerTimers.push(setTimeout(function () {
+      if (userPicked) return;
       var active = document.querySelector('.product-btn.active');
       var oc = active ? (active.getAttribute('onclick') || '') : '';
       var m = oc.match(/showProduct\('(\w+)'/);
-      window.bubaSay(m ? m[1] : 'bionic');
-    }, 1800);
+      showBubble(LINES[(m && LINES[m[1]]) ? m[1] : 'bionic']);
+    }, 1800));
+    openerTimers.push(setTimeout(function () {
+      if (userPicked) return;
+      showBubble(FAMILY);
+    }, 6200));
   });
 })();
 
@@ -2039,58 +2052,37 @@ document.addEventListener('keydown', function(e) {
 </div>
 
 <script>
-// Buba companion: the glossy entrance clip (transparent webm, mp4 fallback)
+// Buba companion: wears the flavour the visitor chose on the homepage.
+// Cool + Cute = their transparent entrance webm; Clever = static (its clip isn't made yet).
+// NOTE: no generic "hi, I'm Lil Buba" voice on the K8 page \u2014 that greeting is wrong here
+// (Jo). The speech bubble introduces K8 instead. Per-product spoken lines await new audio.
 (function() {
-  var vidEl = document.getElementById('bubaVid');
   var companion = document.getElementById('bubaCompanion');
+  var vidEl  = document.getElementById('bubaVid');
+  var vidSrc = document.getElementById('bubaVidSrc');
+  var stillEl = document.getElementById('bubaStill');
   if (companion) companion.style.display = 'block';
-  if (!vidEl) return;
-  vidEl.muted = true;
-  vidEl.loop = true;
-  vidEl.play().catch(function(){});
 
-  // the voice lives in its own mp3 (the video is silent \u2014 transparency layer only)
-  var voice = new Audio('img/buba_hello.mp3');
-  voice.addEventListener('ended', function() {
-    var tb = document.getElementById('bubaAudioToggle');
-    if (tb) tb.textContent = '\uD83D\uDD07';
-  });
+  var COMP = {
+    cute:   { video: 'img/buba_cute_entrance.webm', still: 'img/buba_cute.png'   },
+    cool:   { video: 'img/buba_entrance.webm',      still: 'img/buba_cool.png'   },
+    clever: { video: null,                          still: 'img/buba_clever.png' }
+  };
+  var canWebm = (function(){ var t=document.createElement('video'); return !!(t.canPlayType && t.canPlayType('video/webm').replace(/no/,'')); })();
+  var f = localStorage.getItem('buba_flavour');
+  if (!COMP[f]) f = 'cool';                 // no choice yet -> Cool, the default face
 
-  function playBubaGreeting() {
-    vidEl.currentTime = 0;
-    voice.currentTime = 0;
+  if (vidEl && COMP[f].video && canWebm) {
+    if (vidSrc && vidSrc.getAttribute('src') !== COMP[f].video) { vidSrc.setAttribute('src', COMP[f].video); vidEl.load(); }
+    vidEl.muted = true; vidEl.loop = true;
+    if (stillEl) stillEl.style.display = 'none';
+    vidEl.style.display = '';
     vidEl.play().catch(function(){});
-    voice.play().catch(function(){});
-  }
-
-  if (!sessionStorage.getItem('bubaGreeted')) {
-    function autoGreet() {
-      document.removeEventListener('click', autoGreet);
-      document.removeEventListener('touchstart', autoGreet);
-      document.removeEventListener('keydown', autoGreet);
-      sessionStorage.setItem('bubaGreeted', '1');
-      var tb = document.getElementById('bubaAudioToggle');
-      if (tb) tb.textContent = '\uD83D\uDD0A';
-      playBubaGreeting();
-    }
-    document.addEventListener('click', autoGreet, { once: true });
-    document.addEventListener('touchstart', autoGreet, { once: true });
-    document.addEventListener('keydown', autoGreet, { once: true });
-  }
-
-  var toggleBtn = document.getElementById('bubaAudioToggle');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (voice.paused) {
-        toggleBtn.textContent = '\uD83D\uDD0A';
-        playBubaGreeting();
-      } else {
-        voice.pause();
-        voice.currentTime = 0;
-        toggleBtn.textContent = '\uD83D\uDD07';
-      }
-    });
+  } else if (stillEl) {
+    // Clever, or a browser that can't play the webm: show the chosen static (the box already floats)
+    if (vidEl) { try { vidEl.pause(); } catch(e){} vidEl.style.display = 'none'; }
+    stillEl.src = COMP[f].still;
+    stillEl.style.display = '';
   }
 })();
 </script>
