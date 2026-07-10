@@ -2053,7 +2053,7 @@ document.addEventListener('keydown', function(e) {
 
 <script>
 // Buba companion: wears the flavour the visitor chose on the homepage.
-// Cool + Cute = their transparent entrance webm; Clever = static (its clip isn't made yet).
+// Cool + Cute + Clever = their transparent entrance webm; static per-flavour fallback for non-webm browsers.
 // NOTE: no generic "hi, I'm Lil Buba" voice on the K8 page \u2014 that greeting is wrong here
 // (Jo). The speech bubble introduces K8 instead. Per-product spoken lines await new audio.
 (function() {
@@ -2066,7 +2066,7 @@ document.addEventListener('keydown', function(e) {
   var COMP = {
     cute:   { video: 'img/buba_cute_entrance.webm', still: 'img/buba_cute.png'   },
     cool:   { video: 'img/buba_entrance.webm',      still: 'img/buba_cool.png'   },
-    clever: { video: null,                          still: 'img/buba_clever.png' }
+    clever: { video: 'img/buba_clever_entrance.webm', still: 'img/buba_clever.png' }
   };
   var canWebm = (function(){ var t=document.createElement('video'); return !!(t.canPlayType && t.canPlayType('video/webm').replace(/no/,'')); })();
   var f = localStorage.getItem('buba_flavour');

@@ -143,6 +143,7 @@
   .hero-buba video { width: 100%; height: 100%; display: block; object-fit: cover; }
   .hero-buba.f-cool video { object-position: center 44%; transform: scale(1.34); transform-origin: center 44%; }
   .hero-buba.f-cute video { object-position: center 50%; transform: scale(1.02); transform-origin: center 50%; }
+  .hero-buba.f-clever video { object-position: center 44%; transform: scale(1.20); transform-origin: center 44%; }
   .hero-sound {
     position: absolute; bottom: 6px; right: 6px;
     background: rgba(139,92,246,0.22); border: 1px solid var(--purple-soft);
@@ -478,7 +479,7 @@ function closeMenu() { document.getElementById('mobileNav').classList.remove('op
 var BUBA_FLAVOURS = {
   cute:   { icon: 'img/buba_cute_icon.png',   still: 'img/buba_cute.png',   video: 'img/buba_cute_entrance.webm' },
   cool:   { icon: 'img/buba_cool_icon.png',   still: 'img/buba_cool.png',   video: 'img/buba_entrance.webm'      },
-  clever: { icon: 'img/buba_clever_icon.png', still: 'img/buba_clever.png', video: null                          }
+  clever: { icon: 'img/buba_clever_icon.png', still: 'img/buba_clever.png', video: 'img/buba_clever_entrance.webm' }
 };
 var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var bubaVoice = new Audio('img/buba_hello.mp3');   // the "I'm Lil Buba" voice (silent video, separate mp3)
@@ -507,7 +508,7 @@ function applyFlavour(flavour) {
     vid.style.display = '';
     try { vid.currentTime = 0; } catch (e) {} var p = vid.play(); if (p && p.catch) p.catch(function () {});
   } else {
-    // Clever (no clip yet), or any browser that can't play the webm: static + gentle bob
+    // Any browser that can't play the webm: static + gentle bob
     try { vid.pause(); } catch (e) {}
     vid.style.display = 'none';
     still.src = BUBA_FLAVOURS[f].still;
