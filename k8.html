@@ -89,10 +89,6 @@
 <!-- Paddle.js -->
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
-  Paddle.Initialize({
-    token: 'live_32141f7ba947368975f22b2dc25'
-  });
-
   // Map each Paddle priceId to its K8 product flag.
   // Worker uses the flag to mint the right product-gated key.
   // Must match VALID_FLAGS in k8_key_worker.js.
@@ -103,6 +99,48 @@
     'pri_01kmkgqd61b354cvpctb77pvmg': 'D', // Media + Bionic   £54.95 (duo)
     'pri_01kmpep1pb6r1enr8tvr1r4m02': 'A'  // All Three        £64.95
   };
+
+  // Paddle does NOT append the transaction id to successUrl — `_ptxn` is the
+  // param that *opens* a checkout, not one Paddle hands back. The documented
+  // route to the id is the checkout.completed event, so we take it from there
+  // and send the buyer to the thank-you page ourselves.
+  //
+  // sessionStorage is the belt to the URL's braces: if Paddle's own successUrl
+  // redirect happens to land first, download.html reads the id from storage
+  // and still fetches the key.
+  function k8HandleCheckoutCompleted(data) {
+    var txn = data && data.transaction_id;
+    if (!txn) { return; }
+
+    // Flag comes from the prices Paddle says were bought, not from a variable
+    // we set before payment.
+    var product = '';
+    var items = (data && data.items) || [];
+    for (var i = 0; i < items.length; i++) {
+      var flag = K8_PRICE_TO_PRODUCT[items[i] && items[i].price_id];
+      if (flag) { product = flag; break; }
+    }
+
+    try {
+      sessionStorage.setItem('k8_txn', txn);
+      if (product) { sessionStorage.setItem('k8_product', product); }
+    } catch (e) {
+      // Private mode / storage blocked — the URL params below still carry it.
+    }
+
+    var url = 'https://lilbuba.ai/download.html?_ptxn=' + encodeURIComponent(txn);
+    if (product) { url += '&product=' + product; }
+    window.location.href = url;
+  }
+
+  Paddle.Initialize({
+    token: 'live_32141f7ba947368975f22b2dc25',
+    eventCallback: function(event) {
+      if (event && event.name === 'checkout.completed') {
+        k8HandleCheckoutCompleted(event.data);
+      }
+    }
+  });
 
   function buyProduct(priceId) {
     var product = K8_PRICE_TO_PRODUCT[priceId];
