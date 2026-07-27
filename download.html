@@ -200,11 +200,20 @@ function copyKey() {
   var qs = window.location.search.replace(/\?(_ptxn|txn)=/g, '&$1=');
   if (qs.startsWith('&')) { qs = '?' + qs.substring(1); }
   var params = new URLSearchParams(qs);
-  var txn = params.get('_ptxn') || params.get('txn');
-  // Product flag set per buy button in index.html, passed through Paddle
-  // successUrl as ?product=B|C|M|D|A. If absent, worker falls back to a
-  // legacy ALL-access key (grandfather path) so old links keep working.
-  var product = (params.get('product') || '').toUpperCase();
+
+  // k8.html stashes the transaction id in sessionStorage the moment Paddle
+  // fires checkout.completed, then redirects here with it in the URL. If that
+  // redirect ever loses the race to Paddle's own successUrl redirect, the URL
+  // arrives bare — so fall back to storage rather than showing an error to
+  // someone who has just paid.
+  function fromSession(name) {
+    try { return sessionStorage.getItem(name) || ''; } catch (e) { return ''; }
+  }
+
+  var txn = params.get('_ptxn') || params.get('txn') || fromSession('k8_txn');
+  // Product flag is a hint only — the worker derives real entitlement from the
+  // transaction's own line items at Paddle, so a fiddled URL gains nothing.
+  var product = (params.get('product') || fromSession('k8_product') || '').toUpperCase();
   var validProducts = ['B', 'C', 'M', 'D', 'A'];
 
   if (!txn) {
