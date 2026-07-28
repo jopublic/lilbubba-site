@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Safely Clean Up Developer Disk Space on Windows (Without Breaking Your Projects) | LilBuba.ai Blog</title>
+<meta name="description" content="Your SSD is full of regenerable dev junk — node_modules, .venv, build output, caches. Here's how to clear it safely, across every language, without nuking work you still need.">
+<meta property="og:title" content="How to Safely Clean Up Developer Disk Space on Windows">
+<meta property="og:description" content="Clear the regenerable junk off your dev machine safely, across every language, without breaking projects you're still working on.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lilbuba.ai/blog/reclaim-developer-disk-space-windows.html">
+<link rel="canonical" href="https://lilbuba.ai/blog/reclaim-developer-disk-space-windows.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Safely Clean Up Developer Disk Space on Windows">
+<meta name="twitter:description" content="Clear the regenerable junk off your dev machine safely, without breaking projects you're still working on.">
+<meta name="twitter:image" content="https://lilbuba.ai/img/lilbubba_logo.png">
+
+<!-- Article Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Safely Clean Up Developer Disk Space on Windows (Without Breaking Your Projects)",
+  "datePublished": "2026-07-28",
+  "dateModified": "2026-07-28",
+  "author": {
+    "@type": "Organization",
+    "name": "LilBuba.ai",
+    "url": "https://lilbuba.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LilBuba.ai",
+    "url": "https://lilbuba.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lilbuba.ai/img/lilbubba_logo.png"
+    }
+  },
+  "description": "Your SSD is full of regenerable dev junk — node_modules, .venv, build output, caches. Here's how to clear it safely, across every language, without nuking work you still need.",
+  "mainEntityOfPage": "https://lilbuba.ai/blog/reclaim-developer-disk-space-windows.html"
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fredoka:wght@500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #000; color: #f0f0f5; min-height: 100vh; line-height: 1.8; }
+  .nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .nav a { color: #b0b0c8; text-decoration: none; margin-left: 24px; font-size: 14px; }
+  .nav a:hover { color: #8B5CF6; }
+  .nav .logo { font-family: 'Fredoka', sans-serif; font-size: 1.3em; background: linear-gradient(135deg, #8B5CF6, #00D4FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; margin-left: 0; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; }
+  .breadcrumb { color: #8888a0; font-size: 0.85em; margin-bottom: 32px; }
+  .breadcrumb a { color: #8B5CF6; text-decoration: none; }
+  h1 { font-family: 'Fredoka', sans-serif; font-size: 2.2em; margin-bottom: 12px; color: #f0f0f5; }
+  .meta { color: #8888a0; font-size: 0.9em; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .article h2 { font-size: 1.4em; margin-top: 40px; margin-bottom: 16px; color: #f0f0f5; }
+  .article h3 { font-size: 1.15em; margin-top: 32px; margin-bottom: 12px; color: #b0b0c8; }
+  .article p { color: #b0b0c8; margin-bottom: 16px; font-size: 1.02em; }
+  .article strong { color: #f0f0f5; }
+  .article ul, .article ol { color: #b0b0c8; margin-left: 24px; margin-bottom: 16px; }
+  .article li { margin-bottom: 8px; }
+  .article code { background: rgba(139, 92, 246, 0.15); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: #8B5CF6; }
+  .article pre { background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 8px; padding: 16px; margin-bottom: 16px; overflow-x: auto; }
+  .article pre code { background: none; padding: 0; font-size: 0.85em; }
+  .article a { color: #8B5CF6; text-decoration: none; }
+  .article a:hover { text-decoration: underline; }
+  .article hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 40px 0; }
+  .article table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .article th, .article td { text-align: left; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); color: #b0b0c8; font-size: 0.95em; }
+  .article th { color: #f0f0f5; font-weight: 600; }
+  .cta-box { background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 16px; padding: 32px; margin: 40px 0; text-align: center; }
+  .cta-box h3 { color: #f0f0f5; margin-bottom: 12px; margin-top: 0; }
+  .cta-box p { color: #b0b0c8; margin-bottom: 20px; }
+  .cta-box .btn { display: inline-block; padding: 12px 32px; background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; }
+  .cta-box .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3); text-decoration: none; }
+  footer { text-align: center; padding: 40px; color: #8888a0; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.07); }
+  footer a { color: #8B5CF6; text-decoration: none; }
+</style>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"71710d31ec78473da29f26c0eb2aaec0"}'></script>
+</head>
+<body>
+<nav class="nav">
+  <a href="../" class="logo">LilBuba.ai</a>
+  <div>
+    <a href="../k8.html">Products</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../terms.html">T&Cs</a>
+    <a href="../privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb"><a href="../blog.html">Blog</a> &rsaquo; Reclaim Developer Disk Space Safely</div>
+
+  <h1>How to Safely Clean Up Developer Disk Space on Windows (Without Breaking Your Projects)</h1>
+  <div class="meta">By LilBuba.ai &middot; 28 July 2026 &middot; 6 min read</div>
+
+  <div class="article">
+    <p>If you write code on Windows, your SSD is quietly filling up with things you don't need &mdash; and most of it will come straight back the moment you actually need it. The trick to reclaiming that space isn't deleting aggressively. It's deleting the <strong>right</strong> things, and being able to undo it if you get one wrong.</p>
+
+    <h2>Where the space actually goes</h2>
+
+    <p>It's rarely your code. It's the <strong>regenerable junk</strong> that piles up around it:</p>
+
+    <ul>
+      <li><strong>node_modules</strong> &mdash; every JavaScript project drags one along, often hundreds of megabytes to gigabytes each. Ten old side-projects and you're into serious space. (We went deep on this one in <a href="node-modules-disk-space.html">node_modules Is Eating Your Hard Drive</a>.)</li>
+      <li><strong>Python <code>.venv</code>, <code>__pycache__</code>, <code>.pytest_cache</code></strong> &mdash; virtual environments and caches that rebuild in seconds.</li>
+      <li><strong>Build output</strong> &mdash; <code>build/</code>, <code>dist/</code>, <code>target/</code>, <code>bin/</code>, <code>obj/</code> &mdash; compiled artifacts you can regenerate any time.</li>
+      <li><strong>Package-manager caches</strong> &mdash; npm, pip, yarn, cargo and NuGet all hoard downloads "just in case".</li>
+      <li><strong>.git bloat</strong> &mdash; old branches and large-file history in repos you abandoned long ago.</li>
+    </ul>
+
+    <p>The common thread: <strong>all of it is regenerable.</strong> Delete a node_modules and <code>npm install</code> brings it back. Delete a <code>build/</code> and your next compile rebuilds it. It's cache, not work.</p>
+
+    <h2>Why people don't clean it up (and the one real danger)</h2>
+
+    <p>Two reasons. First, it's tedious &mdash; the junk is scattered across dozens of project folders. Second, and more importantly: <strong>it's genuinely scary.</strong> Delete the wrong folder and you've binned a config, an <code>.env</code>, an uncommitted change, or a local database you forgot was there. So most of us just&hellip; buy a bigger drive.</p>
+
+    <p>The safe way to do it has three rules:</p>
+
+    <ol>
+      <li><strong>Only touch the regenerable stuff</strong> &mdash; never source, never config, never uncommitted work.</li>
+      <li><strong>Know an active project from a dead one</strong> &mdash; the folder you're working in today should be left alone.</li>
+      <li><strong>Make it reversible</strong> &mdash; nothing should be truly <em>gone</em> until you're certain.</li>
+    </ol>
+
+    <h2>Doing it by hand (and the free tools that help)</h2>
+
+    <p>You can absolutely script this yourself. Credit where it's due &mdash; there are excellent free command-line tools for it. <strong>npkill</strong> is brilliant for hunting down node_modules, and <strong>kondo</strong> cleans a wider set of project artifacts. If you live in the terminal and trust your own <code>rm -rf</code>, they're superb and free, and we'll happily say so.</p>
+
+    <p>The catch is they're command-line, they mostly delete outright (no safety net), and they tend to solve one slice of the problem rather than the whole messy picture on a Windows machine.</p>
+
+    <h2>The safe-GUI approach: what we built K8 Cruft to do</h2>
+
+    <p>We made <a href="../k8.html">K8 Cruft</a> for the developer who'd rather not script it &mdash; and, honestly, who's been burned once by a too-clever cleanup.</p>
+
+    <p><strong>It scores each pile by how safe it is to remove.</strong> So you can see at a glance what's genuinely disposable versus what deserves a second look, and it flags the regenerable items plainly: <em>this comes back with one command &mdash; delete with confidence.</em></p>
+
+    <p><strong>It's project-aware.</strong> It can tell an active project from an abandoned one, so it won't nudge you toward nuking something you're working on this week.</p>
+
+    <p><strong>Nothing is hard-deleted.</strong> This is the bit that matters most. Anything you clear goes to a <strong>quarantine you can restore from in one click.</strong> Change your mind, or realise you needed that <code>.venv</code> after all? It's not gone &mdash; it's just parked.</p>
+
+    <p>It's Windows-native, a one-time <strong>&pound;24.95</strong> (no subscription, no account), and it runs <strong>100% locally</strong> &mdash; nothing about your machine or your projects ever leaves it. The approach is patent-pending.</p>
+
+    <h2>The honest bottom line</h2>
+
+    <p>If you're happy in the terminal, npkill and kondo are free and great &mdash; use them. If you'd rather a safe Windows app that shows you what's safe, understands your projects, and lets you undo anything, that's what K8 Cruft is for.</p>
+
+    <p>Either way, the message is the same: <strong>stop buying bigger drives to store cache.</strong> Most of what's filling your SSD will regenerate itself the moment you need it.</p>
+
+    <hr>
+
+    <div class="cta-box">
+      <h3>Clear your dev junk safely &mdash; nothing deleted without your say-so.</h3>
+      <p>K8 Cruft finds the node_modules, build caches, stale venvs and forgotten build output eating your disk. It scores what's safe, knows your active projects, and quarantines everything so you can restore in one click. 100% local.</p>
+      <a href="../k8.html" class="btn">See how K8 Cruft works &rarr;</a>
+    </div>
+
+    <hr>
+
+    <p><em>K8 Cruft is available at <a href="../k8.html">lilbuba.ai</a>. One-time purchase, &pound;24.95. No subscription. No cloud. Your code stays on your machine, where it belongs. Safe. Smart. Stupidly Fast.</em></p>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 LilBuba.ai &middot; Jo Browning &middot; <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a></p>
+  <p style="margin-top: 8px;">Patent pending &middot; Built in Worthing, UK</p>
+</footer>
+</body>
+</html>
