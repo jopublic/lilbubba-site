@@ -107,6 +107,53 @@
     .container { padding: 32px 24px; }
     .mobile-alert { display: block; }
   }
+  .bluebox {
+    text-align: left;
+    background: rgba(0, 212, 255, 0.07);
+    border: 1px solid rgba(0, 212, 255, 0.28);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 4px 0 8px;
+    font-size: 0.92em;
+    line-height: 1.65;
+    color: #c3c3d6;
+  }
+  .bluebox > strong { color: #00D4FF; display: block; margin-bottom: 4px; }
+  .bluebox ol { margin: 10px 0 0 20px; padding: 0; }
+  .bluebox li { margin-bottom: 6px; }
+  .bluebox li strong { color: #f0f0f5; }
+  .bluebox .tail {
+    margin: 14px 0 0;
+    padding-top: 13px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: #a9a9c0;
+    font-size: 0.96em;
+  }
+  .bluebox .tail .tri { margin-right: 4px; }
+  .bluebox .tail strong { color: #f0f0f5; }
+  .winget-boxed {
+    text-align: left;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 12px;
+    padding: 15px 17px;
+    background: rgba(255,255,255,0.03);
+    margin: 18px 0 4px;
+    font-size: 0.88em;
+    color: #8888a0;
+  }
+  .winget-boxed .wg-head { color: #b0b0c8; margin-bottom: 9px; font-size: 0.95em; font-weight: 600; }
+  .winget-boxed code {
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 6px;
+    padding: 3px 9px;
+    color: #c9c9dd;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
 </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"71710d31ec78473da29f26c0eb2aaec0"}'></script>
 </head>
@@ -124,6 +171,20 @@
   </a>
   <div class="meta">v1.8.1 &middot; Windows 10/11 &middot; Hosted on GitHub</div>
 
+  <div class="bluebox">
+      <strong>&#128295; Installing K8 &mdash; three steps</strong>
+      <ol>
+        <li>Open the file you just downloaded.</li>
+        <li>Windows shows a blue <em>&ldquo;Windows protected your PC&rdquo;</em> box. Click <strong>More info</strong>, then <strong>Run anyway</strong>.</li>
+        <li>Paste one of your reviewer keys the first time K8 opens.</li>
+      </ol>
+      <p class="tail"><span class="tri">&#9888;&#65039;</span> The blue box is not a virus warning &mdash; it's <em>just</em> Windows saying it doesn't recognise an app from a small independent developer yet. That box goes on how well-known a file is, not on what's inside it. However, K8 <strong>is</strong> published in Microsoft's own <strong>Windows Package Manager</strong> &mdash; reviewed and listed by Microsoft &mdash; so you can install it with the command below instead if you'd rather.</p>
+  </div>
+
+  <div class="winget-boxed">
+    <div class="wg-head">Prefer the command line?</div>
+    <code>winget install LilBuba.K8</code>
+  </div>
   <div class="key-instruction">
     <strong>After install:</strong> when K8 asks for a licence key on first launch, paste any of the keys we emailed you. One key per product (Bionic / Cruft / Media). The keys are already activated — they just need to be entered.
   </div>
