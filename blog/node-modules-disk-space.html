@@ -200,11 +200,11 @@ rm -rf dist</code></pre>
 
     <p>This is where we come in. <a href="../k8.html">K8 Cruft</a> was built because we kept hitting this exact problem across multiple languages and wanted one tool that handled all of it.</p>
 
-    <p><strong>9 categories of dev junk.</strong> Not just node_modules. K8 Cruft scans for package caches, build output, virtual environments, IDE metadata, log accumulations, temp files, orphaned configs, and more. One scan, everything surfaced.</p>
+    <p><strong>9 categories of dev junk.</strong> Not just node_modules. K8 Cruft scans for package caches, build output, virtual environments, IDE metadata, log accumulations, temp files, and more. One scan, everything surfaced.</p>
 
     <p><strong>A path and a date on every find.</strong> K8 Cruft doesn't just find big folders and offer to delete them. Every find shows its full path, so you can see which project it belongs to, plus its size and the date that folder last changed. It doesn't try to guess which projects you're still working on. You know that better than any app, so it shows you where everything is and leaves the call to you. Each kind of junk also gets a fixed "crap score" for how safely it comes back: node_modules and caches score 95%, because one command rebuilds them, while a .git folder scores 40%, because unpushed work would go with it. High crap score = safe to remove. Low crap score = check first.</p>
 
-    <p><strong>Quarantine, not deletion.</strong> Nothing gets permanently deleted. When you remove something through K8 Cruft, it goes to quarantine for 30 days. Changed your mind? Restore it. Realised you needed that .venv after all? One click, it's back. After 30 days with no complaints, <em>then</em> it's gone for good.</p>
+    <p><strong>Quarantine, not deletion.</strong> Nothing gets permanently deleted. When you remove something through K8 Cruft, it goes to quarantine for 30 days. Changed your mind? Restore it. Realised you needed that .venv after all? One click, it's back. After 30 days it's marked expired, and it only goes for good when you press Purge.</p>
 
     <p><strong>100% local.</strong> Your project files never leave your machine. No cloud upload, no telemetry, no phoning home. It runs locally, it scans locally, it deletes locally.</p>
 
