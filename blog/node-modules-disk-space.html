@@ -194,7 +194,7 @@ rm -rf dist</code></pre>
 
     <p>These are all legitimate tools. Use them. Especially npkill &mdash; it's excellent at what it does.</p>
 
-    <p>Where they fall short is coverage. npkill only handles node_modules. It won't touch your .next caches, Python venvs, Rust targets, or Gradle builds. You'd need a different tool (or manual cleanup) for each language ecosystem. And none of them know whether a project is something you're actively working on or something you abandoned fourteen months ago.</p>
+    <p>Where they fall short is coverage. npkill only handles node_modules. It won't touch your .next caches, Python venvs, Rust targets, or Gradle builds. You'd need a different tool (or manual cleanup) for each language ecosystem.</p>
 
     <h2>K8 Cruft: The "All of the Above" Approach</h2>
 
@@ -202,7 +202,7 @@ rm -rf dist</code></pre>
 
     <p><strong>9 categories of dev junk.</strong> Not just node_modules. K8 Cruft scans for package caches, build output, virtual environments, IDE metadata, log accumulations, temp files, orphaned configs, and more. One scan, everything surfaced.</p>
 
-    <p><strong>Project-aware scanning.</strong> This is the bit that matters. K8 Cruft doesn't just find big folders and offer to delete them. It understands project structure. It knows the difference between a project you committed to yesterday and one that hasn't been touched since 2024. It assigns "crap scores" based on how stale, how large, and how regenerable each item is. High crap score = safe to remove. Low crap score = probably leave it alone.</p>
+    <p><strong>A path and a date on every find.</strong> K8 Cruft doesn't just find big folders and offer to delete them. Every find shows its full path, so you can see which project it belongs to, plus its size and the date that folder last changed. It doesn't try to guess which projects you're still working on. You know that better than any app, so it shows you where everything is and leaves the call to you. Each kind of junk also gets a fixed "crap score" for how safely it comes back: node_modules and caches score 95%, because one command rebuilds them, while a .git folder scores 40%, because unpushed work would go with it. High crap score = safe to remove. Low crap score = check first.</p>
 
     <p><strong>Quarantine, not deletion.</strong> Nothing gets permanently deleted. When you remove something through K8 Cruft, it goes to quarantine for 30 days. Changed your mind? Restore it. Realised you needed that .venv after all? One click, it's back. After 30 days with no complaints, <em>then</em> it's gone for good.</p>
 
@@ -236,7 +236,7 @@ rm -rf dist</code></pre>
 
     <div class="cta-box">
       <h3>9 categories of dev junk. One scan. Nothing deleted without your say-so.</h3>
-      <p>K8 Cruft finds the node_modules, build caches, stale venvs, and forgotten build output that's eating your disk. Project-aware scanning, 30-day quarantine, 100% local.</p>
+      <p>K8 Cruft finds the node_modules, build caches, Python venvs, and forgotten build output that's eating your disk. A path and date on every find, 30-day quarantine, 100% local.</p>
       <a href="../k8.html" class="btn">See how K8 Cruft works &rarr;</a>
     </div>
 
