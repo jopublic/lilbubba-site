@@ -896,6 +896,29 @@
       inset 0 0 30px rgba(255, 255, 255, 0.1);
   }
   .btn-buy .arrow { font-size: 18px; }
+  /* 1.8.2: free download button, same shape as Buy Now, outlined so Buy Now stays the main one */
+  .btn-free {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 35px;
+    background: transparent;
+    color: white;
+    border: 1px solid var(--purple);
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+  .btn-free:hover {
+    transform: translateY(-2px);
+    background: rgba(139, 92, 246, 0.12);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  }
+  .cta-row { flex-wrap: wrap; }
 
   .price-tag {
     font-size: 26px;
@@ -1538,6 +1561,7 @@ function closeMenu() {
     <h1 class="deduplik8-main"><span class="dedupli">Dedupli</span><img src="img/k8_hero_logo.png" alt="K8" class="k8-inline"><span class="your-life">Your Data</span></h1>
     <p class="intelligence-line">"We took the intelligence out of AI so you don't have to."</p>
     <p class="free-scan-line">Free to scan, &pound;24.95 to clean.</p>
+    <a href="download.html" class="btn-free">Download free, scan free</a>
   </section>
 
   <!-- HONEST STATS BAND -->
@@ -1654,6 +1678,7 @@ function closeMenu() {
               <span class="guarantee-badge">30-day money-back guarantee</span>
               <span class="windows-only">Windows 10/11 only</span>
             </div>
+            <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
 
