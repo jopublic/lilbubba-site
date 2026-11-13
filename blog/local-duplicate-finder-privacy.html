@@ -187,10 +187,10 @@
     <p>A few specifics:</p>
 
     <ul>
-      <li><strong>No internet required during scanning.</strong> You can install K8, pull your network cable, and it will scan, find duplicates, and quarantine them with no network connection at all. We tested this. Aeroplane mode works fine.</li>
+      <li><strong>No internet required during scanning.</strong> You can install K8, pull your network cable, and it will scan, find duplicates, and quarantine them with no network connection at all. The app makes no network calls, not even when it opens.</li>
       <li><strong>No accounts.</strong> You don't sign up. We don't have your email unless you've contacted support. There's no "K8 cloud" because there's no K8 cloud.</li>
       <li><strong>No analytics in the app.</strong> No telemetry events, no usage tracking, no "anonymised" data collection. The website has Cloudflare's standard server-side analytics (no cookies, no fingerprinting), but the desktop application itself does not phone home.</li>
-      <li><strong>One-time licence check.</strong> When you activate your licence key, the app talks to our server once to verify it. After that, it's offline. No daily phone-home, no "is this licence still valid?" pings, nothing.</li>
+      <li><strong>Offline licence check.</strong> K8 checks your key on your own machine. It never calls a server to do it: no phone-home, no "is this licence still valid?" pings, nothing.</li>
       <li><strong>Quarantine stays local.</strong> When K8 removes a duplicate, the file goes to a quarantine folder on your own machine. We never see what was removed. We don't know what was on your drive. We don't want to know.</li>
     </ul>
 
