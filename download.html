@@ -232,6 +232,7 @@
   </div>
 
   <div class="support">
+    <p id="boughtNote" style="display:none;">Just bought a key and can't see it? Email <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a> with your order number.</p>
     <p>Need help? Email <a href="mailto:support@lilbuba.ai">support@lilbuba.ai</a></p>
     <p>Keep this page bookmarked for future re-downloads.</p>
     <p>&copy; 2026 LilBuba.ai - All rights reserved</p>
@@ -276,6 +277,20 @@ function copyKey() {
   // transaction's own line items at Paddle, so a fiddled URL gains nothing.
   var product = (params.get('product') || fromSession('k8_product') || '').toUpperCase();
   var validProducts = ['B', 'C', 'M', 'D', 'A'];
+
+  if (!txn && !product) {
+    // Nobody bought anything on this visit: it's someone downloading to scan
+    // for free (1.8.2), from a product page's free download button. Show a
+    // plain download page, not a missing-key error. A buyer always arrives
+    // with a transaction id or ?product= (see successUrl in k8.html), so the
+    // buyer path below is unchanged.
+    document.title = 'Download K8 | LilBuba.ai';
+    document.querySelector('h1').textContent = 'Download K8';
+    document.querySelector('.subtitle').innerHTML = 'Free to scan. <a href="k8.html" style="color:#8B5CF6;">Buy a key</a> when you want it to clean.';
+    document.getElementById('keyBox').style.display = 'none';
+    document.getElementById('boughtNote').style.display = 'block';
+    return;
+  }
 
   if (!txn) {
     document.getElementById('keyDisplay').innerHTML = '<span class="key-error">No transaction found.<br>If you just purchased, please email <a href="mailto:support@lilbuba.ai" style="color:#8B5CF6;">support@lilbuba.ai</a> with your order number.</span>';
