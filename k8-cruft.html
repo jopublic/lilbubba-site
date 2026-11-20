@@ -209,6 +209,8 @@
   });
 
   function buyProduct(priceId) {
+    // K8 Media is off sale (20 Nov 2026): Media and the two bundles that include it cannot be bought.
+    if (priceId === 'pri_01kmkg4ex5x3saje0erbnmca3t' || priceId === 'pri_01kmkgqd61b354cvpctb77pvmg' || priceId === 'pri_01kmpep1pb6r1enr8tvr1r4m02') { return; }
     var product = K8_PRICE_TO_PRODUCT[priceId];
     var successUrl = 'https://lilbuba.ai/download.html';
     if (product) {

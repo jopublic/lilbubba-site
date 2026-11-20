@@ -74,7 +74,7 @@
       "@type": "Offer",
       "price": "39.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/OutOfStock"
     },
     "description": "Media deduplication tool for creators. Find duplicate photos, videos, and audio files across your entire library.",
     "publisher": {
@@ -143,6 +143,8 @@
   });
 
   function buyProduct(priceId) {
+    // K8 Media is off sale (20 Nov 2026): Media and the two bundles that include it cannot be bought.
+    if (priceId === 'pri_01kmkg4ex5x3saje0erbnmca3t' || priceId === 'pri_01kmkgqd61b354cvpctb77pvmg' || priceId === 'pri_01kmpep1pb6r1enr8tvr1r4m02') { return; }
     var product = K8_PRICE_TO_PRODUCT[priceId];
     var successUrl = 'https://lilbuba.ai/download.html';
     if (product) {
@@ -1553,7 +1555,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Media</span>
             <span class="deduplik8">DedupliK8 your media</span>
-            <span class="price">&pound;39.95 &middot; Lifetime</span>
+            <span class="price">Not on sale at the moment</span>
           </div>
         </div>
       </div>
@@ -1770,28 +1772,11 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkg4ex5x3saje0erbnmca3t')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
-            <div class="price-tag">
-              <span class="currency">&pound;</span>39.95
-              <span class="lifetime">One-time &middot; Lifetime licence</span>
-              <span class="guarantee-badge">30-day money-back guarantee</span>
-              <span class="windows-only">Windows 10/11 only</span>
-            </div>
+            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Media is not on sale at the moment. An upgraded version is on its way.</p>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
 
-      </div>
-      <!-- BUNDLE & SAVE -->
-      <div class="loyalty-card-wrap">
-        <div class="loyalty-card">
-          <h3>Bundle &amp; Save</h3>
-          <p>Media + Bionic <span class="hl">&pound;54.95</span> (save &pound;10) &middot; All three <span class="hl">&pound;64.95</span> (save &pound;25)</p>
-          <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkgqd61b354cvpctb77pvmg')" class="btn-buy" style="font-size: 14px; padding: 10px 20px;">Media + Bionic &pound;54.95</a>
-            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmpep1pb6r1enr8tvr1r4m02')" class="btn-buy" style="font-size: 14px; padding: 10px 20px;">All Three &pound;64.95</a>
-          </div>
-        </div>
       </div>
 
     </div>
