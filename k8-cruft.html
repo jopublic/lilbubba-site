@@ -32,7 +32,7 @@
     "name": "K8 Cruft",
     "url": "https://lilbuba.ai/k8-cruft.html",
     "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Windows 10, Windows 11",
+    "operatingSystem": "Windows 10, Windows 11 (64-bit)",
     "offers": {
       "@type": "Offer",
       "price": "24.95",
@@ -141,10 +141,18 @@
       },
       {
         "@type": "Question",
+        "name": "What's the developer bonus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Buy K8 Cruft and K8 Bionic comes free with it: your Cruft key cleans in both. It doesn't work the other way round, so a K8 Bionic key cleans in Bionic only, and K8 Media is separate. Want all three? Everything is £49.95."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Can I install K8 on more than one computer?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Your licence covers one active installation. If you replace your computer, you can deactivate the old one and activate on the new machine using the same key. If the old machine is gone, contact us and we’ll reset your activation."
+          "text": "Yes. Your licence covers your own PCs, up to three: install K8 on each and use the same key. Replacing a computer? Install K8 on the new one and type in your key."
         }
       }
     ]
@@ -1676,7 +1684,7 @@ function closeMenu() {
               <span class="currency">&pound;</span>24.95
               <span class="lifetime">One-time &middot; Lifetime licence</span>
               <span class="guarantee-badge">30-day money-back guarantee</span>
-              <span class="windows-only">Windows 10/11 only</span>
+              <span class="windows-only">Windows 10/11, 64-bit only</span>
             </div>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
@@ -1839,11 +1847,21 @@ function closeMenu() {
 
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">
+          What's the developer bonus?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Buy K8 Cruft and K8 Bionic comes free with it: your Cruft key cleans in both. It doesn't work the other way round, so a K8 Bionic key cleans in Bionic only, and K8 Media is separate. Want all three? Everything is &pound;49.95.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
           Can I install K8 on more than one computer?
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Your licence covers one active installation. If you replace your computer, you can deactivate the old one and activate on the new machine using the same key. If the old machine is gone, contact us and we’ll reset your activation.
+          Yes. Your licence covers your own PCs, up to three: install K8 on each and use the same key. Replacing a computer? Install K8 on the new one and type in your key.
         </div></div>
       </div>
     </div>
@@ -2076,7 +2094,7 @@ document.addEventListener('keydown', function(e) {
 
 <!-- Mobile Warning Banner -->
 <div class="mobile-warning">
-  &#128187; K8 is a Windows desktop app (Windows 10/11). Please visit <a href="https://lilbuba.ai">lilbuba.ai</a> on your PC to download.
+  &#128187; K8 is a Windows desktop app (Windows 10/11, 64-bit). Please visit <a href="https://lilbuba.ai">lilbuba.ai</a> on your PC to download.
 </div>
 
 </body>
