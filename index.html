@@ -195,6 +195,46 @@
     margin: 14px auto 0; line-height: 1.6; font-weight: 300;
   }
 
+  /* ===== K8 FEATURE (on sale now; sits just under Buba's hero, Buba keeps the front door) ===== */
+  .k8-feature { padding-top: 40px; }
+  .k8-panel {
+    background: var(--card); border: 1px solid var(--purple-soft); border-radius: 26px;
+    padding: 46px 40px 42px; text-align: center;
+    box-shadow: 0 18px 60px rgba(139,92,246,0.14);
+  }
+  .k8-mark { width: 64px; height: 64px; object-fit: contain; margin-bottom: 14px; filter: drop-shadow(0 0 14px rgba(139,92,246,0.45)); }
+  .k8-panel .section-sub { max-width: 640px; }
+  .k8-panel h2, .k8-price { text-wrap: balance; }
+  /* Demo film slot: stays hidden until Jo's film goes in */
+  .k8-film { margin: 34px auto 0; max-width: 760px; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); }
+  .k8-film[hidden] { display: none; }
+  .k8-film video, .k8-film iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+  .k8-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; text-align: left; }
+  .k8-tool {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 20px;
+    padding: 26px 24px 24px; display: flex; flex-direction: column;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .k8-tool:hover { transform: translateY(-6px); border-color: var(--purple-soft); }
+  .k8-tool .emoji { font-size: 30px; }
+  .k8-tool h3 { font-family: 'Fredoka', sans-serif; font-size: 22px; font-weight: 600; margin-top: 10px; }
+  .k8-tool p { color: var(--text-secondary); font-size: 15px; line-height: 1.55; margin-top: 8px; font-weight: 300; flex: 1; }
+  .k8-tool a { margin-top: 16px; color: var(--cyan); text-decoration: none; font-size: 14.5px; font-weight: 600; }
+  .k8-tool a:hover { color: #fff; }
+  .k8-facts { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 34px; }
+  .k8-facts li {
+    font-size: 13.5px; line-height: 1.4; color: var(--text-primary); padding: 7px 15px; border-radius: 18px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);
+  }
+  .k8-price { margin-top: 26px; font-family: 'Fredoka', sans-serif; font-size: clamp(18px, 2.4vw, 21px); font-weight: 600; }
+  .k8-ctas { display: flex; gap: 22px; margin-top: 20px; flex-wrap: wrap; justify-content: center; align-items: center; }
+  .k8-quiet {
+    color: var(--text-secondary); text-decoration: none; font-size: 15px; font-weight: 500;
+    border-bottom: 1px solid rgba(185,179,204,0.35); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+  }
+  .k8-quiet:hover { color: #fff; border-bottom-color: #fff; }
+  .k8-note { color: rgba(185,179,204,0.75); font-size: 13px; margin-top: 18px; font-weight: 300; }
+
   /* ===== CHOOSER ===== */
   .flavours { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 54px; }
   .flavour {
@@ -309,6 +349,9 @@
     .header-nav a.nav-k8 { border: none; background: none; border-radius: 0; }
     .flavours { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
     .family-grid { grid-template-columns: 1fr; }
+    .k8-panel { padding: 34px 20px 32px; }
+    .k8-tools { grid-template-columns: 1fr; }
+    .k8-ctas .btn { width: 100%; max-width: 360px; padding-left: 18px; padding-right: 18px; }
     .ethos-grid { grid-template-columns: 1fr; gap: 34px; }
     section { padding: 64px 20px; }
   }
@@ -362,6 +405,58 @@
       <a href="k8.html" class="btn btn-ghost">Meet K8 — live now</a>
     </div>
   </div>
+
+  <!-- K8 FEATURE: K8 is on sale now, so it sits right under Buba's hero (Buba keeps the front door). -->
+  <!-- Words = VERSION A (Kate, 20 Nov 2026); version B is in K8\09_Reports_Audits\2026-11-20_kate_SITE_front-page-K8-feature_for-QC.md. Jo voices the final words. -->
+  <section id="k8" class="k8-feature" aria-labelledby="k8-title">
+    <div class="k8-panel">
+      <img src="img/k8_hero_logo.png" alt="" class="k8-mark" width="64" height="64">
+      <div class="section-kicker">Live now &middot; K8 for Windows</div>
+      <h2 id="k8-title">Drive full? Same photos three times over?</h2>
+      <p class="section-sub">
+        K8 finds the copies and clutter clogging up your Windows PC, shows you the lot,
+        and you decide what goes. Having a nose costs nothing.
+      </p>
+
+      <!-- K8 DEMO FILM SLOT (Jo is making a short demo film).
+           When it's ready: put the <video> (or the player embed) inside this div and delete the word hidden.
+           Nothing else needs changing: its styles are ready (.k8-film, in the style block at the top). -->
+      <div class="k8-film" id="k8-film" hidden></div>
+
+      <div class="k8-tools">
+        <div class="k8-tool">
+          <div class="emoji" aria-hidden="true">📸</div>
+          <h3>K8 Bionic</h3>
+          <p>Duplicate files, plus that one photo you've somehow saved in five different sizes. Found, grouped, and you pick the keeper.</p>
+          <a href="k8-bionic.html">See K8 Bionic &rarr;</a>
+        </div>
+        <div class="k8-tool">
+          <div class="emoji" aria-hidden="true">🧹</div>
+          <h3>K8 Cruft</h3>
+          <p>For coders: the build junk and leftovers piling up in your projects, each scored by how safe it is to bin. K8 Bionic comes free with it.</p>
+          <a href="k8-cruft.html">See K8 Cruft &rarr;</a>
+        </div>
+        <div class="k8-tool">
+          <div class="emoji" aria-hidden="true">🎬</div>
+          <h3>K8 Media</h3>
+          <p>Same video or song saved twice in different formats? Spotted by comparing the pictures and the sound, even after a re-encode.</p>
+          <a href="k8-media.html">See K8 Media &rarr;</a>
+        </div>
+      </div>
+
+      <ul class="k8-facts">
+        <li>Binned the wrong one? 30 days to put it back</li>
+        <li>Runs on your PC. Sends nothing anywhere.</li>
+        <li>30-day money back</li>
+      </ul>
+      <p class="k8-price">Free to scan. From &pound;24.95 to clean, pay once.</p>
+      <div class="k8-ctas">
+        <a href="download.html" class="btn btn-primary">Download free, scan free</a>
+        <a href="k8.html" class="k8-quiet">Have a proper look at K8 &rarr;</a>
+      </div>
+      <p class="k8-note">For Windows 10 and 11 (64-bit).</p>
+    </div>
+  </section>
 
   <!-- CHOOSER -->
   <section id="choose">
