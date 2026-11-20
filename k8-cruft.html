@@ -64,7 +64,7 @@
         "name": "What does K8 Cruft actually find?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nine categories of developer cruft: build artifacts, caches, package-manager folders such as node_modules, logs, Python virtual environments and __pycache__, version-control bloat, temporary files, editor and tool caches, and leftover installer output. Each hit is labelled with its category, its size and a safety score, so you can see at a glance what is eating the disk and why."
+          "text": "Nine categories of developer cruft: build output, caches, package-manager folders such as node_modules, Python virtual environments and __pycache__, version-control bloat, logs, backup and temp files, editor settings folders, and system junk like Thumbs.db. Each hit is labelled with its category, its size and a safety score, so you can see at a glance what is eating the disk and why."
         }
       },
       {
@@ -72,7 +72,7 @@
         "name": "Is it safe to delete node_modules and build folders?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Usually, yes: they are regenerable. A node_modules folder comes back with npm install, a build folder comes back the next time you build, a Python environment comes back from your requirements file. K8 Cruft marks these with a regenerable badge and tells you what brings them back. It still never deletes anything itself: you tick what goes, and it moves to quarantine where you can restore it for 30 days."
+          "text": "Usually, yes: they are regenerable. A node_modules folder comes back with npm install, a build folder comes back the next time you build, a Python environment comes back from your requirements file. K8 Cruft only offers folders like node_modules, dist and build when the project file that rebuilds them sits right beside them, marks them with a regenerable badge and tells you what brings them back. It still never deletes anything itself: you tick what goes, and it moves to quarantine where you can restore it for 30 days."
         }
       },
       {
@@ -96,7 +96,7 @@
         "name": "Does it have false positives?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "In our test across six project types and three package managers (NVM, Scoop and Chocolatey) the final run had zero false positives: nothing flagged that was not regenerable junk. Your machine will differ from our test, which is exactly why every removal goes to quarantine first and your system files, dev tools and package managers are protected by a 3-layer exclusion system."
+          "text": "We test K8 Cruft against six project types, three package managers (NVM, Scoop and Chocolatey) and seven traps outside projects, such as npm's global installs, VS Code's extensions and your own folders called dist or vendor. Every time a test caught a false positive we fixed K8, and in 1.8.4 the whole set comes back clean. Your machine will differ from our tests, which is exactly why every removal goes to quarantine first and your system files, dev tools and package managers are protected by a 3-layer exclusion system."
         }
       },
       {
@@ -1560,7 +1560,7 @@ function closeMenu() {
     <p class="safe-smart-hero">Safe &bull; Smart &bull; Stupidly Fast</p>
     <h1 class="deduplik8-main"><span class="dedupli">Dedupli</span><img src="img/k8_hero_logo.png" alt="K8" class="k8-inline"><span class="your-life">Your Data</span></h1>
     <p class="intelligence-line">"We took the intelligence out of AI so you don't have to."</p>
-    <p class="free-scan-line">Free to scan, &pound;24.95 to clean.</p>
+    <p class="free-scan-line">Free to scan, &pound;24.95 to clean. K8 Bionic comes free with it.</p>
     <a href="download.html" class="btn-free">Download free, scan free</a>
   </section>
 
@@ -1569,7 +1569,7 @@ function closeMenu() {
     <div class="stat-card">
       <div class="stat-icon">&#128737;</div>
       <div class="stat-number cu" data-target="0" data-decimals="0" data-suffix="">0</div>
-      <div class="stat-label">false positives in our test &mdash; six project types, three package managers</div>
+      <div class="stat-label">false positives in our tests: six project types, three package managers and seven traps outside projects</div>
     </div>
     <div class="stat-card">
       <div class="stat-icon">&#128202;</div>
@@ -1619,7 +1619,7 @@ function closeMenu() {
             </div>
           </div>
           <p class="description">
-            Developer junk detection that knows what's safe to nuke. 9 categories of cruft with crap scores, a path and date on every find, and smart exclusions that won't touch your tools.
+            Developer junk detection that knows what's safe to nuke. 9 categories of cruft with crap scores, a path and date on every find, and smart exclusions that won't touch your tools. <strong>Developer bonus:</strong> buy K8 Cruft and K8 Bionic comes free with it.
           </p>
           <div class="features-grid">
             <div class="feature-item" onclick="openLightbox('img/screenshots/cruft_overview.png')">
@@ -1666,7 +1666,7 @@ function closeMenu() {
               <div class="feature-icon">&#128737;</div>
               <div>
                 <h4>Smart Protection</h4>
-                <p>3-layer exclusion system. Your system files, dev tools and package managers are automatically safe. Zero false positives in our test across six project types and three package managers, and everything goes to quarantine first anyway.</p>
+                <p>3-layer exclusion system. Your system files, dev tools and package managers are automatically safe, and folders like node_modules, dist and build are only offered when a project file beside them proves they rebuild. Everything goes to quarantine first anyway.</p>
               </div>
             </div>
           </div>
@@ -1742,7 +1742,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Nine categories of developer cruft: build artifacts, caches, package-manager folders such as node_modules, logs, Python virtual environments and __pycache__, version-control bloat, temporary files, editor and tool caches, and leftover installer output. Each hit is labelled with its category, its size and a safety score, so you can see at a glance what is eating the disk and why.
+          Nine categories of developer cruft: build output, caches, package-manager folders such as node_modules, Python virtual environments and __pycache__, version-control bloat, logs, backup and temp files, editor settings folders, and system junk like Thumbs.db. Each hit is labelled with its category, its size and a safety score, so you can see at a glance what is eating the disk and why.
         </div></div>
       </div>
 
@@ -1752,7 +1752,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Usually, yes: they are regenerable. A node_modules folder comes back with npm install, a build folder comes back the next time you build, a Python environment comes back from your requirements file. K8 Cruft marks these with a regenerable badge and tells you what brings them back. It still never deletes anything itself: you tick what goes, and it moves to quarantine where you can restore it for 30 days.
+          Usually, yes: they are regenerable. A node_modules folder comes back with npm install, a build folder comes back the next time you build, a Python environment comes back from your requirements file. K8 Cruft only offers folders like node_modules, dist and build when the project file that rebuilds them sits right beside them, marks them with a regenerable badge and tells you what brings them back. It still never deletes anything itself: you tick what goes, and it moves to quarantine where you can restore it for 30 days.
         </div></div>
       </div>
 
@@ -1782,7 +1782,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          In our test across six project types and three package managers (NVM, Scoop and Chocolatey) the final run had zero false positives: nothing flagged that was not regenerable junk. Your machine will differ from our test, which is exactly why every removal goes to quarantine first and your system files, dev tools and package managers are protected by a 3-layer exclusion system.
+          We test K8 Cruft against six project types, three package managers (NVM, Scoop and Chocolatey) and seven traps outside projects, such as npm's global installs, VS Code's extensions and your own folders called dist or vendor. Every time a test caught a false positive we fixed K8, and in 1.8.4 the whole set comes back clean. Your machine will differ from our tests, which is exactly why every removal goes to quarantine first and your system files, dev tools and package managers are protected by a 3-layer exclusion system.
         </div></div>
       </div>
 

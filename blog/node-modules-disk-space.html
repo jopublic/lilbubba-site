@@ -157,9 +157,9 @@
 
     <p>That's <strong>5.7GB</strong> from one language. If you also dabble in Python, Rust, or Java, double it.</p>
 
-    <p>When we first scanned a real developer's machine during testing &mdash; someone who'd been coding professionally for about four years on the same Windows install &mdash; we found <strong>12GB of regenerable dev files</strong>. Stuff that could be deleted and recreated with a single command in each project directory.</p>
+    <p>When we filmed K8 Cruft in September on a copy of a real developer's projects folder, it found <strong>3.22 GB of regenerable junk in 42 items</strong>, in 6.1 seconds. Stuff that could be deleted and recreated with a single command in each project directory.</p>
 
-    <p>On a 256GB SSD where Windows and applications already eat 80-100GB, that's nearly 10% of your usable space. Gone. To files you never look at and can rebuild in seconds.</p>
+    <p>On a 256GB SSD where Windows and applications already eat 80-100GB, every few gigabytes counts, and these are files you never look at and can rebuild whenever you need them.</p>
 
     <h2>The Manual Approach (AKA Pain)</h2>
 
@@ -202,7 +202,7 @@ rm -rf dist</code></pre>
 
     <p><strong>9 categories of dev junk.</strong> Not just node_modules. K8 Cruft scans for package caches, build output, virtual environments, IDE metadata, log accumulations, temp files, and more. One scan, everything surfaced.</p>
 
-    <p><strong>A path and a date on every find.</strong> K8 Cruft doesn't just find big folders and offer to delete them. Every find shows its full path, so you can see which project it belongs to, plus its size and the date that folder last changed. It doesn't try to guess which projects you're still working on. You know that better than any app, so it shows you where everything is and leaves the call to you. Each kind of junk also gets a fixed "crap score" for how safely it comes back: node_modules and caches score 95%, because one command rebuilds them, while a .git folder scores 40%, because unpushed work would go with it. High crap score = safe to remove. Low crap score = check first.</p>
+    <p><strong>A path and a date on every find.</strong> K8 Cruft doesn't just find big folders and offer to delete them. Every find shows its full path, so you can see which project it belongs to, plus its size and when anything inside it last changed. It doesn't try to guess which projects you're still working on. You know that better than any app, so it shows you where everything is and leaves the call to you. Each kind of junk also gets a fixed "crap score" for how safely it comes back: node_modules and caches score 95%, because one command rebuilds them, while a .git folder scores 40%, because unpushed work would go with it. High crap score = safe to remove. Low crap score = check first.</p>
 
     <p><strong>Quarantine, not deletion.</strong> Nothing gets permanently deleted. When you remove something through K8 Cruft, it goes to quarantine for 30 days. Changed your mind? Restore it. Realised you needed that .venv after all? One click, it's back. After 30 days it's marked expired, and it only goes for good when you press Purge.</p>
 
