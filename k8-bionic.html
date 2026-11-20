@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K8 Bionic: Duplicate File and Photo Finder for Windows | LilBuba.ai</title>
-<meta name="description" content="K8 Bionic finds duplicate files and near-identical photos on Windows in minutes, not hours. 30-day quarantine undo. 100% local. £24.95 one-time.">
+<meta name="description" content="K8 Bionic finds duplicate files and near-identical photos on Windows. Free to scan, 30-day quarantine undo. 100% local. £24.95 one-time.">
 <link rel="canonical" href="https://lilbuba.ai/k8-bionic.html">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="256x256" href="/img/buba_cool_icon.png">
@@ -40,7 +40,7 @@
       "availability": "https://schema.org/InStock",
       "url": "https://lilbuba.ai/k8-bionic.html"
     },
-    "description": "Duplicate file finder for Windows, built for very large drives. 30-day quarantine protects your files. 100% local, no cloud.",
+    "description": "Duplicate file and near-identical photo finder for Windows. 30-day quarantine protects your files. 100% local, no cloud.",
     "publisher": {
       "@type": "Organization",
       "name": "LilBuba.ai",
@@ -64,7 +64,7 @@
         "name": "How does K8 find duplicates so fast?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most duplicate finders end up comparing every file against every other, which is why they crawl on big drives. K8's patent-pending approach rules most files out before any comparing starts. On a real library of 3,318 photos it needed 6,840 checks instead of 5,496,270, which is 99.88% fewer. It's built for very large drives, and we'll publish measured scan times as we benchmark them."
+          "text": "Checking every photo against every other gets slow on big libraries. K8's patent-pending approach rules most photos out before any comparing starts. On a real library of 3,318 photos it needed 6,840 checks instead of 5,496,270, which is 99.88% fewer. For exact duplicates, K8 only reads the files that could possibly match. In our September test it went through a music folder of 2,941 files and found 18.02 GB of duplicates in 1 minute 16 seconds, on a laptop SSD."
         }
       },
       {
@@ -72,7 +72,7 @@
         "name": "Will it find similar photos, not just exact copies?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Exact copies are the easy part. K8 Bionic also looks for near-identical photos, because we all take loads of shots hoping one comes out perfect. It groups the near-duplicates together so you can pick the keeper and let the rest go. You review every group, and nothing moves until you tick it."
+          "text": "Yes. Exact copies are the easy part. K8 Bionic also looks for near-identical photos: re-saved, resized and lightly edited copies of the same shot. Photos with a date taken are checked against others taken within a minute of them, and photos with no date are checked against every photo. It reads iPhone (HEIC) photos where Windows can open them, which needs Microsoft's HEIF and HEVC extensions (K8 tells you if it couldn't open any), and RAW files through the preview your camera saves inside them. It doesn't match cropped or rotated copies. It groups the near-duplicates together so you can pick the keeper and let the rest go. You review every group, and nothing moves until you tick it."
         }
       },
       {
@@ -1610,14 +1610,14 @@ function closeMenu() {
             </div>
           </div>
           <p class="description">
-            The duplicate file and photo finder that actually works. Patent-pending technology finds exact duplicates and near-identical photos in minutes, not hours. Reclaim gigabytes of wasted space. Your files never leave your machine.
+            The duplicate file and photo finder that actually works. It finds exact duplicates by what's inside them, and near-identical photos with a patent-pending method. Reclaim gigabytes of wasted space. Your files never leave your machine.
           </p>
           <div class="features-grid">
             <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_scan_results.png')">
               <div class="feature-icon">&#9889;</div>
               <div>
                 <h4>Stupidly Fast</h4>
-                <p>Patent-pending technology. 99.88% fewer comparisons than brute force, so a big drive takes minutes, not hours.</p>
+                <p>Patent-pending photo check: on a real 3,318-photo library it needed 99.88% fewer comparisons than checking every pair. In our September test, a 2,941-file music folder took 1 minute 16 seconds on a laptop SSD.</p>
                 <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_scan_results.png" class="feature-thumb" alt="K8 Bionic scan results"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
@@ -1625,7 +1625,7 @@ function closeMenu() {
               <div class="feature-icon">&#128247;</div>
               <div>
                 <h4>Similar Photos</h4>
-                <p>We all take loads of shots hoping one comes out perfect. K8 hunts down your near-duplicates so you don't have to.</p>
+                <p>Re-saved, resized and lightly edited copies of the same shot, found and grouped. Undated photos, RAW files and iPhone photos too (where Windows can open them). You pick the keeper.</p>
                 <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_similar_photos.png" class="feature-thumb" alt="K8 Similar Photos detection"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
@@ -1656,7 +1656,7 @@ function closeMenu() {
               <div class="feature-icon">&#128269;</div>
               <div>
                 <h4>Find This File</h4>
-                <p>Pick any file. K8 searches your entire system for exact copies and same-size matches.</p>
+                <p>Pick any file and the folders or drives to search. K8 lists its exact copies, plus files with the same name or the same size.</p>
                 <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_find_this_file.png" class="feature-thumb" alt="K8 Find This File"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
@@ -1732,7 +1732,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Most duplicate finders end up comparing every file against every other, which is why they crawl on big drives. K8's patent-pending approach rules most files out before any comparing starts. On a real library of 3,318 photos it needed 6,840 checks instead of 5,496,270, which is 99.88% fewer. It's built for very large drives, and we'll publish measured scan times as we benchmark them.
+          Checking every photo against every other gets slow on big libraries. K8's patent-pending approach rules most photos out before any comparing starts. On a real library of 3,318 photos it needed 6,840 checks instead of 5,496,270, which is 99.88% fewer. For exact duplicates, K8 only reads the files that could possibly match. In our September test it went through a music folder of 2,941 files and found 18.02 GB of duplicates in 1 minute 16 seconds, on a laptop SSD.
         </div></div>
       </div>
 
@@ -1742,7 +1742,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Yes. Exact copies are the easy part. K8 Bionic also looks for near-identical photos, because we all take loads of shots hoping one comes out perfect. It groups the near-duplicates together so you can pick the keeper and let the rest go. You review every group, and nothing moves until you tick it.
+          Yes. Exact copies are the easy part. K8 Bionic also looks for near-identical photos: re-saved, resized and lightly edited copies of the same shot. Photos with a date taken are checked against others taken within a minute of them, and photos with no date are checked against every photo. It reads iPhone (HEIC) photos where Windows can open them, which needs Microsoft's HEIF and HEVC extensions (K8 tells you if it couldn't open any), and RAW files through the preview your camera saves inside them. It doesn't match cropped or rotated copies. It groups the near-duplicates together so you can pick the keeper and let the rest go. You review every group, and nothing moves until you tick it.
         </div></div>
       </div>
 
