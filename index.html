@@ -253,14 +253,43 @@
   }
   .k8-quiet:hover { color: #fff; border-bottom-color: #fff; }
   .k8-note { color: rgba(185,179,204,0.75); font-size: 13px; margin-top: 18px; font-weight: 300; }
-  /* Full-width K8 box: the three tools sit side by side, badge on top */
-  @media (min-width: 861px) {
+  /* Middle widths (stacked, full-width K8 box): the three tools sit side by side, badge on top */
+  @media (min-width: 861px) and (max-width: 1199px) {
     .k8-tools { grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .k8-tool { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; padding: 24px 22px 22px; }
     .k8-tool > * { grid-column: 1; }
     .k8-tool .k8-badge { grid-row: auto; align-self: start; width: 80px; height: 80px; margin-bottom: 14px; }
   }
 
+  /* ===== FRONT TOP: two heroes side by side (Jo, 21 Nov 2026) =====
+     Wide screens (1200px and up): Buba's hero with "Choose your Buba" under it on the left, the K8 box on the right.
+     Narrower: it stacks in page order, Buba, then the K8 box, then Choose your Buba. */
+  .front-top > .hero { min-height: 0; padding-bottom: 30px; }
+  .front-top > .hero, .front-top > section { scroll-margin-top: 84px; }   /* nav jumps land clear of the fixed header */
+  @media (min-width: 1200px) {
+    .front-top {
+      display: grid; align-items: start;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+      grid-template-rows: auto 1fr;
+      grid-template-areas: "buba k8" "choose k8";
+      column-gap: clamp(32px, 3.2vw, 72px);
+      max-width: 1640px; margin: 0 auto; padding: 108px clamp(24px, 2.6vw, 40px) 20px;
+    }
+    .front-top .k8-panel { padding: 44px clamp(26px, 2.6vw, 40px) 40px; }
+    .front-top .k8-panel h2 { font-size: clamp(34px, 3.2vw, 46px); }
+    .front-top > .hero { grid-area: buba; padding: 0; }
+    /* the K8 box runs the full height of Buba's column, its contents centred, so the two halves end level */
+    .front-top > .k8-feature { grid-area: k8; align-self: stretch; display: flex; flex-direction: column; max-width: none; margin: 0; padding: 0; }
+    .front-top .k8-panel { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .front-top .k8-panel > .k8-mark { align-self: center; }
+    .front-top > #choose { grid-area: choose; max-width: none; margin: 0; padding: 60px 0 0; }
+    .front-top .flavours { gap: 18px; margin-top: 36px; }
+    .front-top .flavour { padding: 28px 16px 24px; }
+    .front-top .flavour h3 { font-size: 24px; margin-top: 12px; }
+    .front-top .flavour p { font-size: 14.5px; }
+  }
+  /* Very big screens: scale the whole page up a notch so the words aren't lost in the middle */
+  @media (min-width: 2200px) { html { zoom: 1.2; } }
 
   /* ===== CHOOSER ===== */
   .flavours { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 54px; }
@@ -427,6 +456,11 @@
 
 <main>
 
+  <!-- FRONT TOP (Jo, 21 Nov 2026): two heroes side by side on wide screens. Left: Buba's hero with Choose your Buba
+       under it. Right: the K8 box. Narrower screens stack them in this order: Buba, K8, Choose your Buba.
+       Everything inside keeps its ids and classes: the hero script finds them by id and class, not by position. -->
+  <div class="front-top">
+
   <!-- HERO -->
   <div class="hero" id="meet-buba">
     <div class="hero-buba f-cool">
@@ -531,6 +565,8 @@
     </div>
     <p class="chooser-note">Tap a face to hear Buba say hello — then that Buba follows you round the whole site. Change your mind any time. Buba won't sulk. 💜</p>
   </section>
+
+  </div><!-- /front-top -->
 
   <!-- FAMILY -->
   <section id="family">
