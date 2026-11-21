@@ -336,7 +336,7 @@
     opacity: 0; animation: bubaEntrance 0.5s ease-out 2.5s forwards; transition: background 0.3s;
   }
   .buba-audio-toggle:hover { background: rgba(139, 92, 246, 0.5); }
-  .buba-companion video {
+  .buba-companion video, .buba-companion img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -360,11 +360,11 @@
 
 <!-- BUBA COMPANION -->
 <div class="buba-companion" id="bubaCompanion" title="LilBuba">
-  <video id="bubaVid" autoplay loop muted playsinline>
-    <source id="bubaVidSrc" src="img/lilbuba_masculine_v3_trimmed.mp4" type="video/mp4">
+  <video id="bubaVid" loop muted playsinline>
+    <source id="bubaVidSrc" src="img/buba_cute_entrance.webm" type="video/webm">
   </video>
+  <img id="bubaStill" src="img/buba_cute.png" alt="LilBuba" style="display:none;">
 </div>
-<button class="buba-audio-toggle" id="bubaAudioToggle" title="Toggle Buba audio">🔇</button>
 
 
 <!-- AMBIENT LIGHT POOLS -->
@@ -472,50 +472,35 @@
 
 
 <script>
+// Buba companion: the same faces as the K8 pages, wearing the flavour the visitor chose on the homepage.
+// No choice yet -> Cute, the main mascot (Jo, 21 Nov 2026).
+// Cool + Cute + Clever = their transparent entrance webm; static per-flavour fallback for non-webm browsers.
+// No voice greeting here, as on the K8 pages. The stylesheet still hides Buba on narrow screens.
 (function() {
-  var buba = localStorage.getItem('bubaChoice') || 'masc';
-  var vidSrc = buba === 'fem' ? 'img/lilbuba_feminine_v3_trimmed.mp4' : 'img/lilbuba_masculine_v3_trimmed.mp4';
-  var srcEl = document.getElementById('bubaVidSrc');
-  var vidEl = document.getElementById('bubaVid');
-  if (!srcEl || !vidEl) return;
-  srcEl.src = vidSrc;
-  vidEl.load();
-  vidEl.muted = true;
-  vidEl.loop = true;
-  vidEl.play().catch(function(){});
-  function playBubaAudio() {
-    vidEl.pause(); vidEl.loop = false; vidEl.muted = false; vidEl.currentTime = 0;
-    var p = vidEl.play();
-    if (p) p.then(function() {
-      vidEl.addEventListener('ended', function onEnd() {
-        vidEl.removeEventListener('ended', onEnd);
-        vidEl.muted = true; vidEl.loop = true; vidEl.currentTime = 0;
-        var tb = document.getElementById('bubaAudioToggle');
-        if (tb) tb.textContent = '🔇';
-        vidEl.play().catch(function(){});
-      });
-    }).catch(function() { vidEl.muted = true; vidEl.loop = true; vidEl.play().catch(function(){}); });
-  }
-  if (!sessionStorage.getItem('bubaGreeted')) {
-    function autoGreet() {
-      document.removeEventListener('click', autoGreet);
-      document.removeEventListener('touchstart', autoGreet);
-      document.removeEventListener('keydown', autoGreet);
-      sessionStorage.setItem('bubaGreeted', '1');
-      var tb = document.getElementById('bubaAudioToggle'); if (tb) tb.textContent = '🔊';
-      playBubaAudio();
-    }
-    document.addEventListener('click', autoGreet, { once: true });
-    document.addEventListener('touchstart', autoGreet, { once: true });
-    document.addEventListener('keydown', autoGreet, { once: true });
-  }
-  var toggleBtn = document.getElementById('bubaAudioToggle');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (vidEl.muted) { toggleBtn.textContent = '🔊'; playBubaAudio(); }
-      else { vidEl.muted = true; vidEl.loop = true; toggleBtn.textContent = '🔇'; }
-    });
+  var vidEl  = document.getElementById('bubaVid');
+  var vidSrc = document.getElementById('bubaVidSrc');
+  var stillEl = document.getElementById('bubaStill');
+
+  var COMP = {
+    cute:   { video: 'img/buba_cute_entrance.webm', still: 'img/buba_cute.png'   },
+    cool:   { video: 'img/buba_entrance.webm',      still: 'img/buba_cool.png'   },
+    clever: { video: 'img/buba_clever_entrance.webm', still: 'img/buba_clever.png' }
+  };
+  var canWebm = (function(){ var t=document.createElement('video'); return !!(t.canPlayType && t.canPlayType('video/webm').replace(/no/,'')); })();
+  var f = localStorage.getItem('buba_flavour');
+  if (!COMP[f]) f = 'cute';                 // no choice yet -> Cute, the mascot
+
+  if (vidEl && COMP[f].video && canWebm) {
+    if (vidSrc && vidSrc.getAttribute('src') !== COMP[f].video) { vidSrc.setAttribute('src', COMP[f].video); vidEl.load(); }
+    vidEl.muted = true; vidEl.loop = true;
+    if (stillEl) stillEl.style.display = 'none';
+    vidEl.style.display = '';
+    vidEl.play().catch(function(){});
+  } else if (stillEl) {
+    // A browser that can't play the webm: show the chosen static (the box already floats)
+    if (vidEl) { try { vidEl.pause(); } catch(e){} vidEl.style.display = 'none'; }
+    stillEl.src = COMP[f].still;
+    stillEl.style.display = '';
   }
 })();
 </script>
