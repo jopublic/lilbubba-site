@@ -37,7 +37,7 @@
       "@type": "Offer",
       "price": "39.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/InStock",
+      "availability": "https://schema.org/OutOfStock",
       "url": "https://lilbuba.ai/k8-media.html"
     },
     "description": "Media deduplication tool for creators. Finds duplicate videos and audio by comparing the pictures and the sound, and pairs RAW files with their JPEGs. 30-day quarantine protects your files. 100% local, no cloud.",
@@ -201,6 +201,8 @@
   });
 
   function buyProduct(priceId) {
+    // K8 is off sale (21 Nov 2026) until the next version is out: no checkout opens.
+    return;
     var product = K8_PRICE_TO_PRODUCT[priceId];
     var successUrl = 'https://lilbuba.ai/download.html';
     if (product) {
@@ -1593,7 +1595,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Media</span>
             <span class="deduplik8">DedupliK8 your media</span>
-            <span class="price">&pound;39.95 &middot; Lifetime</span>
+            <span class="price">Not on sale at the moment</span>
           </div>
         </div>
       </div>
@@ -1661,16 +1663,9 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkg4ex5x3saje0erbnmca3t')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
-            <div class="price-tag">
-              <span class="currency">&pound;</span>39.95
-              <span class="lifetime">One-time &middot; Lifetime licence</span>
-              <span class="guarantee-badge">30-day money-back guarantee</span>
-              <span class="windows-only">Windows 10/11, 64-bit only</span>
-            </div>
+            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Media is not on sale at the moment. An upgraded version is on its way.</p>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
-          <p class="faq-contact" style="margin-top:16px">Want all three tools? <strong>Everything</strong> (K8 Bionic, K8 Cruft and K8 Media) is &pound;49.95, just &pound;10 more than K8 Media on its own. <a href="javascript:void(0)" onclick="buyProduct('pri_01kmpep1pb6r1enr8tvr1r4m02')">Get all three &rarr;</a></p>
         </div>
       </div>
 

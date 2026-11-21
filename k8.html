@@ -36,7 +36,7 @@
       "@type": "Offer",
       "price": "24.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/OutOfStock"
     },
     "description": "Duplicate file and near-identical photo finder for Windows. 30-day quarantine protects your files. 100% local, no cloud.",
     "publisher": {
@@ -55,7 +55,7 @@
       "@type": "Offer",
       "price": "24.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/OutOfStock"
     },
     "description": "Developer junk cleaner for Windows. Finds node_modules, build artifacts, cache files, and dev cruft eating your disk space.",
     "publisher": {
@@ -74,7 +74,7 @@
       "@type": "Offer",
       "price": "39.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/OutOfStock"
     },
     "description": "Media deduplication tool for creators. Finds duplicate videos and audio by comparing the pictures and the sound, and pairs RAW files with their JPEGs.",
     "publisher": {
@@ -143,6 +143,8 @@
   });
 
   function buyProduct(priceId) {
+    // K8 is off sale (21 Nov 2026) until the next version is out: no checkout opens.
+    return;
     var product = K8_PRICE_TO_PRODUCT[priceId];
     var successUrl = 'https://lilbuba.ai/download.html';
     if (product) {
@@ -1537,7 +1539,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Bionic</span>
             <span class="deduplik8">DedupliK8 your life</span>
-            <span class="price">&pound;24.95 &middot; Lifetime</span>
+            <span class="price">Not on sale at the moment</span>
           </div>
         </div>
         <div class="product-btn" onclick="showProduct('cruft', this)">
@@ -1545,7 +1547,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Cruft</span>
             <span class="deduplik8">DedupliK8 your data</span>
-            <span class="price">&pound;24.95 &middot; Lifetime</span>
+            <span class="price">Not on sale at the moment</span>
           </div>
         </div>
         <div class="product-btn" onclick="showProduct('media', this)">
@@ -1553,7 +1555,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Media</span>
             <span class="deduplik8">DedupliK8 your media</span>
-            <span class="price">&pound;39.95 &middot; Lifetime</span>
+            <span class="price">Not on sale at the moment</span>
           </div>
         </div>
       </div>
@@ -1624,13 +1626,7 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkfbv93p3079jbf7pt21c76')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
-            <div class="price-tag">
-              <span class="currency">&pound;</span>24.95
-              <span class="lifetime">One-time &middot; Lifetime licence</span>
-              <span class="guarantee-badge">30-day money-back guarantee</span>
-              <span class="windows-only">Windows 10/11, 64-bit only</span>
-            </div>
+            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Bionic is not on sale at the moment. An upgraded version is on its way.</p>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
@@ -1698,13 +1694,7 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkfq9ge9q3mc8jbxfvvdvm4')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
-            <div class="price-tag">
-              <span class="currency">&pound;</span>24.95
-              <span class="lifetime">One-time &middot; Lifetime licence</span>
-              <span class="guarantee-badge">30-day money-back guarantee</span>
-              <span class="windows-only">Windows 10/11, 64-bit only</span>
-            </div>
+            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Cruft is not on sale at the moment. An upgraded version is on its way.</p>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
@@ -1770,13 +1760,7 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkg4ex5x3saje0erbnmca3t')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
-            <div class="price-tag">
-              <span class="currency">&pound;</span>39.95
-              <span class="lifetime">One-time &middot; Lifetime licence</span>
-              <span class="guarantee-badge">30-day money-back guarantee</span>
-              <span class="windows-only">Windows 10/11, 64-bit only</span>
-            </div>
+            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Media is not on sale at the moment. An upgraded version is on its way.</p>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
@@ -1786,10 +1770,7 @@ function closeMenu() {
       <div class="loyalty-card-wrap">
         <div class="loyalty-card">
           <h3>Everything: all three tools</h3>
-          <p>K8 Bionic, K8 Cruft and K8 Media for <span class="hl">&pound;49.95</span>, pay once. That's &pound;14.95 less than buying K8 Cruft (which brings K8 Bionic with it) and K8 Media on their own.</p>
-          <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmpep1pb6r1enr8tvr1r4m02')" class="btn-buy" style="font-size: 14px; padding: 10px 20px;">All three &pound;49.95</a>
-          </div>
+          <p>The all-three bundle is not on sale at the moment. An upgraded version of K8 is on its way.</p>
         </div>
       </div>
 
