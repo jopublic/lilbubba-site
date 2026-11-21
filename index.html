@@ -264,6 +264,11 @@
   /* ===== FRONT TOP: two heroes side by side (Jo, 21 Nov 2026) =====
      Wide screens (1200px and up): Buba's hero with "Choose your Buba" under it on the left, the K8 box on the right.
      Narrower: it stacks in page order, Buba, then the K8 box, then Choose your Buba. */
+  .hero-soon {
+    display: inline-block; margin-top: 16px; padding: 6px 15px; border-radius: 999px;
+    font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    background: rgba(0, 212, 255, 0.12); color: var(--cyan); border: 1px solid rgba(0,212,255,0.35);
+  }
   .front-top > .hero { min-height: 0; padding-bottom: 30px; }
   .front-top > .hero, .front-top > section { scroll-margin-top: 84px; }   /* nav jumps land clear of the fixed header */
   @media (min-width: 1200px) {
@@ -283,6 +288,7 @@
     .front-top .k8-panel { flex: 1; display: flex; flex-direction: column; justify-content: center; }
     .front-top .k8-panel > .k8-mark { align-self: center; }
     .front-top > #choose { grid-area: choose; max-width: none; margin: 0; padding: 60px 0 0; }
+    .front-top .hero-k8 { display: none; }   /* the K8 box is right beside it, so Buba's hero stays all Buba */
     .front-top .flavours { gap: 18px; margin-top: 36px; }
     .front-top .flavour { padding: 28px 16px 24px; }
     .front-top .flavour h3 { font-size: 24px; margin-top: 12px; }
@@ -470,6 +476,7 @@
       <img id="heroStill" class="hero-still" src="img/buba_cool.png" alt="Lil Buba" style="display:none;">
       <button class="hero-sound" id="heroSound" title="Hear Buba say hello">🔊 Hear Buba</button>
     </div>
+    <span class="hero-soon">Coming soon</span>
     <h1>Meet <span class="grad">Lil Buba</span></h1>
     <p class="hero-sub">
       The kind little AI helper built on <strong>love, truth and laughter</strong>.
@@ -478,7 +485,7 @@
     </p>
     <div class="hero-ctas">
       <a href="#choose" class="btn btn-primary">Choose your Buba</a>
-      <a href="k8.html" class="btn btn-ghost">Meet K8 — live now</a>
+      <a href="#k8" class="btn btn-ghost hero-k8">Meet K8 — live now</a>
     </div>
   </div>
 
