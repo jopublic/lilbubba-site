@@ -157,7 +157,7 @@
     font-family: 'Fredoka', sans-serif; font-weight: 700;
     font-size: clamp(40px, 7vw, 72px); letter-spacing: -1px; margin-top: 8px;
   }
-  h1 .grad {
+  h1 .grad, .k8-panel h2 .grad {
     background: linear-gradient(100deg, #c4b5fd, var(--purple) 45%, var(--cyan));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
@@ -197,29 +197,48 @@
 
   /* ===== K8 FEATURE (on sale now; sits just under Buba's hero, Buba keeps the front door) ===== */
   .k8-feature { padding-top: 40px; }
+  /* Finish (21 Nov 2026): one even pane of tinted glass, so the drifting orbs behind no longer show
+     through as patchy pools of light; the glow and gradient are the hero's own purple and cyan. */
   .k8-panel {
-    background: var(--card); border: 1px solid var(--purple-soft); border-radius: 26px;
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(120% 55% at 50% 0%, rgba(139,92,246,0.26) 0%, rgba(139,92,246,0.07) 45%, transparent 72%),
+      radial-gradient(70% 45% at 100% 100%, rgba(0,212,255,0.12) 0%, transparent 70%),
+      rgba(14, 11, 28, 0.84);
+    border: 1px solid var(--purple-soft); border-radius: 26px;
     padding: 46px 40px 42px; text-align: center;
-    box-shadow: 0 18px 60px rgba(139,92,246,0.14);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 80px rgba(139,92,246,0.22), 0 0 140px rgba(0,212,255,0.07);
+    -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
   }
-  .k8-mark { width: 64px; height: 64px; object-fit: contain; margin-bottom: 14px; filter: drop-shadow(0 0 14px rgba(139,92,246,0.45)); }
-  .k8-panel .section-sub { max-width: 640px; }
+  /* the logo art sits on black: screen-blend drops the black square into the glass */
+  .k8-mark { width: 104px; height: 104px; object-fit: contain; margin-bottom: 6px; mix-blend-mode: screen; }
+  .k8-panel .section-sub { max-width: 640px; font-size: 17px; }
   .k8-panel h2, .k8-price { text-wrap: balance; }
   /* Demo film slot: stays hidden until Jo's film goes in */
   .k8-film { margin: 34px auto 0; max-width: 760px; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); }
   .k8-film[hidden] { display: none; }
   .k8-film video, .k8-film iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
-  .k8-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; text-align: left; }
+  /* Tool cards: the real product badge is each card's mark (same size, same place, equal heights);
+     the little pictograph stays as an accent on the one-line description. Rows by default (two-up column, phones). */
+  .k8-tools { display: grid; grid-template-columns: 1fr; grid-auto-rows: 1fr; gap: 14px; margin-top: 34px; text-align: left; }
   .k8-tool {
-    background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 20px;
-    padding: 26px 24px 24px; display: flex; flex-direction: column;
-    transition: transform 0.25s, border-color 0.25s;
+    display: grid; grid-template-columns: 88px minmax(0, 1fr); grid-template-rows: auto 1fr auto; column-gap: 22px;
+    background: rgba(7, 6, 13, 0.5); border: 1px solid var(--card-border); border-radius: 20px;
+    padding: 20px 24px 20px 20px;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
   }
-  .k8-tool:hover { transform: translateY(-6px); border-color: var(--purple-soft); }
-  .k8-tool .emoji { font-size: 30px; }
-  .k8-tool h3 { font-family: 'Fredoka', sans-serif; font-size: 22px; font-weight: 600; margin-top: 10px; }
-  .k8-tool p { color: var(--text-secondary); font-size: 15px; line-height: 1.55; margin-top: 8px; font-weight: 300; flex: 1; }
-  .k8-tool a { margin-top: 16px; color: var(--cyan); text-decoration: none; font-size: 14.5px; font-weight: 600; }
+  .k8-tool:hover { transform: translateY(-4px); border-color: var(--purple-soft); box-shadow: 0 14px 40px rgba(139,92,246,0.2); }
+  .k8-tool > * { grid-column: 2; }
+  .k8-tool .k8-badge {
+    grid-column: 1; grid-row: 1 / 4; align-self: center;
+    width: 88px; height: 88px; object-fit: cover; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 22px rgba(139,92,246,0.28);
+  }
+  .k8-tool h3 { font-family: 'Fredoka', sans-serif; font-size: 22px; font-weight: 600; }
+  .k8-tool p { color: var(--text-secondary); font-size: 15px; line-height: 1.55; margin-top: 4px; font-weight: 300; }
+  .k8-tool .k8-pict { font-size: 15px; margin-right: 7px; }
+  .k8-tool a { justify-self: start; margin-top: 10px; color: var(--cyan); text-decoration: none; font-size: 14.5px; font-weight: 600; }
   .k8-tool a:hover { color: #fff; }
   .k8-facts { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 34px; }
   .k8-facts li {
@@ -234,6 +253,14 @@
   }
   .k8-quiet:hover { color: #fff; border-bottom-color: #fff; }
   .k8-note { color: rgba(185,179,204,0.75); font-size: 13px; margin-top: 18px; font-weight: 300; }
+  /* Full-width K8 box: the three tools sit side by side, badge on top */
+  @media (min-width: 861px) {
+    .k8-tools { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .k8-tool { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; padding: 24px 22px 22px; }
+    .k8-tool > * { grid-column: 1; }
+    .k8-tool .k8-badge { grid-row: auto; align-self: start; width: 80px; height: 80px; margin-bottom: 14px; }
+  }
+
 
   /* ===== CHOOSER ===== */
   .flavours { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 54px; }
@@ -351,6 +378,15 @@
     .family-grid { grid-template-columns: 1fr; }
     .k8-panel { padding: 34px 20px 32px; }
     .k8-tools { grid-template-columns: 1fr; }
+    /* phones: badge and name side by side, the description full width under them */
+    .k8-tool { grid-template-columns: 60px minmax(0, 1fr); grid-template-rows: auto 1fr auto; column-gap: 16px; padding: 18px 18px 16px; }
+    .k8-tool .k8-badge { grid-row: 1; width: 60px; height: 60px; border-radius: 15px; }
+    .k8-tool h3 { grid-row: 1; align-self: center; }
+    .k8-tool p, .k8-tool a { grid-column: 1 / 3; }
+    .k8-tool p { margin-top: 12px; }
+    .k8-mark { width: 88px; height: 88px; }
+    .k8-panel h2 .grad { display: block; }
+    .k8-facts li { text-wrap: balance; }
     .k8-ctas .btn { width: 100%; max-width: 360px; padding-left: 18px; padding-right: 18px; }
     .ethos-grid { grid-template-columns: 1fr; gap: 34px; }
     section { padding: 64px 20px; }
@@ -418,7 +454,7 @@
     <div class="k8-panel">
       <img src="img/k8_hero_logo.png" alt="" class="k8-mark" width="64" height="64">
       <div class="section-kicker">Live now &middot; K8 for Windows</div>
-      <h2 id="k8-title">Drive full? Same photos three times over?</h2>
+      <h2 id="k8-title">Drive full? <span class="grad">Same photos three times over?</span></h2>
       <p class="section-sub">
         Free up space on your Windows PC with K8. It finds your duplicates and shows you every one.
         You decide what goes and what stays.
@@ -432,21 +468,21 @@
 
       <div class="k8-tools">
         <div class="k8-tool">
-          <div class="emoji" aria-hidden="true">📸</div>
+          <img src="img/k8_bionic_192.png" alt="K8 Bionic badge" class="k8-badge" width="88" height="88" decoding="async">
           <h3>K8 Bionic</h3>
-          <p>Duplicate files, plus that one photo you've somehow saved in five different sizes. Found, grouped, and you pick the keeper.</p>
+          <p><span class="k8-pict" aria-hidden="true">📸</span>Duplicate files, plus that one photo you've somehow saved in five different sizes. Found, grouped, and you pick the keeper.</p>
           <a href="k8-bionic.html">See K8 Bionic &rarr;</a>
         </div>
         <div class="k8-tool">
-          <div class="emoji" aria-hidden="true">🧹</div>
+          <img src="img/k8_cruft_192.png" alt="K8 Cruft badge" class="k8-badge" width="88" height="88" decoding="async">
           <h3>K8 Cruft</h3>
-          <p>For coders: the build junk and leftovers piling up in your projects, each scored by how safe it is to bin. K8 Bionic comes free with it.</p>
+          <p><span class="k8-pict" aria-hidden="true">🧹</span>For coders: the build junk and leftovers piling up in your projects, each scored by how safe it is to bin. K8 Bionic comes free with it.</p>
           <a href="k8-cruft.html">See K8 Cruft &rarr;</a>
         </div>
         <div class="k8-tool">
-          <div class="emoji" aria-hidden="true">🎬</div>
+          <img src="img/k8_media_192.png" alt="K8 Media badge" class="k8-badge" width="88" height="88" decoding="async">
           <h3>K8 Media</h3>
-          <p>Same video or song saved twice in different formats? Spotted by comparing the pictures and the sound, even after a re-encode.</p>
+          <p><span class="k8-pict" aria-hidden="true">🎬</span>Same video or song saved twice in different formats? Spotted by comparing the pictures and the sound, even after a re-encode.</p>
           <a href="k8-media.html">See K8 Media &rarr;</a>
         </div>
       </div>
