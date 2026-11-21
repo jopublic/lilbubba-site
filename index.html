@@ -355,7 +355,13 @@
     .ethos-grid { grid-template-columns: 1fr; gap: 34px; }
     section { padding: 64px 20px; }
   }
-</style>
+
+    /* K8 promise callout (Jo, 21 Nov 2026): the 30-day put-back line in a spot of its own */
+    .k8-promise { display: inline-block; margin: 14px auto 6px; padding: 10px 18px; border: 1px solid rgba(139,92,246,0.55);
+      border-radius: 999px; background: rgba(139,92,246,0.14); font-weight: 600; font-size: 0.98rem; line-height: 1.35; }
+    .k8-promise span { color: #a78bfa; margin-right: 6px; }
+    @media (max-width: 600px) { .k8-promise { border-radius: 16px; font-size: 0.92rem; } }
+  </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"71710d31ec78473da29f26c0eb2aaec0"}'></script>
 </head>
 <body>
@@ -414,9 +420,10 @@
       <div class="section-kicker">Live now &middot; K8 for Windows</div>
       <h2 id="k8-title">Drive full? Same photos three times over?</h2>
       <p class="section-sub">
-        K8 finds the copies and clutter clogging up your Windows PC, shows you the lot,
-        and you decide what goes. Having a nose costs nothing.
+        Free up space on your Windows PC with K8. It finds your duplicates and shows you every one.
+        You decide what goes and what stays.
       </p>
+      <p class="k8-promise"><span aria-hidden="true">&#10004;</span> Changed your mind? Anything you remove can be put back for 30 days.</p>
 
       <!-- K8 DEMO FILM SLOT (Jo is making a short demo film).
            When it's ready: put the <video> (or the player embed) inside this div and delete the word hidden.
