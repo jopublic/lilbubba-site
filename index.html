@@ -197,21 +197,20 @@
 
   /* ===== K8 FEATURE (on sale now; sits just under Buba's hero, Buba keeps the front door) ===== */
   .k8-feature { padding-top: 40px; }
-  /* Finish (21 Nov 2026): one even pane of tinted glass, so the drifting orbs behind no longer show
+  /* Finish (21 Nov 2026): a solid panel with its own even glow, so the drifting orbs behind no longer show
      through as patchy pools of light; the glow and gradient are the hero's own purple and cyan. */
   .k8-panel {
     position: relative; overflow: hidden;
     background:
       radial-gradient(120% 55% at 50% 0%, rgba(139,92,246,0.26) 0%, rgba(139,92,246,0.07) 45%, transparent 72%),
       radial-gradient(70% 45% at 100% 100%, rgba(0,212,255,0.12) 0%, transparent 70%),
-      rgba(14, 11, 28, 0.84);
+      #100c20;
     border: 1px solid var(--purple-soft); border-radius: 26px;
     padding: 46px 40px 42px; text-align: center;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 80px rgba(139,92,246,0.22), 0 0 140px rgba(0,212,255,0.07);
-    -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
   }
-  /* the logo art sits on black: screen-blend drops the black square into the glass */
-  .k8-mark { width: 104px; height: 104px; object-fit: contain; margin-bottom: 6px; mix-blend-mode: screen; }
+  /* the logo art sits on a black square: lighten-blend shows the panel through the black, so no box shows */
+  .k8-mark { width: 104px; height: 104px; object-fit: contain; margin-bottom: 6px; mix-blend-mode: lighten; }
   .k8-panel .section-sub { max-width: 640px; font-size: 17px; }
   .k8-panel h2, .k8-price { text-wrap: balance; }
   /* Demo film slot: stays hidden until Jo's film goes in */
