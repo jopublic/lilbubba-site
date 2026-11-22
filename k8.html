@@ -1516,9 +1516,9 @@ function closeMenu() {
       <div class="stat-label">of duplicates on my own drive &mdash; the mess that started K8</div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon">&#9889;</div>
-      <div class="stat-number cu" data-target="99.88" data-decimals="2" data-suffix="%">99.88<span class="stat-unit">%</span></div>
-      <div class="stat-label">fewer checks than the brute-force way, on a real 3,318-photo library</div>
+      <div class="stat-icon">&#128187;</div>
+      <div class="stat-number cu" data-target="3" data-decimals="0" data-suffix="">3</div>
+      <div class="stat-label">of your own PCs covered by one licence</div>
     </div>
     <div class="stat-card">
       <div class="stat-icon">&#128274;</div>
@@ -1588,8 +1588,8 @@ function closeMenu() {
             <div class="feature-item" onclick="openLightbox('img/screenshots/k8_bionic_scan_results.png')">
               <div class="feature-icon">&#9889;</div>
               <div>
-                <h4>Stupidly Fast</h4>
-                <p>Patent-pending photo check: on a real 3,318-photo library it needed 99.88% fewer comparisons than checking every pair. In our September test, a 2,941-file music folder took 1 minute 16 seconds on a laptop SSD.</p>
+                <h4>Exact Duplicates</h4>
+                <p>The main scan finds exact duplicates by what's inside them: the same file, byte for byte, whatever it's called.</p>
                 <div class="feature-thumb-wrap"><img src="img/screenshots/k8_bionic_scan_results.png" class="feature-thumb" alt="K8 Bionic scan results"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
@@ -1835,11 +1835,11 @@ function closeMenu() {
 
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">
-          How does K8 find duplicates so fast?
+          How does K8 find duplicates?
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Checking every photo against every other gets slow on big libraries. K8 Bionic's patent-pending approach rules most photos out before any comparing starts. On a real library of 3,318 photos it needed 6,840 checks instead of 5,496,270, which is 99.88% fewer. For exact duplicates, K8 only reads the files that could possibly match. In our September test it went through a music folder of 2,941 files and found 18.02 GB of duplicates in 1 minute 16 seconds, on a laptop SSD.
+          By what's inside the file, not its name. Files that share a size with another file are compared byte for byte, so exact copies turn up whatever they're called. Similar photos are a separate look, using K8 Bionic's patent-pending photo check.<!-- SIMILAR-PHOTOS: recheck against the final build -->
         </div></div>
       </div>
 
