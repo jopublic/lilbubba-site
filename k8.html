@@ -36,7 +36,7 @@
       "@type": "Offer",
       "price": "24.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/OutOfStock"
+      "availability": "https://schema.org/InStock"
     },
     "description": "Duplicate file and near-identical photo finder for Windows. 30-day quarantine protects your files. 100% local, no cloud.",
     "publisher": {
@@ -55,7 +55,7 @@
       "@type": "Offer",
       "price": "24.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/OutOfStock"
+      "availability": "https://schema.org/InStock"
     },
     "description": "Developer junk cleaner for Windows. Finds node_modules, build artifacts, cache files, and dev cruft eating your disk space.",
     "publisher": {
@@ -95,9 +95,9 @@
   var K8_PRICE_TO_PRODUCT = {
     'pri_01kmkfbv93p3079jbf7pt21c76': 'B', // K8 Bionic        £24.95
     'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': 'C', // K8 Cruft         £24.95
-    'pri_01kmkg4ex5x3saje0erbnmca3t': 'M', // K8 Media         £39.95
+    'pri_01kmkg4ex5x3saje0erbnmca3t': 'M', // K8 Media         £39.95: temporarily unavailable, opens no checkout
     'pri_01kmkgqd61b354cvpctb77pvmg': 'D', // Media + Bionic (duo): not on sale since 21 Nov 2026
-    'pri_01kmpep1pb6r1enr8tvr1r4m02': 'A'  // Everything (all three) £49.95
+    'pri_01kmpep1pb6r1enr8tvr1r4m02': 'A'  // Everything (all three) £49.95: not offered while K8 Media is unavailable
   };
 
   // Paddle does NOT append the transaction id to successUrl — `_ptxn` is the
@@ -142,9 +142,16 @@
     }
   });
 
+  // On sale from K8 1.9.1: K8 Bionic and K8 Cruft only. K8 Media is temporarily
+  // unavailable, so Media, the Media + Bionic duo and Everything (which contains
+  // Media) open no checkout, whatever calls this.
+  var K8_ON_SALE = {
+    'pri_01kmkfbv93p3079jbf7pt21c76': true, // K8 Bionic
+    'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': true  // K8 Cruft (its key also unlocks K8 Bionic)
+  };
+
   function buyProduct(priceId) {
-    // K8 is off sale (21 Nov 2026) until the next version is out: no checkout opens.
-    return;
+    if (K8_ON_SALE[priceId] !== true) { return; }
     var product = K8_PRICE_TO_PRODUCT[priceId];
     var successUrl = 'https://lilbuba.ai/download.html';
     if (product) {
@@ -1539,7 +1546,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Bionic</span>
             <span class="deduplik8">DedupliK8 your life</span>
-            <span class="price">Not on sale at the moment</span>
+            <span class="price">&pound;24.95 &middot; Lifetime</span>
           </div>
         </div>
         <div class="product-btn" onclick="showProduct('cruft', this)">
@@ -1547,7 +1554,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Cruft</span>
             <span class="deduplik8">DedupliK8 your data</span>
-            <span class="price">Not on sale at the moment</span>
+            <span class="price">&pound;24.95 &middot; Lifetime</span>
           </div>
         </div>
         <div class="product-btn" onclick="showProduct('media', this)">
@@ -1555,7 +1562,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Media</span>
             <span class="deduplik8">DedupliK8 your media</span>
-            <span class="price">Not on sale at the moment</span>
+            <span class="price">Temporarily unavailable</span>
           </div>
         </div>
       </div>
@@ -1626,7 +1633,13 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Bionic is not on sale at the moment. An upgraded version is on its way.</p>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkfbv93p3079jbf7pt21c76')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
+            <div class="price-tag">
+              <span class="currency">&pound;</span>24.95
+              <span class="lifetime">One-time &middot; Lifetime licence</span>
+              <span class="guarantee-badge">30-day money-back guarantee</span>
+              <span class="windows-only">Windows 10/11, 64-bit only</span>
+            </div>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
@@ -1694,7 +1707,13 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Cruft is not on sale at the moment. An upgraded version is on its way.</p>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkfq9ge9q3mc8jbxfvvdvm4')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
+            <div class="price-tag">
+              <span class="currency">&pound;</span>24.95
+              <span class="lifetime">One-time &middot; Lifetime licence</span>
+              <span class="guarantee-badge">30-day money-back guarantee</span>
+              <span class="windows-only">Windows 10/11, 64-bit only</span>
+            </div>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
@@ -1760,19 +1779,14 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Media is not on sale at the moment. An upgraded version is on its way.</p>
+            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Media is temporarily unavailable.</p>
             <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
 
       </div>
-      <!-- BUNDLE & SAVE -->
-      <div class="loyalty-card-wrap">
-        <div class="loyalty-card">
-          <h3>Everything: all three tools</h3>
-          <p>The all-three bundle is not on sale at the moment. An upgraded version of K8 is on its way.</p>
-        </div>
-      </div>
+      <!-- The all-three card is not shown while K8 Media is temporarily unavailable (it contains Media).
+           It is in git: see this block in the parent of commit acc7424. -->
 
     </div>
   </section>
@@ -1920,7 +1934,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Buy K8 Cruft and K8 Bionic comes free with it: your Cruft key cleans in both. It doesn't work the other way round, so a K8 Bionic key cleans in Bionic only, and K8 Media is separate. Want all three? Everything is &pound;49.95.
+          Buy K8 Cruft and K8 Bionic comes free with it: your Cruft key cleans in both. It doesn't work the other way round, so a K8 Bionic key cleans in Bionic only. K8 Media is separate, and temporarily unavailable.
         </div></div>
       </div>
 
