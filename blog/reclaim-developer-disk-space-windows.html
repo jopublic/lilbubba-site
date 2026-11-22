@@ -117,7 +117,7 @@
       <li><strong>.git bloat</strong> &mdash; old branches and large-file history in repos you abandoned long ago.</li>
     </ul>
 
-    <p>The common thread: <strong>all of it is regenerable.</strong> Delete a node_modules and <code>npm install</code> brings it back. Delete a <code>build/</code> and your next compile rebuilds it. It's cache, not work.</p>
+    <p>The common thread: <strong>nearly all of it is regenerable.</strong> Delete a node_modules and <code>npm install</code> brings it back. Delete a <code>build/</code> and your next compile rebuilds it. It's cache, not work.</p>
 
     <h2>Why people don't clean it up (and the one real danger)</h2>
 
@@ -141,17 +141,17 @@
 
     <p>We made <a href="../k8.html">K8 Cruft</a> for the developer who'd rather not script it &mdash; and, honestly, who's been burned once by a too-clever cleanup.</p>
 
-    <p><strong>It scores each pile by how safe it is to remove.</strong> So you can see at a glance what's genuinely disposable versus what deserves a second look, and it flags the regenerable items plainly: <em>this comes back with one command &mdash; delete with confidence.</em></p>
+    <p><strong>It sorts each find into a plain tier, with the reason in words.</strong> So you can see at a glance what comes back versus what deserves a second look: <em>&ldquo;Comes back with a command&rdquo;</em> on one, <em>&ldquo;Check first&rdquo;</em> on another.</p>
 
     <p><strong>It shows you where and when.</strong> Every find comes with its full path and when anything inside it last changed, so you can see which project it belongs to before you clear it. It doesn't guess what you're working on this week &mdash; you know that, so it leaves the call to you.</p>
 
     <p><strong>Nothing is deleted until you press Purge.</strong> This is the bit that matters most. Anything you clear goes to a <strong>quarantine you can restore from in one click.</strong> Change your mind, or realise you needed that <code>.venv</code> after all? It's not gone &mdash; it's just parked.</p>
 
-    <p>It's Windows-native, a one-time <strong>&pound;24.95</strong> (no subscription, no account), and it runs <strong>100% locally</strong> &mdash; nothing about your machine or your projects ever leaves it.</p>
+    <p>It's Windows-native, a one-time <strong>&pound;24.95</strong> (no subscription, no account), and it runs <strong>100% locally</strong> &mdash; nothing about your machine or your projects leaves it.</p>
 
     <h2>The honest bottom line</h2>
 
-    <p>If you're happy in the terminal, npkill and kondo are free and great &mdash; use them. If you'd rather a safe Windows app that shows you what's safe and where it lives, and lets you undo anything, that's what K8 Cruft is for.</p>
+    <p>If you're happy in the terminal, npkill and kondo are free and great &mdash; use them. If you'd rather a Windows app that shows you what comes back and where it lives, and lets you undo anything for 30 days, that's what K8 Cruft is for.</p>
 
     <p>Either way, the message is the same: <strong>stop buying bigger drives to store cache.</strong> Most of what's filling your SSD will regenerate itself the moment you need it.</p>
 
@@ -159,7 +159,7 @@
 
     <div class="cta-box">
       <h3>Clear your dev junk safely &mdash; nothing deleted without your say-so.</h3>
-      <p>K8 Cruft finds the node_modules, build caches, Python venvs and forgotten build output eating your disk. It scores what's safe, shows every find's path and date, and quarantines everything so you can restore in one click. 100% local.</p>
+      <p>K8 Cruft finds the node_modules, build caches, Python venvs and forgotten build output eating your disk. It says what comes back and why, shows every find's path and date, and quarantines everything so you can restore in one click. 100% local.</p>
       <a href="../k8.html" class="btn">See how K8 Cruft works &rarr;</a>
     </div>
 
