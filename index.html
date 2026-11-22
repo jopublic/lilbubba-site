@@ -195,7 +195,7 @@
     margin: 14px auto 0; line-height: 1.6; font-weight: 300;
   }
 
-  /* ===== K8 FEATURE (on sale now; sits just under Buba's hero, Buba keeps the front door) ===== */
+  /* ===== K8 FEATURE (on sale now; first on the page since 22 Nov 2026, Buba's hero follows) ===== */
   .k8-feature { padding-top: 40px; }
   /* Finish (21 Nov 2026): a solid panel with its own even glow, so the drifting orbs behind no longer show
      through as patchy pools of light; the glow and gradient are the hero's own purple and cyan. */
@@ -237,6 +237,11 @@
   .k8-tool h3 { font-family: 'Fredoka', sans-serif; font-size: 22px; font-weight: 600; }
   .k8-tool p { color: var(--text-secondary); font-size: 15px; line-height: 1.55; margin-top: 4px; font-weight: 300; }
   .k8-tool .k8-pict { font-size: 15px; margin-right: 7px; }
+  .k8-tool .k8-unavail {
+    display: inline-block; margin-left: 6px; padding: 3px 10px; border-radius: 999px; vertical-align: middle;
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+    color: var(--text-secondary); background: rgba(255,255,255,0.06); border: 1px solid var(--card-border);
+  }
   .k8-tool a { justify-self: start; margin-top: 10px; color: var(--cyan); text-decoration: none; font-size: 14.5px; font-weight: 600; }
   .k8-tool a:hover { color: #fff; }
   .k8-facts { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 34px; }
@@ -260,22 +265,23 @@
     .k8-tool .k8-badge { grid-row: auto; align-self: start; width: 80px; height: 80px; margin-bottom: 14px; }
   }
 
-  /* ===== FRONT TOP: two heroes side by side (Jo, 21 Nov 2026) =====
-     Wide screens (1200px and up): Buba's hero with "Choose your Buba" under it on the left, the K8 box on the right.
-     Narrower: it stacks in page order, Buba, then the K8 box, then Choose your Buba. */
+  /* ===== FRONT TOP: two heroes side by side (Jo, 21 Nov 2026; K8 first since 22 Nov 2026) =====
+     Wide screens (1200px and up): the K8 box on the left, Buba's hero with "Choose your Buba" under it on the right.
+     Narrower: it stacks in page order, the K8 box, then Buba, then Choose your Buba. */
   .hero-soon {
     display: inline-block; margin-top: 16px; padding: 6px 15px; border-radius: 999px;
     font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
     background: rgba(0, 212, 255, 0.12); color: var(--cyan); border: 1px solid rgba(0,212,255,0.35);
   }
-  .front-top > .hero { min-height: 0; padding-bottom: 30px; }
+  .front-top > .hero { min-height: 0; padding-top: 10px; padding-bottom: 30px; }
+  .front-top > .k8-feature { padding-top: 104px; padding-bottom: 54px; }   /* first on the page: clears the fixed header */
   .front-top > .hero, .front-top > section { scroll-margin-top: 84px; }   /* nav jumps land clear of the fixed header */
   @media (min-width: 1200px) {
     .front-top {
       display: grid; align-items: start;
-      grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
       grid-template-rows: auto 1fr;
-      grid-template-areas: "buba k8" "choose k8";
+      grid-template-areas: "k8 buba" "k8 choose";
       column-gap: clamp(32px, 3.2vw, 72px);
       max-width: 1640px; margin: 0 auto; padding: 108px clamp(24px, 2.6vw, 40px) 20px;
     }
@@ -287,7 +293,6 @@
     .front-top .k8-panel { flex: 1; display: flex; flex-direction: column; justify-content: center; }
     .front-top .k8-panel > .k8-mark { align-self: center; }
     .front-top > #choose { grid-area: choose; max-width: none; margin: 0; padding: 60px 0 0; }
-    .front-top .hero-k8 { display: none; }   /* the K8 box is right beside it, so Buba's hero stays all Buba */
     .front-top .flavours { gap: 18px; margin-top: 36px; }
     .front-top .flavour { padding: 28px 16px 24px; }
     .front-top .flavour h3 { font-size: 24px; margin-top: 12px; }
@@ -418,6 +423,7 @@
     .k8-tool h3 { grid-row: 1; align-self: center; }
     .k8-tool p, .k8-tool a { grid-column: 1 / 3; }
     .k8-tool p { margin-top: 12px; }
+    .k8-tool .k8-unavail { display: table; margin: 5px 0 0; padding: 3px 9px; font-size: 10px; letter-spacing: 0.4px; }
     .k8-mark { width: 88px; height: 88px; }
     .k8-panel h2 .grad { display: block; }
     .k8-facts li { text-wrap: balance; }
@@ -452,43 +458,22 @@
     <span></span><span></span><span></span>
   </div>
   <nav class="header-nav" id="mobileNav">
+    <a href="k8.html" class="nav-k8">K8: free up your drive</a>
     <a href="#meet-buba" onclick="closeMenu()">Meet Buba</a>
     <a href="#choose" onclick="closeMenu()">Choose Your Buba</a>
     <a href="#family" onclick="closeMenu()">The Family</a>
-    <a href="k8.html" class="nav-k8">K8: free up your drive</a>
   </nav>
 </header>
 
 <main>
 
-  <!-- FRONT TOP (Jo, 21 Nov 2026): two heroes side by side on wide screens. Left: Buba's hero with Choose your Buba
-       under it. Right: the K8 box. Narrower screens stack them in this order: Buba, K8, Choose your Buba.
+  <!-- FRONT TOP (Jo, 21 Nov 2026; K8 first since 22 Nov 2026): two heroes side by side on wide screens.
+       Left: the K8 box. Right: Buba's hero with Choose your Buba under it. Narrower screens and phones stack them in
+       page order: K8, Buba, Choose your Buba.
        Everything inside keeps its ids and classes: the hero script finds them by id and class, not by position. -->
   <div class="front-top">
 
-  <!-- HERO -->
-  <div class="hero" id="meet-buba">
-    <div class="hero-buba f-cool">
-      <video id="heroVid" muted playsinline poster="img/buba_cool.png">
-        <source id="heroVidSrc" src="img/buba_entrance.webm" type="video/webm">
-      </video>
-      <img id="heroStill" class="hero-still" src="img/buba_cool.png" alt="Lil Buba" style="display:none;">
-      <button class="hero-sound" id="heroSound" title="Hear Buba say hello">🔊 Hear Buba</button>
-    </div>
-    <span class="hero-soon">Coming soon</span>
-    <h1>Meet <span class="grad">Lil Buba</span></h1>
-    <p class="hero-sub">
-      The kind little AI helper built on <strong>love, truth and laughter</strong>.
-      No dark patterns. No pretending to be human. No scary monster hiding in the machine —
-      just a friendly face who's honestly, properly on your side.
-    </p>
-    <div class="hero-ctas">
-      <a href="#choose" class="btn btn-primary">Choose your Buba</a>
-      <a href="#k8" class="btn btn-ghost hero-k8">Meet K8 — live now</a>
-    </div>
-  </div>
-
-  <!-- K8 FEATURE: K8 is on sale now, so it sits right under Buba's hero (Buba keeps the front door). -->
+  <!-- K8 FEATURE: K8 is the product that's finished and on sale, so it comes first (Jo, 22 Nov 2026). Buba, coming soon, follows. -->
   <!-- Words = VERSION A (Kate, 20 Nov 2026); version B is in K8\09_Reports_Audits\2026-11-20_kate_SITE_front-page-K8-feature_for-QC.md. Jo voices the final words. -->
   <section id="k8" class="k8-feature" aria-labelledby="k8-title">
     <div class="k8-panel">
@@ -521,7 +506,7 @@
         </div>
         <div class="k8-tool">
           <img src="img/k8_media_192.png" alt="K8 Media badge" class="k8-badge" width="88" height="88" decoding="async">
-          <h3>K8 Media</h3>
+          <h3>K8 Media <span class="k8-unavail">Temporarily unavailable</span></h3>
           <p><span class="k8-pict" aria-hidden="true">🎬</span>Same video or song saved twice in different formats? Spotted by comparing the pictures and the sound, even after a re-encode.</p>
           <a href="k8-media.html">See K8 Media &rarr;</a>
         </div>
@@ -540,6 +525,27 @@
       <p class="k8-note">For Windows 10 and 11 (64-bit).</p>
     </div>
   </section>
+
+  <!-- HERO -->
+  <div class="hero" id="meet-buba">
+    <div class="hero-buba f-cool">
+      <video id="heroVid" muted playsinline poster="img/buba_cool.png">
+        <source id="heroVidSrc" src="img/buba_entrance.webm" type="video/webm">
+      </video>
+      <img id="heroStill" class="hero-still" src="img/buba_cool.png" alt="Lil Buba" style="display:none;">
+      <button class="hero-sound" id="heroSound" title="Hear Buba say hello">🔊 Hear Buba</button>
+    </div>
+    <span class="hero-soon">Coming soon</span>
+    <h1>Meet <span class="grad">Lil Buba</span></h1>
+    <p class="hero-sub">
+      The kind little AI helper built on <strong>love, truth and laughter</strong>.
+      No dark patterns. No pretending to be human. No scary monster hiding in the machine —
+      just a friendly face who's honestly, properly on your side.
+    </p>
+    <div class="hero-ctas">
+      <a href="#choose" class="btn btn-primary">Choose your Buba</a>
+    </div>
+  </div>
 
   <!-- CHOOSER -->
   <section id="choose">
