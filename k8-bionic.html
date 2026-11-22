@@ -24,6 +24,7 @@
 <meta name="twitter:image" content="https://lilbuba.ai/img/og_card.png">
 
 <!-- Structured Data -->
+<!-- SIMILAR-PHOTOS: recheck against the final build (in the structured data below: every "near-identical photo" description and the "Will it find similar photos" answer; comments cannot go inside the data itself) -->
 <script type="application/ld+json">
 [
   {
@@ -72,7 +73,7 @@
         "name": "Will it find similar photos, not just exact copies?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Exact copies are the easy part. K8 Bionic also looks for near-identical photos: re-saved, resized and lightly edited copies of the same shot. Photos with a date taken are checked against others taken within a minute of them, and photos with no date are checked against every photo. It reads iPhone (HEIC) photos where Windows can open them, which needs Microsoft's HEIF and HEVC extensions (K8 tells you if it couldn't open any), and RAW files through the preview your camera saves inside them. It doesn't match cropped or rotated copies. It groups the near-duplicates together so you can pick the keeper and let the rest go. You review every group, and nothing moves until you tick it."
+          "text": "Yes. The main scan finds exact copies: the same file, byte for byte. Similar Photos then shows two kinds of batch: “same picture” (a copy at another size or quality) and “similar shots” (a burst taken moments apart). K8 ticks nothing by itself. You choose how to judge: pick yourself, or let K8 pick the sharpest, the one most like the others, or the biggest file."
         }
       },
       {
@@ -1580,7 +1581,7 @@ function closeMenu() {
     <div class="stat-card">
       <div class="stat-icon">&#128274;</div>
       <div class="stat-number cu" data-target="100" data-decimals="0" data-suffix="%">100<span class="stat-unit">%</span></div>
-      <div class="stat-label">local &amp; private &mdash; nothing ever leaves your PC</div>
+      <div class="stat-label">local &amp; private &mdash; nothing leaves your PC</div>
     </div>
     <div class="stat-card">
       <div class="stat-icon">&#128737;</div>
@@ -1620,7 +1621,7 @@ function closeMenu() {
           </div>
           <p class="description">
             The duplicate file and photo finder that actually works. It finds exact duplicates by what's inside them, and near-identical photos with a patent-pending method. Reclaim gigabytes of wasted space. Your files never leave your machine.
-          </p>
+          </p><!-- SIMILAR-PHOTOS: recheck against the final build -->
           <div class="features-grid">
             <div class="feature-item" onclick="openLightbox('img/screenshots/bionic_scan_results.png')">
               <div class="feature-icon">&#9889;</div>
@@ -1634,7 +1635,7 @@ function closeMenu() {
               <div class="feature-icon">&#128247;</div>
               <div>
                 <h4>Similar Photos</h4>
-                <p>Re-saved, resized and lightly edited copies of the same shot, found and grouped. Undated photos, RAW files and iPhone photos too (where Windows can open them). You pick the keeper.</p>
+                <p>K8 shows two kinds of batch: &ldquo;same picture&rdquo; (a copy at another size or quality) and &ldquo;similar shots&rdquo; (a burst taken moments apart). It ticks nothing by itself. You choose how to judge: pick yourself, or let K8 pick the sharpest, the one most like the others, or the biggest file.</p><!-- SIMILAR-PHOTOS: recheck against the final build -->
                 <div class="feature-thumb-wrap"><img src="img/screenshots/bionic_similar_photos.png" class="feature-thumb" alt="K8 Similar Photos detection"><span class="feature-thumb-zoom">&#128269;</span></div>
               </div>
             </div>
@@ -1714,7 +1715,7 @@ function closeMenu() {
         <div class="trust-point"><span class="dot"></span> No account needed</div>
         <div class="trust-point"><span class="dot"></span> No telemetry</div>
         <div class="trust-point"><span class="dot"></span> No subscription</div>
-        <div class="trust-point"><span class="dot"></span> Patent-pending technology</div>
+        <div class="trust-point"><span class="dot"></span> Patent-pending photo check</div>
       </div>
     </div>
   </section>
@@ -1731,7 +1732,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          K8 Bionic is the duplicate file and photo finder for ordinary life: the Downloads folder nobody opens, the eleven nearly-identical shots of the same sunset, the backup of the backup of the backup. It finds exact duplicates and near-identical photos, shows you what it found, and never removes anything on its own. Anything you do remove goes to a 30-day quarantine you can restore from with one click. It runs entirely on your own machine. £24.95, one-time, lifetime licence.
+          K8 Bionic is the duplicate file and photo finder for ordinary life: the Downloads folder nobody opens, the eleven nearly-identical shots of the same sunset, the backup of the backup of the backup. It finds exact duplicates and near-identical photos, shows you what it found, and never removes anything on its own. Anything you do remove goes to a 30-day quarantine you can restore from with one click. It runs entirely on your own machine. £24.95, one-time, lifetime licence.<!-- SIMILAR-PHOTOS: recheck against the final build -->
         </div></div>
       </div>
 
@@ -1751,7 +1752,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Yes. Exact copies are the easy part. K8 Bionic also looks for near-identical photos: re-saved, resized and lightly edited copies of the same shot. Photos with a date taken are checked against others taken within a minute of them, and photos with no date are checked against every photo. It reads iPhone (HEIC) photos where Windows can open them, which needs Microsoft's HEIF and HEVC extensions (K8 tells you if it couldn't open any), and RAW files through the preview your camera saves inside them. It doesn't match cropped or rotated copies. It groups the near-duplicates together so you can pick the keeper and let the rest go. You review every group, and nothing moves until you tick it.
+          Yes. The main scan finds exact copies: the same file, byte for byte. Similar Photos then shows two kinds of batch: “same picture” (a copy at another size or quality) and “similar shots” (a burst taken moments apart). K8 ticks nothing by itself. You choose how to judge: pick yourself, or let K8 pick the sharpest, the one most like the others, or the biggest file.<!-- SIMILAR-PHOTOS: recheck against the final build -->
         </div></div>
       </div>
 
@@ -1901,7 +1902,7 @@ window.addEventListener('hashchange', activateProductFromHash);
   var LINES = {
     bionic: 'This is <b>K8 Bionic</b> &mdash; file and photo deduper. Let me show you around.',
     cruft:  'This is <b>K8 Cruft</b> &mdash; the developer junk cleaner.',
-    media:  'This is <b>K8 Media</b> &mdash; dedupe your photos, music &amp; video.'
+    media:  'This is <b>K8 Media</b> &mdash; for your video &amp; music. Temporarily unavailable.'
   };
   var FAMILY = 'This page is all about <b>K8 Bionic</b>. Want Cruft or Media too? The whole <b>K8 family</b> is one click away in the menu.';
   var bubble = document.getElementById('bubaSpeech');

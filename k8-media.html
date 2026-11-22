@@ -56,7 +56,7 @@
         "name": "What is K8 Media?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "K8 Media is the K8 built for creators: video, audio and RAW+JPEG pairs in one scan. It finds the same video even after a re-encode, a resize or a new container by comparing the pictures inside, finds the same song in another format by listening to it, pairs RAW files with the JPEGs your camera saved alongside them, and leaves your editor's cache and render files alone. Nothing is deleted outright: anything you remove goes to a 30-day quarantine with one-click restore, and it all runs on your own machine. K8 Media is temporarily unavailable."
+          "text": "K8 Media is the K8 built for creators: video, audio and RAW+JPEG pairs in one scan. It finds the same video even after a re-encode, a resize or a new container by comparing the pictures inside, finds the same song in another format by comparing the sound, pairs RAW files with the JPEGs your camera saved alongside them, and leaves your editor's cache and render files alone. Nothing is deleted outright: anything you remove goes to a 30-day quarantine with one-click restore, and it all runs on your own machine. K8 Media is temporarily unavailable."
         }
       },
       {
@@ -64,7 +64,7 @@
         "name": "What counts as a duplicate video or audio file?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Exact copies always: the same file sitting in three folders under three different names, confirmed by reading every byte. Beyond that, K8 Media matches the same video across a different encode, a different resolution or a different container by comparing the pictures inside, and the same song in a different format by listening to it, so the master and the compressed upload copy land in the same group. One limit: a copy that was re-encoded and also given a new date outside K8's time window isn't matched by default, and a file K8 can't read is shown as not checked, never guessed. You pick what stays, and K8 Media never removes anything by itself."
+          "text": "Exact copies always: the same file sitting in three folders under three different names, confirmed by reading every byte. Beyond that, K8 Media matches the same video across a different encode, a different resolution or a different container by comparing the pictures inside, and the same song in a different format by comparing the sound, so the master and the compressed upload copy land in the same group. When two files only look or sound similar, K8 says so and tells you to check before you tick. One limit: a copy that was re-encoded and also given a new date outside K8's time window isn't matched by default, and a file K8 can't read is shown as not checked, never guessed. You pick what stays, and K8 Media never removes anything by itself."
         }
       },
       {
@@ -1580,7 +1580,7 @@ function closeMenu() {
     <div class="stat-card">
       <div class="stat-icon">&#128274;</div>
       <div class="stat-number cu" data-target="100" data-decimals="0" data-suffix="%">100<span class="stat-unit">%</span></div>
-      <div class="stat-label">local &amp; private &mdash; nothing ever leaves your PC</div>
+      <div class="stat-label">local &amp; private &mdash; nothing leaves your PC</div>
     </div>
     <div class="stat-card">
       <div class="stat-icon">&#128737;</div>
@@ -1724,7 +1724,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          K8 Media is the K8 built for creators: video, audio and RAW+JPEG pairs in one scan. It finds the same video even after a re-encode, a resize or a new container by comparing the pictures inside, finds the same song in another format by listening to it, pairs RAW files with the JPEGs your camera saved alongside them, and leaves your editor's cache and render files alone. Nothing is deleted outright: anything you remove goes to a 30-day quarantine with one-click restore, and it all runs on your own machine. K8 Media is temporarily unavailable.
+          K8 Media is the K8 built for creators: video, audio and RAW+JPEG pairs in one scan. It finds the same video even after a re-encode, a resize or a new container by comparing the pictures inside, finds the same song in another format by comparing the sound, pairs RAW files with the JPEGs your camera saved alongside them, and leaves your editor's cache and render files alone. Nothing is deleted outright: anything you remove goes to a 30-day quarantine with one-click restore, and it all runs on your own machine. K8 Media is temporarily unavailable.
         </div></div>
       </div>
 
@@ -1734,7 +1734,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Exact copies always: the same file sitting in three folders under three different names, confirmed by reading every byte. Beyond that, K8 Media matches the same video across a different encode, a different resolution or a different container by comparing the pictures inside, and the same song in a different format by listening to it, so the master and the compressed upload copy land in the same group. One limit: a copy that was re-encoded and also given a new date outside K8's time window isn't matched by default, and a file K8 can't read is shown as not checked, never guessed. You pick what stays, and K8 Media never removes anything by itself.
+          Exact copies always: the same file sitting in three folders under three different names, confirmed by reading every byte. Beyond that, K8 Media matches the same video across a different encode, a different resolution or a different container by comparing the pictures inside, and the same song in a different format by comparing the sound, so the master and the compressed upload copy land in the same group. When two files only look or sound similar, K8 says so and tells you to check before you tick. One limit: a copy that was re-encoded and also given a new date outside K8's time window isn't matched by default, and a file K8 can't read is shown as not checked, never guessed. You pick what stays, and K8 Media never removes anything by itself.
         </div></div>
       </div>
 
@@ -1894,7 +1894,7 @@ window.addEventListener('hashchange', activateProductFromHash);
   var LINES = {
     bionic: 'This is <b>K8 Bionic</b> &mdash; file and photo deduper. Let me show you around.',
     cruft:  'This is <b>K8 Cruft</b> &mdash; the developer junk cleaner.',
-    media:  'This is <b>K8 Media</b> &mdash; dedupe your photos, music &amp; video.'
+    media:  'This is <b>K8 Media</b> &mdash; for your video &amp; music. Temporarily unavailable.'
   };
   var FAMILY = 'This page is all about <b>K8 Media</b>. Want Bionic or Cruft too? The whole <b>K8 family</b> is one click away in the menu.';
   var bubble = document.getElementById('bubaSpeech');
