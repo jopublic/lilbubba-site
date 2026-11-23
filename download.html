@@ -200,6 +200,7 @@
     </div>
     <button class="copy-btn" id="copyBtn" style="display:none;" onclick="copyKey()">Copy Key</button>
     <div class="key-note">Save this key! K8 asks for it the first time you clean something.<br>Screenshot this page or copy the key now.</div>
+    <div class="key-note" id="bionicBonus" style="display:none;">Your K8 Cruft key also unlocks cleaning in K8 Bionic.</div>
   </div>
 
   <div class="mobile-alert">
@@ -310,6 +311,8 @@ function copyKey() {
       if (data.key) {
         document.getElementById('keyDisplay').textContent = data.key;
         document.getElementById('copyBtn').style.display = 'inline-block';
+        // A K8 Cruft key (K8-C-...) also unlocks K8 Bionic: say so beside the key
+        if (/^K8-C-/.test(data.key)) { document.getElementById('bionicBonus').style.display = 'block'; }
       } else {
         document.getElementById('keyDisplay').innerHTML = '<span class="key-error">Error generating key. Please email <a href="mailto:support@lilbuba.ai" style="color:#8B5CF6;">support@lilbuba.ai</a> with your order number.</span>';
       }
