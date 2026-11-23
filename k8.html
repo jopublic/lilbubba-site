@@ -75,7 +75,7 @@
       "@type": "Offer",
       "price": "39.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/OutOfStock"
+      "availability": "https://schema.org/InStock"
     },
     "description": "Media deduplication tool for creators. Finds duplicate videos and audio by comparing the pictures and the sound, and pairs RAW files with their JPEGs.",
     "publisher": {
@@ -96,9 +96,9 @@
   var K8_PRICE_TO_PRODUCT = {
     'pri_01kmkfbv93p3079jbf7pt21c76': 'B', // K8 Bionic        £24.95
     'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': 'C', // K8 Cruft         £24.95
-    'pri_01kmkg4ex5x3saje0erbnmca3t': 'M', // K8 Media         £39.95: temporarily unavailable, opens no checkout
-    'pri_01kmkgqd61b354cvpctb77pvmg': 'D', // Media + Bionic (duo): not on sale since 21 Nov 2026
-    'pri_01kmpep1pb6r1enr8tvr1r4m02': 'A'  // Everything (all three) £49.95: not offered while K8 Media is unavailable
+    'pri_01kmkg4ex5x3saje0erbnmca3t': 'M', // K8 Media         £39.95
+    'pri_01kmkgqd61b354cvpctb77pvmg': 'D', // Media + Bionic (duo): dropped 21 Nov 2026, opens no checkout
+    'pri_01kmpep1pb6r1enr8tvr1r4m02': 'A'  // Everything (all three) £49.95
   };
 
   // Paddle does NOT append the transaction id to successUrl — `_ptxn` is the
@@ -143,12 +143,14 @@
     }
   });
 
-  // On sale from K8 1.9.1: K8 Bionic and K8 Cruft only. K8 Media is temporarily
-  // unavailable, so Media, the Media + Bionic duo and Everything (which contains
-  // Media) open no checkout, whatever calls this.
+  // On sale: K8 Bionic, K8 Cruft, K8 Media and Everything (all three).
+  // The Media + Bionic duo was dropped on 21 Nov 2026, so it opens no checkout,
+  // whatever calls this.
   var K8_ON_SALE = {
     'pri_01kmkfbv93p3079jbf7pt21c76': true, // K8 Bionic
-    'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': true  // K8 Cruft (its key also unlocks K8 Bionic)
+    'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': true, // K8 Cruft (its key also unlocks K8 Bionic)
+    'pri_01kmkg4ex5x3saje0erbnmca3t': true, // K8 Media
+    'pri_01kmpep1pb6r1enr8tvr1r4m02': true  // Everything (all three)
   };
 
   function buyProduct(priceId) {
@@ -1563,7 +1565,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Media</span>
             <span class="deduplik8">DedupliK8 your media</span>
-            <span class="price">Temporarily unavailable</span>
+            <span class="price">&pound;39.95 &middot; Lifetime</span>
           </div>
         </div>
       </div>
@@ -1774,13 +1776,28 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Media is temporarily unavailable.</p>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkg4ex5x3saje0erbnmca3t')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
+            <div class="price-tag">
+              <span class="currency">&pound;</span>39.95
+              <span class="lifetime">One-time &middot; Lifetime licence</span>
+              <span class="guarantee-badge">30-day money-back guarantee</span>
+              <span class="windows-only">Windows 10/11, 64-bit only</span>
+            </div>
+            <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
         </div>
 
       </div>
-      <!-- The all-three card is not shown while K8 Media is temporarily unavailable (it contains Media).
-           It is in git: see this block in the parent of commit acc7424. -->
+      <!-- BUNDLE & SAVE -->
+      <div class="loyalty-card-wrap">
+        <div class="loyalty-card">
+          <h3>Everything: all three tools</h3>
+          <p>K8 Bionic, K8 Cruft and K8 Media for <span class="hl">&pound;49.95</span>, pay once. That's &pound;14.95 less than buying K8 Cruft (which brings K8 Bionic with it) and K8 Media on their own.</p>
+          <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmpep1pb6r1enr8tvr1r4m02')" class="btn-buy" style="font-size: 14px; padding: 10px 20px;">All three &pound;49.95</a>
+          </div>
+        </div>
+      </div>
 
     </div>
   </section>
@@ -1928,7 +1945,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          Buy K8 Cruft and K8 Bionic comes free with it: your Cruft key cleans in both. It doesn't work the other way round, so a K8 Bionic key cleans in Bionic only. K8 Media is separate, and temporarily unavailable.
+          Buy K8 Cruft and K8 Bionic comes free with it: your Cruft key cleans in both. It doesn't work the other way round, so a K8 Bionic key cleans in Bionic only, and K8 Media is separate. Want all three? Everything is &pound;49.95.
         </div></div>
       </div>
 
@@ -2007,7 +2024,7 @@ window.addEventListener('hashchange', activateProductFromHash);
   var LINES = {
     bionic: 'This is <b>K8 Bionic</b> &mdash; file and photo deduper. Let me show you around.',
     cruft:  'This is <b>K8 Cruft</b> &mdash; the developer junk cleaner.',
-    media:  'This is <b>K8 Media</b> &mdash; for your video &amp; music. Temporarily unavailable.'
+    media:  'This is <b>K8 Media</b> &mdash; for your video &amp; music.'
   };
   var FAMILY = 'Meet the <b>K8 family</b> &mdash; Bionic, Cruft and Media. Click each one for a special tour.';
   var bubble = document.getElementById('bubaSpeech');

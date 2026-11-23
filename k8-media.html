@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K8 Media: Duplicate Video and Audio Finder for Windows | LilBuba.ai</title>
-<meta name="description" content="K8 Media finds duplicate video and audio on Windows by comparing the pictures and the sound, even after a re-encode or a format change. Pairs RAW with JPEG, leaves editor caches alone. 100% local. Temporarily unavailable.">
+<meta name="description" content="K8 Media finds duplicate video and audio on Windows by comparing the pictures and the sound, even after a re-encode or a format change. Pairs RAW with JPEG, leaves editor caches alone. 100% local. £39.95 one-time.">
 <link rel="canonical" href="https://lilbuba.ai/k8-media.html">
 <link rel="icon" type="image/x-icon" href="/img/buba_cute_favicon.ico">
 <link rel="icon" type="image/png" sizes="256x256" href="/img/buba_cute_icon.png">
 
 <!-- Open Graph -->
 <meta property="og:title" content="K8 Media: Duplicate Video and Audio Finder for Windows | LilBuba.ai">
-<meta property="og:description" content="Finds duplicate video and audio by comparing the pictures and the sound, even after a re-encode, a resize or a new container. Pairs RAW files with their JPEGs and leaves editor cache and render files alone. 100% local. Temporarily unavailable.">
+<meta property="og:description" content="Finds duplicate video and audio by comparing the pictures and the sound, even after a re-encode, a resize or a new container. Pairs RAW files with their JPEGs and leaves editor cache and render files alone. 100% local. £39.95 one-time.">
 <meta property="og:type" content="product">
 <meta property="og:url" content="https://lilbuba.ai/k8-media.html">
 <meta property="og:image" content="https://lilbuba.ai/img/og_card.png">
@@ -20,7 +20,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="K8 Media: Duplicate Video and Audio Finder for Windows | LilBuba.ai">
-<meta name="twitter:description" content="Finds duplicate video and audio by comparing the pictures and the sound, even after a re-encode, a resize or a new container. Pairs RAW files with their JPEGs and leaves editor cache files alone. 100% local. Temporarily unavailable.">
+<meta name="twitter:description" content="Finds duplicate video and audio by comparing the pictures and the sound, even after a re-encode, a resize or a new container. Pairs RAW files with their JPEGs and leaves editor cache files alone. 100% local. £39.95.">
 <meta name="twitter:image" content="https://lilbuba.ai/img/og_card.png">
 
 <!-- Structured Data -->
@@ -37,7 +37,7 @@
       "@type": "Offer",
       "price": "39.95",
       "priceCurrency": "GBP",
-      "availability": "https://schema.org/OutOfStock",
+      "availability": "https://schema.org/InStock",
       "url": "https://lilbuba.ai/k8-media.html"
     },
     "description": "Media deduplication tool for creators. Finds duplicate videos and audio by comparing the pictures and the sound, and pairs RAW files with their JPEGs. 30-day quarantine protects your files. 100% local, no cloud.",
@@ -56,7 +56,7 @@
         "name": "What is K8 Media?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "K8 Media is the K8 built for creators: video, audio and RAW+JPEG pairs in one scan. It finds the same video even after a re-encode, a resize or a new container by comparing the pictures inside, finds the same song in another format by comparing the sound, pairs RAW files with the JPEGs your camera saved alongside them, and leaves your editor's cache and render files alone. Nothing is deleted outright: anything you remove goes to a 30-day quarantine with one-click restore, and it all runs on your own machine. K8 Media is temporarily unavailable."
+          "text": "K8 Media is the K8 built for creators: video, audio and RAW+JPEG pairs in one scan. It finds the same video even after a re-encode, a resize or a new container by comparing the pictures inside, finds the same song in another format by comparing the sound, pairs RAW files with the JPEGs your camera saved alongside them, and leaves your editor's cache and render files alone. Nothing is deleted outright: anything you remove goes to a 30-day quarantine with one-click restore, and it all runs on your own machine. £39.95, one-time, lifetime licence."
         }
       },
       {
@@ -153,9 +153,9 @@
   var K8_PRICE_TO_PRODUCT = {
     'pri_01kmkfbv93p3079jbf7pt21c76': 'B', // K8 Bionic        £24.95
     'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': 'C', // K8 Cruft         £24.95
-    'pri_01kmkg4ex5x3saje0erbnmca3t': 'M', // K8 Media         £39.95: temporarily unavailable, opens no checkout
-    'pri_01kmkgqd61b354cvpctb77pvmg': 'D', // Media + Bionic (duo): not on sale since 21 Nov 2026
-    'pri_01kmpep1pb6r1enr8tvr1r4m02': 'A'  // Everything (all three) £49.95: not offered while K8 Media is unavailable
+    'pri_01kmkg4ex5x3saje0erbnmca3t': 'M', // K8 Media         £39.95
+    'pri_01kmkgqd61b354cvpctb77pvmg': 'D', // Media + Bionic (duo): dropped 21 Nov 2026, opens no checkout
+    'pri_01kmpep1pb6r1enr8tvr1r4m02': 'A'  // Everything (all three) £49.95
   };
 
   // Paddle does NOT append the transaction id to successUrl — `_ptxn` is the
@@ -200,12 +200,14 @@
     }
   });
 
-  // On sale from K8 1.9.1: K8 Bionic and K8 Cruft only. K8 Media is temporarily
-  // unavailable, so Media, the Media + Bionic duo and Everything (which contains
-  // Media) open no checkout, whatever calls this.
+  // On sale: K8 Bionic, K8 Cruft, K8 Media and Everything (all three).
+  // The Media + Bionic duo was dropped on 21 Nov 2026, so it opens no checkout,
+  // whatever calls this.
   var K8_ON_SALE = {
     'pri_01kmkfbv93p3079jbf7pt21c76': true, // K8 Bionic
-    'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': true  // K8 Cruft (its key also unlocks K8 Bionic)
+    'pri_01kmkfq9ge9q3mc8jbxfvvdvm4': true, // K8 Cruft (its key also unlocks K8 Bionic)
+    'pri_01kmkg4ex5x3saje0erbnmca3t': true, // K8 Media
+    'pri_01kmpep1pb6r1enr8tvr1r4m02': true  // Everything (all three)
   };
 
   function buyProduct(priceId) {
@@ -1561,7 +1563,8 @@ function closeMenu() {
     <p class="safe-smart-hero">Safe &bull; Smart &bull; Stupidly Fast</p>
     <h1 class="deduplik8-main"><span class="dedupli">Dedupli</span><img src="img/k8_hero_logo.png" alt="K8" class="k8-inline"><span class="your-life">Your Media</span></h1>
     <p class="intelligence-line">"We took the intelligence out of AI so you don't have to."</p>
-    <p class="free-scan-line">K8 Media is temporarily unavailable.</p>
+    <p class="free-scan-line">Free to scan, &pound;39.95 to clean.</p>
+    <a href="download.html" class="btn-free">Download free, scan free</a>
   </section>
 
   <!-- HONEST STATS BAND -->
@@ -1601,7 +1604,7 @@ function closeMenu() {
           <div class="product-btn-text">
             <span class="name">K8 Media</span>
             <span class="deduplik8">DedupliK8 your media</span>
-            <span class="price">Temporarily unavailable</span>
+            <span class="price">&pound;39.95 &middot; Lifetime</span>
           </div>
         </div>
       </div>
@@ -1667,8 +1670,16 @@ function closeMenu() {
             </div>
           </div>
           <div class="cta-row">
-            <p class="lifetime" style="margin: 0; font-weight: 600;">K8 Media is temporarily unavailable.</p>
+            <a href="javascript:void(0)" onclick="buyProduct('pri_01kmkg4ex5x3saje0erbnmca3t')" class="btn-buy">Buy Now <span class="arrow">&rarr;</span></a>
+            <div class="price-tag">
+              <span class="currency">&pound;</span>39.95
+              <span class="lifetime">One-time &middot; Lifetime licence</span>
+              <span class="guarantee-badge">30-day money-back guarantee</span>
+              <span class="windows-only">Windows 10/11, 64-bit only</span>
+            </div>
+            <a href="download.html" class="btn-free">Download free, scan free</a>
           </div>
+          <p class="faq-contact" style="margin-top:16px">Want all three tools? <strong>Everything</strong> (K8 Bionic, K8 Cruft and K8 Media) is &pound;49.95, just &pound;10 more than K8 Media on its own. <a href="javascript:void(0)" onclick="buyProduct('pri_01kmpep1pb6r1enr8tvr1r4m02')">Get all three &rarr;</a></p>
         </div>
       </div>
 
@@ -1720,7 +1731,7 @@ function closeMenu() {
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-answer"><div class="faq-answer-inner">
-          K8 Media is the K8 built for creators: video, audio and RAW+JPEG pairs in one scan. It finds the same video even after a re-encode, a resize or a new container by comparing the pictures inside, finds the same song in another format by comparing the sound, pairs RAW files with the JPEGs your camera saved alongside them, and leaves your editor's cache and render files alone. Nothing is deleted outright: anything you remove goes to a 30-day quarantine with one-click restore, and it all runs on your own machine. K8 Media is temporarily unavailable.
+          K8 Media is the K8 built for creators: video, audio and RAW+JPEG pairs in one scan. It finds the same video even after a re-encode, a resize or a new container by comparing the pictures inside, finds the same song in another format by comparing the sound, pairs RAW files with the JPEGs your camera saved alongside them, and leaves your editor's cache and render files alone. Nothing is deleted outright: anything you remove goes to a 30-day quarantine with one-click restore, and it all runs on your own machine. £39.95, one-time, lifetime licence.
         </div></div>
       </div>
 
@@ -1890,7 +1901,7 @@ window.addEventListener('hashchange', activateProductFromHash);
   var LINES = {
     bionic: 'This is <b>K8 Bionic</b> &mdash; file and photo deduper. Let me show you around.',
     cruft:  'This is <b>K8 Cruft</b> &mdash; the developer junk cleaner.',
-    media:  'This is <b>K8 Media</b> &mdash; for your video &amp; music. Temporarily unavailable.'
+    media:  'This is <b>K8 Media</b> &mdash; for your video &amp; music.'
   };
   var FAMILY = 'This page is all about <b>K8 Media</b>. Want Bionic or Cruft too? The whole <b>K8 family</b> is one click away in the menu.';
   var bubble = document.getElementById('bubaSpeech');
